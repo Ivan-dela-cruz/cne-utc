@@ -1,43 +1,33 @@
 @extends('admin.init.index')
 @section('title','Organizaciones')
 @section('content')
-    <form action="" method="post" enctype="multipart/form-data">
-        @csrf
-        <div class="col-md-7">
-            <!-- profile-edit-container-->
-            <div class="profile-edit-container">
-                <div class="profile-edit-header fl-wrap">
-                    <h4>Nueva organización</h4>
-                </div>
-                <div class="custom-form">
-                    <label>Nombre <i class="fa fa-user-o"></i></label>
-                    <input name="name" type="text" placeholder="" value="{{old('name')}}"/>
-                    <label>Lista<i class="fa fa-envelope-o"></i> </label>
-                    <input name="list" type="text" placeholder="" value=""/>
-                    <label>Siglas<i class="fa fa-phone"></i> </label>
-                    <input name="acronym" type="text" placeholder="" value=""/>
-                    <label> Representante <i class="fa fa-map-marker"></i> </label>
-                    <input name="representative" type="text" placeholder="" value=""/>
-                    <label> Asambleistas <i class="fa fa-globe"></i> </label>
-                    <input name="assembly_members" type="text" placeholder="" value=""/>
-                    <label> Prefectos <i class="fa fa-globe"></i> </label>
-                    <input name="prefects" type="text" placeholder="" value=""/>
-                    <label> Alcaldes <i class="fa fa-globe"></i> </label>
-                    <input name="mayors" type="text" placeholder="" value=""/>
-
-                </div>
+    <div class="col-md-9">
+        <div class="dashboard-list-box fl-wrap">
+            <div class="dashboard-header fl-wrap">
+                <h3>Indox</h3>
             </div>
-        </div>
-        <div class="col-md-2">
-            <div class="edit-profile-photo fl-wrap">
-                <img src="{{asset('assets/images/avatar/1.jpg')}}" class="respimg" alt="">
-                <div class="change-photo-btn">
-                    <div class="photoUpload">
-                        <span><i class="fa fa-upload"></i> Upload Photo</span>
-                        <input name="url_image" type="file" class="upload">
+            @foreach($organizations as $organization)
+                <div class="dashboard-list">
+                    <div class="dashboard-message">
+                        <span class="new-dashboard-item">New</span>
+                        <div class="dashboard-listing-table-image">
+                            <a href="listing-single.html"><img src="{{asset($organization->url_image)}}" alt=""></a>
+                        </div>
+                        <div class="dashboard-listing-table-text">
+                            <h4><a href="listing-single.html">Event In City Hall</a></h4>
+                            <span class="dashboard-listing-table-address"><i class="fa fa-map-marker"></i><a href="#">USA 27TH Brooklyn NY</a></span>
+                            <div class="listing-rating card-popup-rainingvis fl-wrap" data-starrating2="5">
+                                <span>(2 reviews)</span>
+                            </div>
+                            <ul class="dashboard-listing-table-opt  fl-wrap">
+                                <li><a href="#">Edit <i class="fa fa-pencil-square-o"></i></a></li>
+                                <li><a href="#" class="del-btn">Delete <i class="fa fa-trash-o"></i></a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
+            @endforeach
+
         </div>
-    </form>
+    </div>
 @endsection

@@ -38,7 +38,7 @@ Route::get('users/{id}/edit', 'Api\UserController@edit');
 Route::delete('users-dl', 'Api\UserController@destroy');
 
 // RUTA ORGANIZATIONS
-Route::get('organizations','Api\OrganizationController@index');
+Route::get('organizations-list','Api\OrganizationController@index');
 Route::get('organizations/create', 'Api\OrganizationController@create');
 Route::post('organizationst', 'Api\OrganizationController@store');
 Route::patch('organizations/{id}', 'Api\OrganizationController@update');
