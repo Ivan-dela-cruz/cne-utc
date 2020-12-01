@@ -5,7 +5,7 @@
             <div class="user-profile-menu">
                 <h3>Main</h3>
                 <ul>
-                    <li><a href="{{url('organizations')}}" class="user-profile-act"><i class="fa fa-gears"></i>Organización</a>
+                    <li><a href="{{url('organizations-list')}}" class="user-profile-act"><i class="fa fa-gears"></i>Organización</a>
                     </li>
                     <li><a href="dashboard-myprofile.html" ><i
                                 class="fa fa-user-o"></i> Usuarios</a></li>
