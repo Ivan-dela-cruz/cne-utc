@@ -48,7 +48,7 @@ Route::delete('organizations', 'Api\OrganizationController@destroy');
 // RUTA positions
 Route::get('positions','Api\PositionController@index');
 Route::get('positions-create', 'Api\PositionController@create');
-Route::post('positions', 'Api\PositionController@store');
+Route::post('positionst', 'Api\PositionController@store');
 Route::patch('positions/{id}', 'Api\PositionController@update');
 Route::get('positions/{id}/show', 'Api\PositionController@show');
 Route::get('positions/{id}/edit', 'Api\PositionController@edit');
