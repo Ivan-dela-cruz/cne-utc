@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Organization;
 use App\Position;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -42,24 +43,21 @@ class PositionController extends Controller
     {
         //
         try {
-            DB::beginTransaction();
-            $data = $request->all();
-            $positions = new Position();
-            $positions->fill($data);
-            $positions->save();
-            DB::commit();
-            return response()->json([
-              'status' => true,
-              'message' => 'Cargo creado correctamente'
-            ], 200);
-      
-          } catch (\Exception $e) {
-            DB::rollBack();
-            return response()->json([
+          DB::beginTransaction();
+          $data = $request->all();
+          $position = new Position();
+          $position->fill($data);
+          $position->save();
+          DB::commit();
+          return $this->index();
+
+      } catch (\Exception $e) {
+          DB::rollBack();
+          return response()->json([
               'status' => false,
               'message' => $e->getMessage()
-            ], 500);
-          }
+          ], 500);
+      }
     }
 
     /**
