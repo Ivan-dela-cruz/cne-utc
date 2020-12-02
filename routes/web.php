@@ -55,7 +55,7 @@ Route::group(['middleware' => ['auth']], function () {
 // RUTA candidates
     Route::get('candidates', 'Api\CandidateController@index');
     Route::get('candidates-create', 'Api\CandidateController@create');
-    Route::post('candidates', 'Api\CandidateController@store');
+    Route::post('candidatest', 'Api\CandidateController@store');
     Route::patch('candidates/{id}', 'Api\CandidateController@update');
     Route::get('candidates/{id}/show', 'Api\CandidateController@show');
     Route::get('candidates/{id}/edit', 'Api\CandidateController@edit');

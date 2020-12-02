@@ -33,8 +33,9 @@ class CandidateController extends Controller
     public function create()
     {
         //
-        $organizations = Organization::all();
-        $positions = Position::all();
+
+        $organizations = Organization::orderBy('name', 'ASC')->get(['name','id']);;
+        $positions = Position::orderBy('name', 'ASC')->get(['name','id']);
         return view('admin.candidates.create', compact('organizations', 'positions'));
     
     }
@@ -47,26 +48,24 @@ class CandidateController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        try {
-            DB::beginTransaction();
-            $data = $request->all();
-            $candidate = new Candidate();
-            $candidate->fill($data);
-            $candidate->save();
-            DB::commit();
-            return response()->json([
-              'status' => true,
-              'message' => 'Candidato creado correctamente'
-            ], 200);
-      
-          } catch (\Exception $e) {
-            DB::rollBack();
-            return response()->json([
-              'status' => false,
-              'message' => $e->getMessage()
-            ], 500);
-          }
+      try {
+        DB::beginTransaction();
+        $data = $request->all();
+        $candidate = new Candidate();
+        $data['url_image'] = $this->loadFile($request, 'image', 'candidates', 'candidates');
+        $candidate->fill($data);
+        $candidate->save();
+        DB::commit();
+
+        return $this->index();
+
+    } catch (\Exception $e) {
+        DB::rollBack();
+        return response()->json([
+            'status' => false,
+            'message' => $e->getMessage()
+        ], 500);
+    }
     }
 
     /**
@@ -175,5 +174,6 @@ class CandidateController extends Controller
             ], 500);
           }
         }
-    }
+    
 }
+

@@ -14,8 +14,14 @@
                             <a href="listing-single.html"><img src="{{asset($organization->url_image)}}" alt=""></a>
                         </div>
                         <div class="dashboard-listing-table-text">
-                            <h4><a href="listing-single.html">Event In City Hall</a></h4>
-                            <span class="dashboard-listing-table-address"><i class="fa fa-map-marker"></i><a href="#">USA 27TH Brooklyn NY</a></span>
+                            <h4><a href="listing-single.html">Nombre:{{$organization->name}}</a></h4>
+                            <h4><a href="listing-single.html">Nombre:{{$organization->list}}</a></h4>
+                            <h4><a href="listing-single.html">Nombre:{{$organization->acronym}}</a></h4>
+                            <h4><a href="listing-single.html">Nombre:{{$organization->representative}}</a></h4>
+                            <span class="dashboard-listing-table-address"><i></i><a href="#">{{$organization->name}}</a></span>
+                            <span class="dashboard-listing-table-address"><i></i><a href="#">{{$organization->list}}</a></span>
+                            <span class="dashboard-listing-table-address"><i></i><a href="#">USA 27TH Brooklyn NY</a></span>
+                            <span class="dashboard-listing-table-address"><i></i><a href="#">USA 27TH Brooklyn NY</a></span>
                             <div class="listing-rating card-popup-rainingvis fl-wrap" data-starrating2="5">
                                 <span>(2 reviews)</span>
                             </div>
