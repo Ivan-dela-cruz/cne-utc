@@ -17,10 +17,8 @@ class UserController extends Controller
     $users = User::orderBy('name', 'ASC')->get();
     $roles = Role::all();
     $permissions = Permission::all();
-    $breadcrumbs = [
-      ['link' => "dashboard-analytics", 'name' => "Home"], ['link' => "dashboard-analytics", 'name' => "Pages"], ['name' => "User List"]
-    ];
-    return view('admin.users.index', compact('users', 'roles', 'permissions', 'breadcrumbs'));
+
+    return view('admin.users.index', compact('users', 'roles', 'permissions'));
 
   }
 
