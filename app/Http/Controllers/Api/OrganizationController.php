@@ -41,9 +41,7 @@ class OrganizationController extends Controller
             $data = $request->all();
             $organization = new Organization();
             $data['url_image'] = $this->loadFile($request, 'image', 'organizations', 'organizations');
-
             $organization->fill($data);
-
             $organization->save();
             DB::commit();
 
