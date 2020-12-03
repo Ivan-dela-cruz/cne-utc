@@ -66,3 +66,22 @@ Route::group(['middleware' => ['auth']], function () {
 
 
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Route::resource('roles', 'Api\RoleController');
