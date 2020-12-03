@@ -40,30 +40,30 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('organizations-list', 'Api\OrganizationController@index');
     Route::get('organizations/create', 'Api\OrganizationController@create');
     Route::post('organizationst', 'Api\OrganizationController@store');
-    Route::patch('organizations/{id}', 'Api\OrganizationController@update');
+    Route::put('organizations/{id}', 'Api\OrganizationController@update');
     Route::get('organizations/{id}/show', 'Api\OrganizationController@show');
     Route::get('organizations/{id}/edit', 'Api\OrganizationController@edit');
-    Route::delete('organizations', 'Api\OrganizationController@destroy');
+    Route::delete('organizations-delete', 'Api\OrganizationController@destroy');
 // RUTA positions
-    Route::get('positions', 'Api\PositionController@index');
+    Route::get('positions-list', 'Api\PositionController@index');
     Route::get('positions-create', 'Api\PositionController@create');
     Route::post('positionst', 'Api\PositionController@store');
     Route::patch('positions/{id}', 'Api\PositionController@update');
     Route::get('positions/{id}/show', 'Api\PositionController@show');
     Route::get('positions/{id}/edit', 'Api\PositionController@edit');
-    Route::delete('positions', 'Api\PositionController@destroy');
+    Route::delete('positions-delete', 'Api\PositionController@destroy');
 // RUTA candidates
-    Route::get('candidates', 'Api\CandidateController@index');
+    Route::get('candidates-list', 'Api\CandidateController@index');
     Route::get('candidates-create', 'Api\CandidateController@create');
     Route::post('candidatest', 'Api\CandidateController@store');
     Route::patch('candidates/{id}', 'Api\CandidateController@update');
     Route::get('candidates/{id}/show', 'Api\CandidateController@show');
     Route::get('candidates/{id}/edit', 'Api\CandidateController@edit');
-    Route::delete('candidates', 'Api\CandidateController@destroy');
+    Route::delete('candidates-delete', 'Api\CandidateController@destroy');
 
 
     Route::get('/home', 'HomeController@index')->name('home');
-
+    Route::resource('organizations', 'Api\OrganizationController');
 
 });
 

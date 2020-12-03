@@ -56,8 +56,7 @@ class CandidateController extends Controller
         $candidate->fill($data);
         $candidate->save();
         DB::commit();
-
-        return $this->index();
+        return redirect('candidates-list');
 
     } catch (\Exception $e) {
         DB::rollBack();

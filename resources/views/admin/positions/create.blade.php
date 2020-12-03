@@ -24,6 +24,18 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-2">
+            <div class="edit-profile-photo fl-wrap">
+                <img src="{{asset('assets/images/avatar/1.jpg')}}" class="respimg" alt="">
+                <div class="change-photo-btn">
+                    <div class="photoUpload">
+                        <span><i class="fa fa-upload"></i> Upload Photo</span>
+                        <input name="image" type="file" class="upload">
+                    </div>
+                </div>
+            </div>
+
+        </div>
     
 
     </form>
