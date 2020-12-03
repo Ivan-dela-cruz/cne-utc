@@ -47,10 +47,15 @@ return [
             'driver' => 'local',
             'root' => public_path('organizations'),
         ],
+        'positions' => [
+            'driver' => 'local',
+            'root' => public_path('positions'),
+        ],
         'candidates' => [
             'driver' => 'local',
             'root' => public_path('candidates'),
         ],
+        
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),

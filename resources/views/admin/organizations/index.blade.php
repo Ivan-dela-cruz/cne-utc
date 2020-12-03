@@ -5,28 +5,45 @@
         <div class="dashboard-list-box fl-wrap">
             <div class="dashboard-header fl-wrap">
                 <h3>Indox</h3>
+                <a  href="{{ url('organizations/create') }}" class="new-dashboard-item">Nuevo</a>
             </div>
             @foreach($organizations as $organization)
                 <div class="dashboard-list">
                     <div class="dashboard-message">
-                        <span class="new-dashboard-item">New</span>
+                        
                         <div class="dashboard-listing-table-image">
                             <a href="listing-single.html"><img src="{{asset($organization->url_image)}}" alt=""></a>
                         </div>
                         <div class="dashboard-listing-table-text">
-                            <h4><a href="listing-single.html">Nombre:{{$organization->name}}</a></h4>
-                            <h4><a href="listing-single.html">Nombre:{{$organization->list}}</a></h4>
-                            <h4><a href="listing-single.html">Nombre:{{$organization->acronym}}</a></h4>
-                            <h4><a href="listing-single.html">Nombre:{{$organization->representative}}</a></h4>
-                            <span class="dashboard-listing-table-address"><i></i><a href="#">{{$organization->name}}</a></span>
-                            <span class="dashboard-listing-table-address"><i></i><a href="#">{{$organization->list}}</a></span>
-                            <span class="dashboard-listing-table-address"><i></i><a href="#">USA 27TH Brooklyn NY</a></span>
-                            <span class="dashboard-listing-table-address"><i></i><a href="#">USA 27TH Brooklyn NY</a></span>
-                            <div class="listing-rating card-popup-rainingvis fl-wrap" data-starrating2="5">
-                                <span>(2 reviews)</span>
-                            </div>
+                            <div class="row" >
+                                        <h4>{{$organization->name}}<span> - ({{$organization->acronym}})</span></h4>
+                                        <div class="booking-details fl-wrap ">
+                                            <span class="booking-title">Lista:</span> :
+                                            <span class="booking-text"><a href="listing-sinle.html">{{$organization->list}}</a></span>
+                                        </div>
+                                        <div class="booking-details fl-wrap">
+                                            <span class="booking-title">Representate:</span> : 
+                                            <span class="booking-text">{{$organization->representative}}</span>
+                                        </div>
+                                        <div class="booking-details fl-wrap">
+                                            <span class="booking-title">Asambleistas:</span> : 
+                                            <span class="booking-text">{{$organization->assembly_members}}</span>
+                                        </div>
+                                        <div class="booking-details fl-wrap">
+                                            <span class="booking-title">Prefectos:</span> : 
+                                            <span class="booking-text">{{$organization->prefects}}</span>
+                                        </div>
+                                        <div class="booking-details fl-wrap">
+                                            <span class="booking-title">Alcaldes:</span> : 
+                                            <span class="booking-text">{{$organization->mayors}}</span>
+                                        </div>
+                                        <div class="booking-details fl-wrap">
+                                            <span class="booking-title">Estado:</span> : 
+                                            <span class="booking-text">{{$organization->status}}</span>
+                                        </div>
+                            </div>   
                             <ul class="dashboard-listing-table-opt  fl-wrap">
-                                <li><a href="#">Edit <i class="fa fa-pencil-square-o"></i></a></li>
+                                <li><a href="{{ url('organizations/'.$organization->id.'/edit')}}">Editar <i class="fa fa-pencil-square-o"></i></a></li>
                                 <li><a href="#" class="del-btn">Delete <i class="fa fa-trash-o"></i></a></li>
                             </ul>
                         </div>

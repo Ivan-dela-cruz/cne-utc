@@ -11,6 +11,7 @@ class Position extends Model
     protected $fillable = [
         'name',
         'description',
+        'url_image',
         'start_date',
         'end_date',
     ];

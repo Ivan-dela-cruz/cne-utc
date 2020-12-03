@@ -46,10 +46,11 @@ class PositionController extends Controller
           DB::beginTransaction();
           $data = $request->all();
           $position = new Position();
+          $data['url_image'] = $this->loadFile($request, 'image', 'positions', 'positions');
           $position->fill($data);
           $position->save();
           DB::commit();
-          return $this->index();
+          return redirect('positions-list');
 
       } catch (\Exception $e) {
           DB::rollBack();

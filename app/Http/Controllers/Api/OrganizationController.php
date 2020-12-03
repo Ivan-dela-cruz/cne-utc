@@ -45,7 +45,7 @@ class OrganizationController extends Controller
             $organization->save();
             DB::commit();
 
-            return $this->index();
+            return redirect('organizations-list');
 
         } catch (\Exception $e) {
             DB::rollBack();
@@ -84,10 +84,7 @@ class OrganizationController extends Controller
         //
         $organization = Organization::find($id);
         if (isset($organization)) {
-            return response()->json([
-                'status' => true,
-                'organization' => $organization
-            ], 200);
+            return view('admin.organizations.edit',compact('organization'));
         }
         return response()->json([
             'status' => false,
@@ -105,25 +102,8 @@ class OrganizationController extends Controller
     public function update(Request $request, $id)
     {
         //
-        try {
-            DB::beginTransaction();
-            $data = $request->all();
-            $organization = Organization::find($id);
-            $organization->fill($data);
-            $organization->save();
-            DB::commit();
-            return response()->json([
-                'status' => true,
-                'message' => 'Organizaciòn modificado correctamente'
-            ], 200);
-
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return response()->json([
-                'status' => false,
-                'message' => $e->getMessage()
-            ], 500);
-        }
+        dd($request->all());
+    
     }
 
     /**

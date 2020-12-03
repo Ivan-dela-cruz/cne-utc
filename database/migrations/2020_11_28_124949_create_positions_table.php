@@ -17,6 +17,7 @@ class CreatePositionsTable extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->string('description')->nullable();
+            $table->string('url_image')->nullable();
             $table->string('start_date')->nullable();
             $table->string('end_date')->nullable();
             $table->tinyInteger('status')->default(1);

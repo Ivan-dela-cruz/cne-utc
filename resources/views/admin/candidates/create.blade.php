@@ -17,14 +17,13 @@
                     <input name="last_name" type="text" placeholder="" value=""/>
                     <label> Partido politico <i class="fa fa-globe"></i> </label>
                     <select name="organization_id"  class="chosen-select" >
-                        <option>Partidos Polìticos</option>
+                    
                         @foreach($organizations as $organization )
-                     
                         <option value="{{$organization->id}}"> {{$organization->name}}</option>
                         @endforeach
                     </select>
+                    <label> Cargo: <i class="fa fa-globe"></i> </label>
                     <select name="position_id" class="chosen-select" >
-                        <option>Cargo</option>
                         @foreach($positions as $position )
                         
                         <option value="{{$position->id}}"> {{$position->name}}</option>
