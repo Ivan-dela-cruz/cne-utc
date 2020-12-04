@@ -9,14 +9,9 @@ use Illuminate\Support\Facades\DB;
 
 class OrganizationController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        //
         $organizations = Organization::orderBy('name', 'ASC')->get();
         return view('admin.organizations.index', compact('organizations'));
     }
@@ -24,16 +19,10 @@ class OrganizationController extends Controller
 
     public function create()
     {
-
         return view('admin.organizations.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         try {
@@ -44,7 +33,6 @@ class OrganizationController extends Controller
             $organization->fill($data);
             $organization->save();
             DB::commit();
-
             return redirect('organizations-list');
 
         } catch (\Exception $e) {
@@ -56,15 +44,8 @@ class OrganizationController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
         $organization = Organization::find($id);
         if (isset($organization)) {
             return response()->json([
@@ -81,10 +62,9 @@ class OrganizationController extends Controller
 
     public function edit($id)
     {
-        //
         $organization = Organization::find($id);
         if (isset($organization)) {
-            return view('admin.organizations.edit',compact('organization'));
+            return view('admin.organizations.edit', compact('organization'));
         }
         return response()->json([
             'status' => false,
@@ -92,45 +72,37 @@ class OrganizationController extends Controller
         ], 404);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
-        dd($request->all());
-    
+        try {
+            DB::beginTransaction();
+            $data = $request->all();
+            $organization = Organization::find($id);
+            if ($request->file('image')) {
+                $data['url_image'] = $this->loadFile($request, 'image', 'organizations', 'organizations');
+            }
+            $organization->fill($data);
+            $organization->save();
+            DB::commit();
+            return redirect()->route('organizations.index');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('organizations.index')->with('error', '¡Error al guardar!');
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
         try {
             DB::beginTransaction();
             $organization = Organization::find($id);
             $organization->delete();
             DB::commit();
-            return response()->json([
-                'status' => true,
-                'message' => 'Organizaciòn eliminado correctamente'
-            ], 200);
+            return redirect()->route('organizations.index')->with('status', '¡Eliminado satisfactoriamente!');
 
         } catch (\Exception $e) {
             DB::rollBack();
-            return response()->json([
-                'status' => false,
-                'message' => $e->getMessage()
-            ], 500);
+            return redirect()->route('organizations.index')->with('error', '¡Error al eliminar!');
         }
     }
 }

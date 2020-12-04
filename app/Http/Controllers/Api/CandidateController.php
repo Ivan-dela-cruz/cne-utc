@@ -11,11 +11,7 @@ use Illuminate\Support\Facades\DB;
 
 class CandidateController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         //
@@ -25,103 +21,62 @@ class CandidateController extends Controller
         return view('admin.candidates.index', compact('candidates', 'organizations', 'positions'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
-        //
-
-        $organizations = Organization::orderBy('name', 'ASC')->get(['name','id']);;
-        $positions = Position::orderBy('name', 'ASC')->get(['name','id']);
+        $organizations = Organization::orderBy('name', 'ASC')->pluck('name', 'id');
+        $positions = Position::orderBy('name', 'ASC')->pluck('name', 'id');
         return view('admin.candidates.create', compact('organizations', 'positions'));
-    
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-      try {
-        DB::beginTransaction();
-        $data = $request->all();
-        $candidate = new Candidate();
-        $data['url_image'] = $this->loadFile($request, 'image', 'candidates', 'candidates');
-        $candidate->fill($data);
-        $candidate->save();
-        DB::commit();
-        return redirect('candidates-list');
+        try {
+            DB::beginTransaction();
+            $data = $request->all();
+            $candidate = new Candidate();
+            $data['url_image'] = $this->loadFile($request, 'image', 'candidates', 'candidates');
+            $candidate->fill($data);
+            $candidate->save();
+            DB::commit();
+            return redirect()->route('candidates.index')->with('status', '¡Registro creado con exito!');
 
-    } catch (\Exception $e) {
-        DB::rollBack();
-        return response()->json([
-            'status' => false,
-            'message' => $e->getMessage()
-        ], 500);
-    }
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('candidates.index')->with('error', '¡Error al eliminar!');
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
         //
         $candidate = Candidate::find($id);
         if (isset($candidate)) {
-          return response()->json([
-            'status' => true,
-            'candidate' => $candidate
-          ], 200);
+            return response()->json([
+                'status' => true,
+                'candidate' => $candidate
+            ], 200);
         }
         return response()->json([
-          'status' => false,
-          'message' => 'Candidato no encontrado'
+            'status' => false,
+            'message' => 'Candidato no encontrado'
         ], 404);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
         $candidate = Candidate::find($id);
-    $organizations = Organization::all();
-    $positions = Position::all();
-    if (isset($candidate)) {
-      return response()->json([
-        'status' => true,
-        'candidate' => $candidate,
-        'organizations' => $organizations,
-        'positions' => $positions
-      ], 200);
-    }
-    return response()->json([
-      'status' => false,
-      'message' => 'candidato no encontrado'
-    ], 404);
+        $organizations = Organization::orderBy('name', 'ASC')->pluck('name', 'id');
+        $positions = Position::orderBy('name', 'ASC')->pluck('name', 'id');
+        if (isset($candidate)) {
+            return view('admin.candidates.edit', compact('organizations', 'positions', 'candidate'));
+        }
+        return redirect()->route('candidates.index')->with('error', '¡Candidato no encontrado!');
+
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         //
@@ -129,29 +84,23 @@ class CandidateController extends Controller
             DB::beginTransaction();
             $data = $request->all();
             $candidate = Candidate::find($id);
+            if ($request->file('image')) {
+                $data['url_image'] = $this->loadFile($request, 'image', 'candidates', 'candidates');
+            }
             $candidate->fill($data);
             $candidate->save();
             DB::commit();
-            return response()->json([
-              'status' => true,
-              'message' => 'Candidato modificado correctamente'
-            ], 200);
-      
-          } catch (\Exception $e) {
+            return redirect()->route('candidates.index')->with('status', '¡Modificado  con exito!');
+
+
+        } catch (\Exception $e) {
             DB::rollBack();
-            return response()->json([
-              'status' => false,
-              'message' => $e->getMessage()
-            ], 500);
-          }
+            return redirect()->route('candidates.index')->with('error', '¡Error al eliminar!');
+
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
         //
@@ -160,19 +109,15 @@ class CandidateController extends Controller
             $candidate = Candidate::find($id);
             $candidate->delete();
             DB::commit();
-            return response()->json([
-              'status' => true,
-              'message' => 'Candidato eliminado correctamente'
-            ], 200);
-      
-          } catch (\Exception $e) {
+            return redirect()->route('candidates.index')->with('status', '¡Elimindado  con exito!');
+
+
+        } catch (\Exception $e) {
             DB::rollBack();
-            return response()->json([
-              'status' => false,
-              'message' => $e->getMessage()
-            ], 500);
-          }
+            return redirect()->route('candidates.index')->with('error', '¡Error al eliminar!');
+
         }
-    
+    }
+
 }
 
