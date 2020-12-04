@@ -5,14 +5,13 @@
             <div class="user-profile-menu">
                 <h3>Main</h3>
                 <ul>
-                    <li><a href="{{url('organizations-list')}}" class="user-profile-act"><i class="fa fa-gears"></i>Organización</a>
+                    <li><a href="{{route('organizations.index')}}"><i class="fa fa-gears"></i>Organizaciones</a>
                     </li>
-                    <li><a href="dashboard-myprofile.html" ><i
-                                class="fa fa-user-o"></i> Usuarios</a></li>
-                    <li><a href="dashboard-messages.html"><i class="fa fa-envelope-o"></i>
-                            Ubicaciones <span>3</span></a></li>
-                    <li><a href="dashboard-password.html"><i class="fa fa-unlock-alt"></i>
-                            Candidatos</a></li>
+                    <li><a href="{{route('candidates.index')}}" class="user-profile-act"><i
+                                class="fa fa-user-o"></i> Candidatos</a></li>
+                    <li><a href="{{route('roles.index')}}"><i class="fa fa-envelope-o"></i>
+                            Roles</a></li>
+                    <li><a href="{{route('organizations.index')}}"><i class="fa fa-unlock-alt"></i>Usuarios</a></li>
                 </ul>
             </div>
             <!-- user-profile-menu end-->

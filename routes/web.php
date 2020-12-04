@@ -36,14 +36,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('users/{id}/edit', 'Api\UserController@edit');
     Route::delete('users-dl', 'Api\UserController@destroy');
 
-// RUTA ORGANIZATIONS
-    Route::get('organizations-list', 'Api\OrganizationController@index');
-    Route::get('organizations/create', 'Api\OrganizationController@create');
-    Route::post('organizationst', 'Api\OrganizationController@store');
-    Route::put('organizations/{id}', 'Api\OrganizationController@update');
-    Route::get('organizations/{id}/show', 'Api\OrganizationController@show');
-    Route::get('organizations/{id}/edit', 'Api\OrganizationController@edit');
-    Route::delete('organizations-delete', 'Api\OrganizationController@destroy');
 // RUTA positions
     Route::get('positions-list', 'Api\PositionController@index');
     Route::get('positions-create', 'Api\PositionController@create');
@@ -52,36 +44,16 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('positions/{id}/show', 'Api\PositionController@show');
     Route::get('positions/{id}/edit', 'Api\PositionController@edit');
     Route::delete('positions-delete', 'Api\PositionController@destroy');
-// RUTA candidates
-    Route::get('candidates-list', 'Api\CandidateController@index');
-    Route::get('candidates-create', 'Api\CandidateController@create');
-    Route::post('candidatest', 'Api\CandidateController@store');
-    Route::patch('candidates/{id}', 'Api\CandidateController@update');
-    Route::get('candidates/{id}/show', 'Api\CandidateController@show');
-    Route::get('candidates/{id}/edit', 'Api\CandidateController@edit');
-    Route::delete('candidates-delete', 'Api\CandidateController@destroy');
+
 
 
     Route::get('/home', 'HomeController@index')->name('home');
-    Route::resource('organizations', 'Api\OrganizationController');
+
+    Route::resource('dashboard/organizations', 'Api\OrganizationController');
+    Route::resource('dashboard/candidates', 'Api\CandidateController');
+
 
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 Route::resource('roles', 'Api\RoleController');
