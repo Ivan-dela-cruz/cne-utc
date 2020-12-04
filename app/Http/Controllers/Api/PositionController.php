@@ -50,14 +50,10 @@ class PositionController extends Controller
           $position->fill($data);
           $position->save();
           DB::commit();
-          return redirect('positions-list');
-
+          return redirect()->route('positions.index')->with('status', '¡Registro creado con exito!');
       } catch (\Exception $e) {
           DB::rollBack();
-          return response()->json([
-              'status' => false,
-              'message' => $e->getMessage()
-          ], 500);
+          return redirect()->route('positions.index')->with('error', '¡Error al eliminar!');
       }
     }
 
@@ -94,15 +90,9 @@ class PositionController extends Controller
         //
         $position = Position::find($id);
         if (isset($position)) {
-            return response()->json([
-              'status' => true,
-              'position' => $position
-            ], 200);
-          }
-          return response()->json([
-            'status' => false,
-            'message' => 'organizaciòn no editado'
-          ], 404);
+            return view('admin.positions.edit', compact('position'));
+        }
+        return redirect()->route('positions.index')->with('error', '¡Cargo no encontrado!');
     }
 
     /**
@@ -116,25 +106,20 @@ class PositionController extends Controller
     {
         //
         try {
-            DB::beginTransaction();
-            $data = $request->all();
-            $position = Position::find($id);
-            $position->fill($data);
-            $position->save();
-            DB::commit();
-            return response()->json([
-              'status' => true,
-              'message' => 'Cargo modificado correctamente'
-            ], 200);
-      
-          } catch (\Exception $e) {
-            DB::rollBack();
-            return response()->json([
-              'status' => false,
-              'message' => $e->getMessage()
-            ], 500);
+          DB::beginTransaction();
+          $data = $request->all();
+          $position = Position::find($id);
+          if ($request->file('image')) {
+              $data['url_image'] = $this->loadFile($request, 'image', 'positions', 'positions');
           }
-
+          $position->fill($data);
+          $position->save();
+          DB::commit();
+          return redirect()->route('positions.index')->with('status', '¡Modificado  con exito!');
+      } catch (\Exception $e) {
+          DB::rollBack();
+          return redirect()->route('positions.index')->with('error', '¡Error al eliminar!');
+      }
     }
 
     /**
@@ -147,21 +132,17 @@ class PositionController extends Controller
     {
         //
         try {
-            DB::beginTransaction();
-            $position = Position::find($id);
-            $position->delete();
-            DB::commit();
-            return response()->json([
-              'status' => true,
-              'message' => 'Cargo eliminado correctamente'
-            ], 200);
-      
-          } catch (\Exception $e) {
-            DB::rollBack();
-            return response()->json([
-              'status' => false,
-              'message' => $e->getMessage()
-            ], 500);
-          }
+          DB::beginTransaction();
+          $position = Position::find($id);
+          $position->delete();
+          DB::commit();
+          return redirect()->route('positions.index')->with('status', '¡Elimindado  con exito!');
+
+
+      } catch (\Exception $e) {
+          DB::rollBack();
+          return redirect()->route('positions.index')->with('error', '¡Error al eliminar!');
+
+      }
     }
 }
