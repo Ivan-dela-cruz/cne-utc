@@ -72,7 +72,7 @@ class RoleController extends Controller
         // revocamos todos los permisos otorgados
         $role->revokePermissionTo(Permission::all());
         // sincronizar los nuevos permisos
-        $role->syncPermissions($request->get('permissions'));
+        $role->syncPermissions($request->get('roles'));
         return redirect()->route('roles.index');
 
     }
