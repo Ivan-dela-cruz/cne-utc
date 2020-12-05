@@ -36,9 +36,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('dashboard/positions', 'Api\PositionController');
     Route::resource('dashboard/roles', 'Api\RoleController');
     Route::resource('dashboard/users', 'Api\UserController');
+    Route::resource('dashboard/enclosures', 'Api\EnclosureController');
 
 
 });
 Route::resource('dashboard/locations', 'Api\LocationController');
+
 
 
