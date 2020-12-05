@@ -1,63 +1,110 @@
-<div class="row">
-    <div class="col-lg-12">
-        <div class="form-group">
-            {!! Form::label('title', 'Título') !!}
-            {!! Form::text('title',null, ['id'=>'title','class'=>'form-control']) !!}
-            @error('title')
-            <x-form message="{{$message }}"/>
-            @enderror
+<div class="col-md-7">
+    <div class="profile-edit-container">
+        <div class="profile-edit-header fl-wrap">
+            @if(isset($user))
+                <h4> Editar usuario </h4>
+            @else
+                <h4> Nuevo usuario </h4>
+            @endif
         </div>
-    </div>
-    <div class="col-lg-12">
-        <div class="form-group">
+        <div class="custom-form">
+            <label>Nombre <i class="fa fa-user-o"></i></label>
+            {!! Form::text('name',null, ['id'=>'name']) !!}
+            @error('name')
+            <strong class="text-danger">{{ $message }}</strong>
+            @enderror
 
-            <label class="mb-2" for="url_image">Imagen <small>(jpeg, png, jpg, gif)</small></label>
-            <div class="text-center">
-                <img id="show_img" src="@if(isset($course->url_image)){{asset($course->url_image)}}@endif" height="300">
-            </div>
-            {!! Form::file('url_image', ['id'=>'url_image','class'=>'form-control mt-2']) !!}
+            <label>Apellidos<i class="fa fa-envelope-o"></i> </label>
+            {!! Form::text('last_name',null, ['id'=>'last_name']) !!}
+            @error('last_name')
+            <strong class="text-danger">{{ $message }}</strong>
+            @enderror
 
-            @error('url_image')
-            <x-form message="{{$message }}"/>
+            <label>Usuario<i class="fa fa-envelope-o"></i> </label>
+            {!! Form::text('username',null, ['id'=>'username']) !!}
+            @error('username')
+            <strong class="text-danger">{{ $message }}</strong>
             @enderror
-        </div>
-    </div>
-    <div class="col-lg-12">
-        <div class="form-group">
-            {!! Form::label('file_url', 'Certificado de Finalizacion (PDF)') !!}
-            {!! Form::file('file_url', ['id'=>'file_url','class'=>'form-control']) !!}
-            @error('file_url')
-            <x-form message="{{$message }}"/>
+
+            <label>Dirección<i class="fa fa-envelope-o"></i> </label>
+            {!! Form::text('address',null, ['id'=>'address']) !!}
+            @error('address')
+            <strong class="text-danger">{{ $message }}</strong>
             @enderror
-        </div>
-    </div>
-    <div class="col-lg-6">
-        <div class="form-group">
-            {!! Form::label('is_activated', 'Estado') !!}
-            <div class="form-control">
-                <div class="form-check form-check-inline">
-                    <label>
-                        {{ Form::radio('is_activated', 1) }} Activo
-                    </label>
+
+            <label>Télefono<i class="fa fa-envelope-o"></i> </label>
+            {!! Form::text('phone',null, ['id'=>'phone']) !!}
+            @error('phone')
+            <strong class="text-danger">{{ $message }}</strong>
+            @enderror
+
+            <label>Email<i class="fa fa-envelope-o"></i> </label>
+            {!! Form::text('email',null, ['id'=>'email']) !!}
+            @error('phone')
+            <strong class="text-danger">{{ $message }}</strong>
+            @enderror
+
+            @if(!isset($user))
+                <div class="custom-form no-icons">
+                    <div class="pass-input-wrap fl-wrap">
+                        <label>Contraseña</label>
+                        {!! Form::password('password',null, ['id'=>'password','class'=>'pass-input']) !!}
+                        @error('password')
+                        <strong class="text-danger">{{ $message }}</strong>
+                        @enderror
+                        <span class="eye"><i class="fa fa-eye" aria-hidden="true"></i> </span>
+                    </div>
+                    <div class="pass-input-wrap fl-wrap">
+                        <label>Confirmar Contraseña</label>
+                        {!! Form::password('confirm_password',null, ['id'=>'confirm_password','class'=>'pass-input']) !!}
+                        @error('confirm_password')
+                        <strong class="text-danger">{{ $message }}</strong>
+                        @enderror
+                        <span class="eye"><i class="fa fa-eye" aria-hidden="true"></i> </span>
+                    </div>
                 </div>
-                <div class="form-check form-check-inline">
-                    <label>
-                        {{ Form::radio('is_activated',0) }} Inactivo
-                    </label>
+            @endif
+            <div class="dashboard-list-box fl-wrap activities">
+                <div class="dashboard-header fl-wrap">
+                    <h3>Roles</h3>
+                </div>
+                <div class="dashboard-list">
+                    <div class="dashboard-message">
+                        <div class="dashboard-message-text">
+                            <div class="row">
+                                @foreach($roles as $role)
+                                    <div class="col-md-3">
+                                        <label>
+                                            {{ Form::checkbox('roles[]', $role->id) }} {{ $role->name}}
+                                        </label>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            @error('is_activated')
-            <x-form message="{{$message }}"/>
-            @enderror
+
+            <button type="submit" class="btn  big-btn  color-bg flat-btn">Guardar<i
+                    class="fa fa-angle-right"></i></button>
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-lg-12">
-        <div class="form-group">
-            {!! Form::submit('Guardar', ['class'=>'btn btn-primary']) !!}
+<div class="col-md-2">
+    <div class="edit-profile-photo fl-wrap">
+        @if(isset($user))
+            <img src="{{asset($user->url_image)}}" class="respimg" alt="">
+        @else
+            <img src="{{asset('assets/images/avatar/1.jpg')}}" class="respimg" alt="">
+        @endif
+        <div class="change-photo-btn">
+            <div class="photoUpload">
+                <span><i class="fa fa-upload"></i> Subir foto</span>
+                {!! Form::file('image', ['id'=>'image','class'=>'upload']) !!}
+                @error('image')
+                <strong class="text-danger">{{ $message }}</strong>
+                @enderror
+            </div>
         </div>
     </div>
 </div>
-
-

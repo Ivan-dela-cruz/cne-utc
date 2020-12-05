@@ -28,7 +28,7 @@ Route::group(['middleware' => ['auth']], function () {
         return view('admin.organizations.index');
     });
 ///RUTAS DEL PROYECTO
-    Route::get('/users', 'Api\UserController@index');
+    Route::resource('dashboard/users', 'Api\UserController');
     Route::get('/users-create', 'Api\UserController@create');
     Route::post('users-st', 'Api\UserController@store');
     Route::patch('users/{id}', 'Api\UserController@update');
@@ -44,7 +44,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('positions/{id}/show', 'Api\PositionController@show');
     Route::get('positions/{id}/edit', 'Api\PositionController@edit');
     Route::delete('positions-delete', 'Api\PositionController@destroy');
-
 
 
     Route::get('/home', 'HomeController@index')->name('home');

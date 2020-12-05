@@ -51,11 +51,15 @@ return [
             'driver' => 'local',
             'root' => public_path('positions'),
         ],
+        'users' => [
+            'driver' => 'local',
+            'root' => public_path('users'),
+        ],
         'candidates' => [
             'driver' => 'local',
             'root' => public_path('candidates'),
         ],
-        
+
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),

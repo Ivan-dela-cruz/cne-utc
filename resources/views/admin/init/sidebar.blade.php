@@ -11,7 +11,7 @@
                                 class="fa fa-user-o"></i> Candidatos</a></li>
                     <li><a href="{{route('roles.index')}}"><i class="fa fa-envelope-o"></i>
                             Roles</a></li>
-                    <li><a href="{{route('organizations.index')}}"><i class="fa fa-unlock-alt"></i>Usuarios</a></li>
+                    <li><a href="{{route('users.index')}}"><i class="fa fa-unlock-alt"></i>Usuarios</a></li>
                 </ul>
             </div>
             <!-- user-profile-menu end-->
