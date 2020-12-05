@@ -17,15 +17,12 @@ class UserController extends Controller
         $users = User::orderBy('name', 'ASC')->get();
         $roles = Role::all();
         $permissions = Permission::all();
-
         return view('admin.users.index', compact('users', 'roles', 'permissions'));
-
     }
 
     public function userData()
     {
         $users = User::orderBy('name', 'ASC')->get();
-
         return response()->json([
             'users' => $users
         ], 200);
@@ -47,22 +44,15 @@ class UserController extends Controller
             $data['password'] = bcrypt($password);
             $user = new User();
             $data['avatar'] = $this->loadFile($request, 'image', 'users', 'users');
-
             $user->fill($data);
             $user->save();
-
             $user->roles()->sync($request->get('roles'));
-
             DB::commit();
             return redirect()->route('users.index')->with('status', '¡Usuario registrado con exíto!');
-
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->route('users.index')->with('error', '¡Error al registrar el usuario! ');
-
         }
-
-
     }
 
 
@@ -101,13 +91,10 @@ class UserController extends Controller
             }
             $user->fill($data);
             $user->save();
-
-            //$user->removeRole(Role::all());
-            //$user->roles()->sync($request->get('roles'));
+            $user->roles()->detach();
+            $user->roles()->sync($request->get('roles'));
             DB::commit();
             return redirect()->route('users.index')->with('status', '¡Usuario modificado con exíto!');
-
-
         } catch (\Exception $e) {
             DB::rollBack();
             return response()->json([
@@ -119,7 +106,6 @@ class UserController extends Controller
 
     public function destroy($id)
     {
-        //
         try {
             DB::beginTransaction();
             $user = User::find($id);
@@ -129,7 +115,6 @@ class UserController extends Controller
                 'status' => true,
                 'message' => 'Usuario elemindado correctamente'
             ], 200);
-
         } catch (\Exception $e) {
             DB::rollBack();
             return response()->json([
