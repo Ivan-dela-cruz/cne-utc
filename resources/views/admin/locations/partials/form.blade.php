@@ -21,9 +21,6 @@
             {!! Form::select('provincie_id',$provinces, null , ['class' => 'chosen-select']) !!}
             <label> Cantón: <i class="fa fa-globe"></i> </label>
             {!! Form::select('canton_id',$cantons, null , ['class' => 'chosen-select']) !!}
-            <label> Parroquia: <i class="fa fa-globe"></i> </label>
-            {!! Form::select('paris_id',$parishes, null , ['class' => 'chosen-select']) !!}
-
             <label>Nombre <i class="fa fa-user-o"></i></label>
             {!! Form::text('name', null,['id'=>'name']) !!}
 

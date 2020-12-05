@@ -18,9 +18,9 @@
                     </div>
                 </div>
                 <ul class="dashboard-listing-table-opt  fl-wrap">
-                    <li><a href="{{route('candidates.edit',$parishe->id)}}">Editar <i class="fa fa-pencil-square-o"></i></a>
+                    <li><a href="{{route('locations.edit',$parishe->id)}}">Editar <i class="fa fa-pencil-square-o"></i></a>
                     </li>
-                    {!! Form::open(['route' => ['candidates.destroy', $parishe->id], 'method' => 'DELETE','class'=>'delete-item'.$parishe->id]) !!}
+                    {!! Form::open(['route' => ['locations.destroy', $parishe->id], 'method' => 'DELETE','class'=>'delete-item'.$parishe->id]) !!}
                     <li><a href="#" class="btn del-btn">Eliminar <i class="fa fa-trash-o"></i></a></li>
                     <button type="submit">Borrar</button>
                     {!! Form::close() !!}
