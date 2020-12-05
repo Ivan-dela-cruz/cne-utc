@@ -37,20 +37,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::delete('users-dl', 'Api\UserController@destroy');
 
 // RUTA positions
-    Route::get('positions-list', 'Api\PositionController@index');
-    Route::get('positions-create', 'Api\PositionController@create');
-    Route::post('positionst', 'Api\PositionController@store');
-    Route::patch('positions/{id}', 'Api\PositionController@update');
-    Route::get('positions/{id}/show', 'Api\PositionController@show');
-    Route::get('positions/{id}/edit', 'Api\PositionController@edit');
-    Route::delete('positions-delete', 'Api\PositionController@destroy');
-
-
 
     Route::get('/home', 'HomeController@index')->name('home');
 
     Route::resource('dashboard/organizations', 'Api\OrganizationController');
     Route::resource('dashboard/candidates', 'Api\CandidateController');
+    Route::resource('dashboard/positions', 'Api\PositionController');
 
 
 });
