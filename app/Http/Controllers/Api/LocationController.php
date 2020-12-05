@@ -24,7 +24,6 @@ class LocationController extends Controller
     {
         $provinces = Location::orderBy('name', 'ASC')->where('type', 1)->pluck('name', 'id');
         $cantons = Location::orderBy('name', 'ASC')->where('type', 2)->pluck('name', 'id');
-        $parishes = Location::orderBy('name', 'ASC')->where('type', 3)->pluck('name', 'id');
         return view('admin.locations.create', compact('provinces', 'cantons', 'parishes'));
     }
 
@@ -68,10 +67,9 @@ class LocationController extends Controller
     public function edit($id)
     {
         $location = Location::find($id);
-        $provinces = Location::orderBy('name', 'ASC')->get(['code', 'name', 'long_name', 'slug', 'type', 'type_id']);
-        $cantons = Location::orderBy('name', 'ASC')->get(['code', 'name', 'long_name', 'slug', 'type', 'type_id']);
-        $parishes = Location::orderBy('name', 'ASC')->get(['code', 'name', 'long_name', 'slug', 'type', 'type_id']);
-        return view('admin.locations.edit', compact('province', 'cantons', 'parishes', 'locations'));
+        $provinces = Location::orderBy('name', 'ASC')->where('type', 1)->pluck('name', 'id');
+        $cantons = Location::orderBy('name', 'ASC')->where('type', 2)->pluck('name', 'id');
+        return view('admin.locations.edit', compact('provinces', 'cantons', 'location'));
     }
 
 
@@ -86,7 +84,7 @@ class LocationController extends Controller
 
     public function destroy($id)
     {
-        Location::find($id)->destroy();
+        Location::find($id)->delete();
         return redirect()->route('locations.index')->with('status', '¡Eliminado con exíto!');
 
     }
