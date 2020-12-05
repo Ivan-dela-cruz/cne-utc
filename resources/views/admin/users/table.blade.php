@@ -1,7 +1,6 @@
 @foreach($users as $user)
     <div class="dashboard-list">
         <div class="dashboard-message">
-
             <div class="dashboard-listing-table-image">
                 <a href="listing-single.html"><img src="{{asset($user->avatar)}}" alt=""></a>
             </div>
