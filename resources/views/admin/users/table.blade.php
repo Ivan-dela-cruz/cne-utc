@@ -3,7 +3,7 @@
         <div class="dashboard-message">
 
             <div class="dashboard-listing-table-image">
-                <a href="listing-single.html"><img src="{{asset($user->url_image)}}" alt=""></a>
+                <a href="listing-single.html"><img src="{{asset($user->avatar)}}" alt=""></a>
             </div>
             <div class="dashboard-listing-table-text">
                 <h4><a href="listing-single.html">{{$user->name}} {{$user->last_name}}</a></h4>

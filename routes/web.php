@@ -27,36 +27,18 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/organizations', function () {
         return view('admin.organizations.index');
     });
-///RUTAS DEL PROYECTO
-    Route::resource('dashboard/users', 'Api\UserController');
-    Route::get('/users-create', 'Api\UserController@create');
-    Route::post('users-st', 'Api\UserController@store');
-    Route::patch('users/{id}', 'Api\UserController@update');
-    Route::get('users/{id}/show', 'Api\UserController@show');
-    Route::get('users/{id}/edit', 'Api\UserController@edit');
-    Route::delete('users-dl', 'Api\UserController@destroy');
 
-// RUTA positions
-<<<<<<< HEAD
-    Route::get('positions-list', 'Api\PositionController@index');
-    Route::get('positions-create', 'Api\PositionController@create');
-    Route::post('positionst', 'Api\PositionController@store');
-    Route::patch('positions/{id}', 'Api\PositionController@update');
-    Route::get('positions/{id}/show', 'Api\PositionController@show');
-    Route::get('positions/{id}/edit', 'Api\PositionController@edit');
-    Route::delete('positions-delete', 'Api\PositionController@destroy');
-
-=======
->>>>>>> 87cfd463e93166b5471516eaabe22a820fc554df
 
     Route::get('/home', 'HomeController@index')->name('home');
 
     Route::resource('dashboard/organizations', 'Api\OrganizationController');
     Route::resource('dashboard/candidates', 'Api\CandidateController');
     Route::resource('dashboard/positions', 'Api\PositionController');
+    Route::resource('dashboard/roles', 'Api\RoleController');
+    Route::resource('dashboard/users', 'Api\UserController');
 
 
 });
 
 
-Route::resource('roles', 'Api\RoleController');
+

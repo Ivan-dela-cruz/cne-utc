@@ -9,37 +9,40 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-  use  Notifiable, HasRoles;
+    use  Notifiable, HasRoles;
 
-  /**
-   * The attributes that are mass assignable.
-   *
-   * @var array
-   */
-  protected $fillable = [
-    'name', 'email', 'password', 'last_name', 'username','avatar'
-  ];
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name', 'email', 'password', 'last_name', 'username', 'avatar'
+    ];
 
-  /**
-   * The attributes that should be hidden for arrays.
-   *
-   * @var array
-   */
-  protected $hidden = [
-    'password', 'remember_token',
-  ];
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'password', 'remember_token',
+    ];
 
-  /**
-   * The attributes that should be cast to native types.
-   *
-   * @var array
-   */
-  protected $casts = [
-    'email_verified_at' => 'datetime',
-  ];
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
 
-  public function elections()
-  {
-    return $this->belongsToMany(Election::class, 'votes');
-  }
+
+
+
+    public function elections()
+    {
+        return $this->belongsToMany(Election::class, 'votes');
+    }
 }
