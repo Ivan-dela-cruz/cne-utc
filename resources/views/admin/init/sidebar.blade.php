@@ -19,8 +19,8 @@
             <div class="user-profile-menu">
                 <h3>Listings</h3>
                 <ul>
-                    <li><a href="dashboard-listing-table.html"><i class="fa fa-th-list"></i>
-                            My listigs </a></li>
+                    <li><a href="{{route('locations.index')}}"><i class="fa fa-th-list"></i>
+                            Ubicaciones </a></li>
                     <li><a href="dashboard-bookings.html"> <i
                                 class="fa fa-calendar-check-o"></i> Bookings <span>2</span></a>
                     </li>

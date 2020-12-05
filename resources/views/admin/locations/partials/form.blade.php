@@ -1,0 +1,37 @@
+<div class="col-md-7">
+    <div class="profile-edit-container">
+        <div class="profile-edit-header fl-wrap">
+            @if(isset($location))
+                <h4>Editar Ubicación</h4>
+            @else
+                <h4>Nueva Ubicación</h4>
+            @endif
+
+        </div>
+        <div class="custom-form">
+            <label> Código <i class="fa fa-globe"></i> </label>
+            {!! Form::text('code', null,['id'=>'last_name']) !!}
+            <label> Tipo: <i class="fa fa-globe"></i> </label>
+            {!! Form::select('type', [
+                    '1'=>'Provincia',
+                    '2'=>'Cantón',
+                    '3'=>'Parroquia'
+            ] , null , ['class' => 'chosen-select']) !!}
+            <label> Provincia: <i class="fa fa-globe"></i> </label>
+            {!! Form::select('provincie_id',$provinces, null , ['class' => 'chosen-select']) !!}
+            <label> Cantón: <i class="fa fa-globe"></i> </label>
+            {!! Form::select('canton_id',$cantons, null , ['class' => 'chosen-select']) !!}
+            <label> Parroquia: <i class="fa fa-globe"></i> </label>
+            {!! Form::select('paris_id',$parishes, null , ['class' => 'chosen-select']) !!}
+
+            <label>Nombre <i class="fa fa-user-o"></i></label>
+            {!! Form::text('name', null,['id'=>'name']) !!}
+
+            <label> Nombre completo <i class="fa fa-globe"></i> </label>
+            {!! Form::text('long_name', null,['id'=>'last_name']) !!}
+
+            <button type="submit" class="btn  big-btn  color-bg flat-btn">Guardar<i
+                    class="fa fa-angle-right"></i></button>
+        </div>
+    </div>
+</div>

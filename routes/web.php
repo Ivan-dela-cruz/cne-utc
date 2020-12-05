@@ -39,6 +39,6 @@ Route::group(['middleware' => ['auth']], function () {
 
 
 });
-
+Route::resource('dashboard/locations', 'Api\LocationController');
 
 
