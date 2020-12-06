@@ -79,7 +79,16 @@
                 </ul>
             </div>
             <!-- user-profile-menu end-->
-            <a href="#" class="log-out-btn">Salir</a>
+            <a class="log-out-btn" href="{{ route('logout') }}"
+               onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                {{ __('Logout') }}
+            </a>
+
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
+
         </div>
     </div>
 </div>
