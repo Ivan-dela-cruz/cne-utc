@@ -72,13 +72,19 @@ class UserSeeder extends Seeder
         Permission::create(['name' => 'update_setting', 'module' => 'Configuraciones', 'description' => 'Permite modificar un configuraciones']);
         Permission::create(['name' => 'destroy_setting', 'module' => 'Configuraciones', 'description' => 'Permite eliminar un configuraciones']);
 
+
+
+
+
         /// creamos los roles para que son admin
         $role = Role::create(['name' => 'Administrador', 'status' => 1]);
+        //asignación de los permisos al rol admin
+        $role->givePermissionTo(Permission::all());
+        
         $role = Role::create(['name' => 'Votante', 'status' => 1]);
         $role = Role::create(['name' => 'Moderador', 'status' => 1]);
 
-        //asignación de los permisos al rol admin
-        $role->givePermissionTo(Permission::all());
+        
 
         ///crearmos el usario por defecto
         $user_password = Hash::make('root1234');

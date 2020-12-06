@@ -1,8 +1,11 @@
 <header class="main-header dark-header fs-header sticky">
     <div class="header-inner">
-        <div class="logo-holder">
-            <a href="index.html"><img height="300" src="{{asset('assets/images/logo.png')}}" alt=""></a>
-        </div>
+        <div class="header-inner">
+            <div class="logo-holder">
+                <a style="color: white; font-size: 20px;" href="{{route('admin')}}"><img
+                        src="{{asset('assets/images/utc.png')}}" alt="">
+                    <b> Elecciones 2021</b> </a>
+            </div>
 
 
         @if (Route::has('login'))
