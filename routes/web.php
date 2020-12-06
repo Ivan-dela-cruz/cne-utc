@@ -22,7 +22,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/admin', function () {
         return view('admin.init.index');
-    });
+    })->name('admin');
 
     Route::get('/organizations', function () {
         return view('admin.organizations.index');

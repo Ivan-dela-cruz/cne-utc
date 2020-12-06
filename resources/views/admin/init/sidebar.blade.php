@@ -3,35 +3,83 @@
         <div class="user-profile-menu-wrap fl-wrap">
             <!-- user-profile-menu-->
             <div class="user-profile-menu">
-                <h3>Main</h3>
+                <h3>Principales</h3>
                 <ul>
-                    <li><a href="{{route('organizations.index')}}"><i class="fa fa-gears"></i>Organizaciones</a>
-                    </li>
-                    <li><a href="{{route('candidates.index')}}" class="user-profile-act"><i
-                                class="fa fa-user-o"></i> Candidatos</a></li>
-                    <li><a href="{{route('roles.index')}}"><i class="fa fa-envelope-o"></i>
-                            Roles</a></li>
-                    <li><a href="{{route('users.index')}}"><i class="fa fa-unlock-alt"></i>Usuarios</a></li>
+                    @can('read_position')
+                        <li>
+                            <a class="{{ (request()->is('dashboard/positions')) ? 'user-profile-act' : '' }}"
+                               href="{{route('positions.index')}}"><i
+                                    class="fa fa-unlock-alt"></i>Cargos</a></li>
+                    @endcan
+                    @can('read_organization')
+                        <li>
+                            <a class="{{ (request()->is('dashboard/organizations')) ? 'user-profile-act' : '' }}"
+                               href="{{route('organizations.index')}}"><i
+                                    class="fa fa-gears"></i>Organizaciones</a>
+                        </li>
+                    @endcan
+                    @can('read_candidate')
+                        <li>
+                            <a class="{{ (request()->is('dashboard/candidates')) ? 'user-profile-act' : '' }}"
+                               href="{{route('candidates.index')}}"><i
+                                    class="fa fa-user-o"></i> Candidatos</a></li>
+                    @endcan
+
+                    @can('read_enclosure')
+                        <li>
+                            <a class="{{ (request()->is('dashboard/enclosures')) ? 'user-profile-act' : '' }}"
+                               href="{{route('enclosures.index')}}">
+                                <i
+                                    class="fa fa-calendar-check-o"></i> Recintos</a>
+                        </li>
+                    @endcan
+                    @can('read_location')
+                        <li>
+                            <a class="{{ (request()->is('dashboard/locations')) ? 'user-profile-act' : '' }}"
+                               href="{{route('locations.index')}}"><i
+                                    class="fa fa-th-list"></i>
+                                Ubicaciones </a></li> @endcan
+
                 </ul>
             </div>
             <!-- user-profile-menu end-->
             <!-- user-profile-menu-->
             <div class="user-profile-menu">
-                <h3>Listings</h3>
+                <h3>Configuración</h3>
                 <ul>
-                    <li><a href="{{route('locations.index')}}"><i class="fa fa-th-list"></i>
-                            Ubicaciones </a></li>
-                    <li><a href="dashboard-bookings.html"> <i
-                                class="fa fa-calendar-check-o"></i> Bookings <span>2</span></a>
+                    @can('read_user')
+                        <li>
+                            <a class="{{ (request()->is('dashboard/users')) ? 'user-profile-act' : '' }}"
+                               href="{{route('users.index')}}"><i
+                                    class="fa fa-unlock-alt"></i>Usuarios</a></li>
+                    @endcan
+                    @role('Administrador')
+                    <li>
+                        <a class="{{ (request()->is('dashboard/roles')) ? 'user-profile-act' : '' }}"
+                           href="{{route('roles.index')}}"><i
+                                class="fa fa-envelope-o"></i>
+                            Roles</a></li>
+
+
+                    <li>
+                        <a class="{{ (request()->is('dashboard/enclosures')) ? 'user-profile-act' : '' }}"
+                           href="{{route('enclosures.index')}}">
+                            <i
+                                class="fa fa-calendar-check-o"></i> Aplicación</a>
                     </li>
-                    <li><a href="dashboard-review.html"><i class="fa fa-comments-o"></i>
-                            Reviews </a></li>
-                    <li><a href="dashboard-add-listing.html"><i
-                                class="fa fa-plus-square-o"></i> Add New</a></li>
+                    @endrole
+                    @can('read_user')
+                        <li>
+                            <a class="{{ (request()->is('dashboard/enclosures')) ? 'user-profile-act' : '' }}"
+                               href="{{route('enclosures.index')}}">
+                                <i
+                                    class="fa fa-calendar-check-o"></i> Contraseñas</a>
+                        </li>
+                    @endcan
                 </ul>
             </div>
             <!-- user-profile-menu end-->
-            <a href="#" class="log-out-btn">Log Out</a>
+            <a href="#" class="log-out-btn">Salir</a>
         </div>
     </div>
 </div>
