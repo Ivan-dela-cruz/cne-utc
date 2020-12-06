@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Auth::routes();
-Route::get('/', function () {
-    return view('web.index');
-});
+Route::get('/', 'Web\HomeController@index');
 
 Route::group(['middleware' => ['auth']], function () {
 
