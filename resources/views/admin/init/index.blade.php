@@ -40,8 +40,13 @@
                         Hola, {{\Illuminate\Support\Facades\Auth::user()->name}}
                     </div>
                     <ul>
-                        <li><a href="dashboard-myprofile.html">  Mi perfil</a></li>
-                        <li><a href="#">Cerrar sesión</a></li>
+                        <li><a href="dashboard-myprofile.html"> Mi perfil</a></li>
+                        <li><a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();">Cerrar sesión</a>
+                        </li>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
                     </ul>
                 @endguest
 
