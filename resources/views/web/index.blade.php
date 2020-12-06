@@ -78,14 +78,15 @@
                     <!--listing-carousel-->
                     <div class="listing-carousel  fl-wrap ">
                         <!--slick-slide-item-->
+                        @foreach($positions as $position)
                         <div class="slick-slide-item">
                             <!-- listing-item -->
-                            @foreach($positions as $position)
+
                             <div class="listing-item">
-                    
-                                
+
+
                                 <article class="geodir-category-listing fl-wrap">
-                                    
+
                                     <div class="geodir-category-img">
                                         <img src="{{asset($position->url_image)}}" alt="">
                                         <div class="overlay"></div>
@@ -93,27 +94,24 @@
                                     </div>
                                     <div class="geodir-category-content fl-wrap">
                                         <a class="listing-geodir-category" href="listing.html">Votar</a>
-                                        
+
                                         <h3><a href="listing-single.html">{{$position->name}}</a></h3>
                                         <p>{{$position->description}} </p>
-                                      
                                     </div>
-                                  
                                 </article>
-                                
                             </div>
-                            @endforeach
                             <!-- listing-item end-->
                         </div>
                         <!--slick-slide-item end-->
+                    @endforeach
                         <!--slick-slide-item-->
-                        
+
                         <!--slick-slide-item end-->
                         <!--slick-slide-item-->
-                       
+
                         <!--slick-slide-item end-->
                         <!--slick-slide-item-->
-                      
+
                         <!--slick-slide-item end-->
 
                     </div>
