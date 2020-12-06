@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Enclosure;
 use App\Http\Controllers\Controller;
+use App\Location;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class EnclosureController extends Controller
 {
@@ -14,7 +17,10 @@ class EnclosureController extends Controller
      */
     public function index()
     {
-        //
+        $enclosures = Enclosure::orderBy('name', 'ASC')->get();
+        $locations = Location::all();
+  
+        return view('admin.enclosures.index', compact('enclosures', 'locations'));
     }
 
     /**
@@ -25,6 +31,8 @@ class EnclosureController extends Controller
     public function create()
     {
         //
+        $parishes = Location::orderBy('name', 'ASC')->where('type', 3)->pluck('name', 'id');
+        return view('admin.enclosures.create', compact('parishes'));
     }
 
     /**
@@ -36,6 +44,25 @@ class EnclosureController extends Controller
     public function store(Request $request)
     {
         //
+        try {
+            DB::beginTransaction();
+            $data = $request->all();
+            $m_fem = $request->meeting_fem;
+            $m_ma = $request->meeting_mas;
+            $total = $m_fem + $m_ma;
+            $data['meeting_total'] = $total;
+            $enclosure = new Enclosure();
+            $enclosure->fill($data);
+        
+            $enclosure->save();
+            DB::commit();
+            return redirect()->route('enclosures.index')->with('status', '¡Registro creado con exito!');
+
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('enclosures.index')->with('error', '¡Error al eliminar!');
+        }
     }
 
     /**
@@ -47,6 +74,17 @@ class EnclosureController extends Controller
     public function show($id)
     {
         //
+        $enclosure = Enclosure::find($id);
+        if (isset($enclosure)) {
+            return response()->json([
+                'status' => true,
+                'enclosure' => $enclosure
+            ], 200);
+        }
+        return response()->json([
+            'status' => false,
+            'message' => ' no encontrado'
+        ], 404);
     }
 
     /**
@@ -58,6 +96,12 @@ class EnclosureController extends Controller
     public function edit($id)
     {
         //
+        $enclosure = Enclosure::find($id);
+        $parishes = Location::orderBy('name', 'ASC')->where('type', 3)->pluck('name', 'id');
+        if (isset($enclosure)) {
+            return view('admin.enclosures.edit', compact('enclosure', 'parishes'));
+        }
+        return redirect()->route('enclosures.index')->with('error', '¡Candidato no encontrado!');
     }
 
     /**
@@ -70,6 +114,23 @@ class EnclosureController extends Controller
     public function update(Request $request, $id)
     {
         //
+        try {
+            DB::beginTransaction();
+            $data = $request->all();
+            $enclosure = Enclosure::find($id);
+            $m_fem = $request->meeting_fem;
+            $m_ma = $request->meeting_mas;
+            $total = $m_fem + $m_ma;
+            $data['meeting_total'] = $total;
+            $enclosure->fill($data);
+            $enclosure->save();
+            DB::commit();
+            return redirect()->route('enclosures.index')->with('status', '¡Modificado  con exito!');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('enclosures.index')->with('error', '¡Error al eliminar!');
+
+        }
     }
 
     /**
@@ -81,5 +142,16 @@ class EnclosureController extends Controller
     public function destroy($id)
     {
         //
+        try {
+            DB::beginTransaction();
+            $enclosure = Enclosure::find($id);
+            $enclosure->delete();
+            DB::commit();
+            return redirect()->route('enclosures.index')->with('status', '¡Elimindado  con exito!');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('enclosures.index')->with('error', '¡Error al eliminar!');
+
+        }
     }
 }
