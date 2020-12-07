@@ -21,6 +21,8 @@ class CreateCandidatesTable extends Migration
             $table->string('url_image')->nullable();
             $table->unsignedBigInteger('organization_id');
             $table->unsignedBigInteger('position_id');
+            $table->string('start_date')->nullable();
+            $table->string('end_date')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->softDeletes();
             $table->timestamps();

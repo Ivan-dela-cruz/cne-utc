@@ -10,21 +10,12 @@
             @error('name')
             <strong class="text-danger">{{ $message }}</strong>
             @enderror
-            <label>Lista<i class="fa fa-envelope-o"></i> </label>
+            <label>Descripción<i class="fa fa-envelope-o"></i> </label>
             {!! Form::text('description',null, ['id'=>'description']) !!}
             @error('description')
             <strong class="text-danger">{{ $message }}</strong>
             @enderror
-            <label>Inicio de Cargo<i class="fa fa-calendar-check-o"></i></label>
-            <input name="start_date" type="text" placeholder="Date" class="datepicker"   data-large-mode="true" data-large-default="true" value=""/>
-            @error('start_date')
-            <strong class="text-danger">{{ $message }}</strong>
-            @enderror
-            <label>Fin de Cargo<i class="fa fa-calendar-check-o"></i>  </label>
-            <input name="end_date" type="text" placeholder="Date" class="datepicker"   data-large-mode="true" data-large-default="true" value=""/>
-            @error('end_date')
-            <strong class="text-danger">{{ $message }}</strong>
-            @enderror
+
             <button type="submit" class="btn  big-btn  color-bg flat-btn">Guardar<i
                     class="fa fa-angle-right"></i></button>
         </div>

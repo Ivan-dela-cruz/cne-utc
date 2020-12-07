@@ -24,7 +24,7 @@ class LocationController extends Controller
     {
         $provinces = Location::orderBy('name', 'ASC')->where('type', 1)->pluck('name', 'id');
         $cantons = Location::orderBy('name', 'ASC')->where('type', 2)->pluck('name', 'id');
-        return view('admin.locations.create', compact('provinces', 'cantons', 'parishes'));
+        return view('admin.locations.create', compact('provinces', 'cantons'));
     }
 
 

@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 Auth::routes();
 Route::get('/', 'Web\HomeController@index');
+Route::get('maps', 'Web\HomeController@getMapTemplate')->name('maps');
+Route::get('selects', 'Web\HomeController@getSelectTemplate')->name('selecion');
 
 Route::group(['middleware' => ['auth']], function () {
 
@@ -35,10 +37,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('dashboard/roles', 'Api\RoleController');
     Route::resource('dashboard/users', 'Api\UserController');
     Route::resource('dashboard/enclosures', 'Api\EnclosureController');
-
-
+    Route::resource('dashboard/locations', 'Api\LocationController');
 });
-Route::resource('dashboard/locations', 'Api\LocationController');
+
 
 
 

@@ -21,7 +21,16 @@
 
             <label> Cargo: <i class="fa fa-globe"></i> </label>
             {!! Form::select('position_id', $positions , null , ['class' => 'chosen-select']) !!}
-
+            <label>Inicio de Cargo<i class="fa fa-calendar-check-o"></i></label>
+            <input name="start_date" type="text" placeholder="Date" class="datepicker"   data-large-mode="true" data-large-default="true" value=""/>
+            @error('start_date')
+            <strong class="text-danger">{{ $message }}</strong>
+            @enderror
+            <label>Fin de Cargo<i class="fa fa-calendar-check-o"></i>  </label>
+            <input name="end_date" type="text" placeholder="Date" class="datepicker"   data-large-mode="true" data-large-default="true" value=""/>
+            @error('end_date')
+            <strong class="text-danger">{{ $message }}</strong>
+            @enderror
             <button type="submit" class="btn  big-btn  color-bg flat-btn">Guardar<i
                     class="fa fa-angle-right"></i></button>
         </div>

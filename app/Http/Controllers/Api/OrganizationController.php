@@ -33,7 +33,7 @@ class OrganizationController extends Controller
             $organization->fill($data);
             $organization->save();
             DB::commit();
-            return redirect('organizations-list');
+            return redirect()->route('organizations.index');
 
         } catch (\Exception $e) {
             DB::rollBack();

@@ -11,12 +11,10 @@ class Position extends Model
     protected $fillable = [
         'name',
         'description',
-        'url_image',
-        'start_date',
-        'end_date',
+        'url_image'
     ];
     public function candidate(){
-    
+
        return $this->belongsTo(Candidate::class,"position_id");
 
     }

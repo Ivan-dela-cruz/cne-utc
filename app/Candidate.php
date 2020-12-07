@@ -13,7 +13,9 @@ class Candidate extends Model
         'last_name',
         'url_image',
         'organization_id',
-        'position_id'
+        'position_id',
+        'start_date',
+        'end_date',
     ];
 
     public function organization()

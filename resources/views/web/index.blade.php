@@ -9,7 +9,7 @@
                 <div class="media-container video-parallax" data-scrollax="properties: { translateY: '200px' }">
                     <div class="bg mob-bg" style="background-image: url(images/1.jpg)"></div>
                     <div class="video-container">
-                        <video controls autoplay  loop muted  class="bgvid">
+                        <video controls autoplay loop muted class="bgvid">
                             <source src="video/videoweb.mp4" type="video/mp4">
                         </video>
                     </div>
@@ -52,13 +52,13 @@
                                     </select>
                                 </div>
                                 <button class="main-search-button"
-                                        onclick="window.location.href='listings-half-screen-map-list.html'">Resultados
+                                        onclick="window.location.href='{{route('maps')}}'">Resultados
                                 </button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="bubble-bg"> </div>
+                <div class="bubble-bg"></div>
                 <div class="header-sec-link">
                     <div class="container"><a href="#sec2" class="custom-scroll-link">Let's Start</a></div>
                 </div>
@@ -79,32 +79,30 @@
                     <div class="listing-carousel  fl-wrap ">
                         <!--slick-slide-item-->
                         @foreach($positions as $position)
-                        <div class="slick-slide-item">
-                            <!-- listing-item -->
+                            <div class="slick-slide-item">
+                                <!-- listing-item -->
+                                <div class="listing-item">
+                                    <article class="geodir-category-listing fl-wrap">
 
-                            <div class="listing-item">
+                                        <div class="geodir-category-img">
+                                            <img src="{{asset($position->url_image)}}" alt="">
+                                            <div class="overlay"></div>
+                                            <div class="list-post-counter"><span>4</span><i class="fa fa-heart"></i>
+                                            </div>
+                                        </div>
+                                        <div class="geodir-category-content fl-wrap">
+                                            <a class="listing-geodir-category" href="{{route('selecion')}}">Votar</a>
 
-
-                                <article class="geodir-category-listing fl-wrap">
-
-                                    <div class="geodir-category-img">
-                                        <img src="{{asset($position->url_image)}}" alt="">
-                                        <div class="overlay"></div>
-                                        <div class="list-post-counter"><span>4</span><i class="fa fa-heart"></i></div>
-                                    </div>
-                                    <div class="geodir-category-content fl-wrap">
-                                        <a class="listing-geodir-category" href="listing.html">Votar</a>
-
-                                        <h3><a href="listing-single.html">{{$position->name}}</a></h3>
-                                        <p>{{$position->description}} </p>
-                                    </div>
-                                </article>
+                                            <h3><a href="listing-single.html">{{$position->name}}</a></h3>
+                                            <p>{{$position->description}} </p>
+                                        </div>
+                                    </article>
+                                </div>
+                                <!-- listing-item end-->
                             </div>
-                            <!-- listing-item end-->
-                        </div>
-                        <!--slick-slide-item end-->
+                            <!--slick-slide-item end-->
                     @endforeach
-                        <!--slick-slide-item-->
+                    <!--slick-slide-item-->
 
                         <!--slick-slide-item end-->
                         <!--slick-slide-item-->
