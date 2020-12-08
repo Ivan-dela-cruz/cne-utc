@@ -23,33 +23,33 @@
                         </div>
                         <div class="main-search-input-wrap">
                             <div class="main-search-input fl-wrap">
-
+                                
                                 <div class="main-search-input-item">
-                                    <select data-placeholder="All Categories" class="chosen-select">
-                                        <option>Selecciona una cantón</option>
+                                    <select data-placeholder="All Categories" class="chosen-select-canton">
+                                
                                         @foreach($cantons as $canton)
                                             <option value="{{$canton->id}}">{{$canton->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
+
                                 <div class="main-search-input-item">
-                                    <select data-placeholder="All Categories" class="chosen-select">
-                                        <option>Selecciona una parroquia</option>
-                                        @foreach($parishes as $parish)
-                                            <option value="{{$parish->id}}">{{$parish->name}}</option>
-                                        @endforeach
+                                    <select  data-placeholder="All Categories" class="chosen-select-parish">
+                                            @include('web.selects.parishes')
                                     </select>
                                 </div>
+         
                                 <div class="main-search-input-item">
-                                    <select data-placeholder="All Categories" class="chosen-select">
-                                        <option>Selecciona un recinto</option>
-                                        @foreach($enclosures as $enclosure)
-                                            <option value="{{$enclosure->id}}">{{$enclosure->name}}</option>
-                                        @endforeach
+                                    <select data-placeholder="All Categories" class="chosen-select-enclosure">
+                                    
+                                     @include('web.selects.enclosures')
                                     </select>
-                                </div>
-                                <button class="main-search-button"
-                                        onclick="window.location.href='{{route('maps')}}'">Resultados
+                               </div>
+                            
+                                <button class="main-search-button">
+                                    <a href="#sec2" class="custom-scroll-link">
+                                       <i style="color: #fff;" class="fa fa-handshake-o fa-2x"></i>
+                                       </a>
                                 </button>
                             </div>
                         </div>
@@ -57,15 +57,15 @@
                 </div>
                 <div class="bubble-bg"></div>
                 <div class="header-sec-link">
-                    <div class="container"><a href="#sec2" class="custom-scroll-link">Let's Start</a></div>
+                   
                 </div>
             </section>
-            <section class="gray-bg" id="sec1">
+            <section class="gray-bg" id="sec2">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-md-12">
                             <div class="listsearch-header fl-wrap">
-                                <h3>Candidatos prsidenciales</h3>
+                                <h3>Candidatos presidenciales</h3>
                                 <div class="listing-view-layout">
                                     <ul>
                                         <li><a class="grid active" href="#"><i class="fa fa-th-large"></i></a></li>
@@ -73,56 +73,70 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="list-main-wrap fl-wrap card-listing ">
-
+                            <div class="list-main-wrap fl-wrap card-listing row ">
                                 @for($i = 0; $i< count($candidates); $i++)
+                                <div class="col-md-4">
                                     <div class="listing-item">
                                         <article class="geodir-category-listing fl-wrap">
                                             <div class="geodir-category-img">
-                                                <img style="height: 350px;"
+                                                <img style="height: 200px;"
                                                      src="{{$candidates[$i]['presi']->url_image}}" alt="">
                                             </div>
                                             <div class="geodir-category-content fl-wrap">
-                                                <a class="listing-geodir-category"
-                                                   href="listing.html">{{$candidates[$i]['presi']->organization->acronym}}</a>
+                                               
                                                 <div class="listing-avatar"><a href="author-single.html"><img
-                                                            style="height: 75px; width: 75px;"
+                                                          
                                                             src="{{$candidates[$i]['presi']->organization->url_image}}"
                                                             alt=""></a>
                                                     <span
                                                         class="avatar-tooltip"><strong>{{$candidates[$i]['presi']->organization->name}}</strong></span>
                                                 </div>
-                                                <h3>
+                                                <h4>
                                                     <a href="listing-single.html">{{$candidates[$i]['presi']->name}} {{$candidates[$i]['presi']->last_name}}
                                                         (PRESIDENTE) </a>
-                                                </h3>
+                                                </h4>
                                             </div>
                                         </article>
                                     </div>
                                     <div class="listing-item">
                                         <article class="geodir-category-listing fl-wrap">
                                             <div class="geodir-category-img">
-                                                <img style="height: 350px;" src="{{$candidates[$i]['vice']->url_image}}"
+                                                <img style="height: 200px;" src="{{$candidates[$i]['vice']->url_image}}"
                                                      alt="">
                                             </div>
                                             <div class="geodir-category-content fl-wrap">
-                                                <a class="listing-geodir-category"
-                                                   href="listing.html">{{$candidates[$i]['vice']->organization->acronym}}</a>
+                                                
                                                 <div class="listing-avatar"><a href="author-single.html"><img
-                                                            style="height: 75px; width: 75px;"
+                                                        
                                                             src="{{$candidates[$i]['vice']->organization->url_image}}"
                                                             alt=""></a>
                                                     <span
                                                         class="avatar-tooltip"><strong>{{$candidates[$i]['vice']->organization->name}}</strong></span>
                                                 </div>
-                                                <h3>
+                                                <h4>
                                                     <a href="listing-single.html">{{$candidates[$i]['vice']->name}} {{$candidates[$i]['vice']->last_name}}
                                                         (VICEPRESIDENTE)</a>
-                                                </h3>
+                                                </h4>
                                             </div>
                                         </article>
                                     </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <button type="button" style="width: 100%; 
+                                            position: relative;
+                                            padding: 5px 5px;
+                                            margin: 0px 10px 10px 0px;
+                                            float: left;
+                                            border-radius: 10px;
+                                            border-color:#fff;
+                                            font-size: 18px;
+                                            text-decoration: none;
+                                            background-color:#3EAAFD; color:#fff;" class="btn btn-block btn-danger">Votar</button>
+                                        </div>
+                                    </div>
+                                </div>
                                 @endfor
+                               
                             </div>
                         </div>
                         <!--box-widget-wrap -->
@@ -198,6 +212,41 @@
 @section('scripts')
     <script type="text/javascript" src="{{asset('js/locations.js')}}"></script>
     <script type="text/javascript">
+        $(document).ready(function(){
+           $('.chosen-select-parish').niceSelect();
+           $('.chosen-select-enclosure').niceSelect();
+           $('.chosen-select-canton').niceSelect();
+           
+        });
 
+        function getSelectParishes(id){
+           
+            let url ='select-parishes/'+id;
+            axios.get(url).then(function(response){
+                    $('.chosen-select-parish').empty();
+                    $('.chosen-select-parish').html(response.data.view);
+                    $('.chosen-select-parish').niceSelect('update');
+                    getSelectEnclosure(response.data.location_id);
+            });
+        }
+        function getSelectEnclosure(id){
+            let url ='select-enclosures/'+id;
+            axios.get(url).then(function(response){
+                    $('.chosen-select-enclosure').empty();
+                    $('.chosen-select-enclosure').html(response.data);
+                    $('.chosen-select-enclosure').niceSelect('update');
+            });
+        }
+
+      $(document).on('change','.chosen-select-canton',function(){
+            let id = $(this).val(); 
+            getSelectParishes(id);
+
+      });
+      $(document).on('change','.chosen-select-parish',function(){
+            let id = $(this).val(); 
+            getSelectEnclosure(id);
+      });
+     
     </script>
 @endsection

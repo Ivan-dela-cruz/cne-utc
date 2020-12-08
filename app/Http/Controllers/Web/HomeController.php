@@ -35,7 +35,6 @@ class HomeController extends Controller
         $enclosures = Enclosure::orderBy('name', 'ASC')->get(['id', 'name']);
         $cantons = Location::where('type', 2)->get(['id', 'name']);
         $parishes = Location::where('type', 3)->get(['id', 'name']);
-
         $pres = Candidate::where('position_id', 1)
             ->orderBy('name', 'ASC')
             ->get();
@@ -57,6 +56,22 @@ class HomeController extends Controller
             $candidates->push($lista);
         }
         return view('web.selects.index', compact('candidates', 'num_org', 'enclosures', 'cantons', 'parishes'));
+    }
+
+    public function getSelectParish($id)
+    {
+        $parishes = Location::where('type_id',$id)->where('type',3)->get();
+        $parish = $parishes->first();
+        $view_select = view('web.selects.parishes',compact('parishes'))->render();
+        return response()->json([
+            'view'=>$view_select,
+            'location_id' => $parish->id
+        ]);
+    }
+    public function getSelectEnclosure($id)
+    {
+        $enclosures = Enclosure::where('location_id',$id)->get();
+        return view('web.selects.enclosures',compact('enclosures'))->render();
     }
 
 }

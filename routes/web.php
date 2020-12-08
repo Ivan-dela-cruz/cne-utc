@@ -15,11 +15,11 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 Route::get('/', 'Web\HomeController@index');
 Route::get('maps', 'Web\HomeController@getMapTemplate')->name('maps');
-Route::get('selects', 'Web\HomeController@getSelectTemplate')->name('selecion');
+
 
 Route::group(['middleware' => ['auth']], function () {
 
-
+    Route::get('selects', 'Web\HomeController@getSelectTemplate')->name('selecion');
     Route::get('/admin', function () {
         return view('admin.init.index');
     })->name('admin');
@@ -38,6 +38,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('dashboard/users', 'Api\UserController');
     Route::resource('dashboard/enclosures', 'Api\EnclosureController');
     Route::resource('dashboard/locations', 'Api\LocationController');
+    Route::get('select-parishes/{id}', 'Web\HomeController@getSelectParish');
+    Route::get('select-enclosures/{id}', 'Web\HomeController@getSelectEnclosure');
+    
+    
 });
 
 
