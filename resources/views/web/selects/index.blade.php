@@ -10,7 +10,7 @@
                     <div class="bg mob-bg" style="background-image: url(images/1.jpg)"></div>
                     <div class="video-container">
                         <video controls autoplay loop muted class="bgvid">
-                            <source src="video/videoweb.mp4" type="video/mp4">
+                            <source src="video/video.mp4" type="video/mp4">
                         </video>
                     </div>
                 </div>
@@ -61,7 +61,99 @@
                 </div>
             </section>
             <section class="gray-bg" id="sec2">
+                <form action="">
+
+              
                 <div class="container">
+
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="profile-edit-container add-list-container">
+                                <div class="profile-edit-header fl-wrap">
+                                    <h4>Elije tus representantes</h4>
+                                </div>
+                                <div class="custom-form">
+                                    <div class="row">
+                                       
+                                    
+                                        <div class="col-md-8">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="add-list-media-header">
+                                                        <label class="radio inline"> 
+                                                        <input class="check1"  type="radio" name="gender"  checked>
+                                                        <span>Masculino</span> 
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="add-list-media-header">
+                                                        <label class="radio inline"> 
+                                                        <input type="radio" name="gender">
+                                                        <span>Femenino</span> 
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                       
+                                        <div class="col-md-4">
+                                            <select name="meeting" class="chosen-select" >
+                                            
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="add-list-media-header">
+                                                        <label class="radio inline"> 
+                                                        <input type="radio" name="vote"  >
+                                                        <span>Voto en blanco</span> 
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="add-list-media-header">
+                                                        <label class="radio inline"> 
+                                                        <input type="radio" name="vote">
+                                                        <span>Voto en null</span> 
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="add-list-media-header">
+                                                        <label class="radio inline"> 
+                                                        <input type="radio" name="vote" checked>
+                                                        <span>Elegir candidato</span> 
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div  class="col-md-4">
+                                            <button  style="width: 100%; 
+                                            height: 100%;
+                                            position: relative;
+                                            margin-top: -5px;
+                                            float: left;
+                                            border-radius: 10px;
+                                            border-color:#fff;
+                                            font-size: 12px;
+                                            text-decoration: none;
+                                            background-color:red; color:#fff;" class="btn  big-btn  color-bg flat-btn btn-send-vote">Terminar ahora <i class="fa fa-angle-right"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                    </row>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="listsearch-header fl-wrap">
@@ -122,7 +214,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <button type="button" style="width: 100%; 
+                                            <button type="submit" style="width: 100%; 
                                             position: relative;
                                             padding: 5px 5px;
                                             margin: 0px 10px 10px 0px;
@@ -139,71 +231,10 @@
                                
                             </div>
                         </div>
-                        <!--box-widget-wrap -->
-                        <div class="col-md-4">
-                            <div class="fl-wrap">
-                                <!--box-widget-item -->
-                                <div class="box-widget-item fl-wrap">
-                                    <div class="box-widget-item-header">
-                                        <h3>User Contacts : </h3>
-                                    </div>
-                                    <div class="box-widget">
-                                        <div class="box-widget-content">
-                                            <div class="list-author-widget-contacts list-item-widget-contacts">
-                                                <ul>
-                                                    <li><span><i class="fa fa-map-marker"></i> Adress :</span> <a
-                                                            href="#">USA 27TH Brooklyn NY</a></li>
-                                                    <li><span><i class="fa fa-phone"></i> Phone :</span> <a href="#">+7(123)987654</a>
-                                                    </li>
-                                                    <li><span><i class="fa fa-envelope-o"></i> Mail :</span> <a
-                                                            href="#">AlisaNoory@domain.com</a></li>
-                                                    <li><span><i class="fa fa-globe"></i> Website :</span> <a href="#">themeforest.net</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="list-widget-social">
-                                                <ul>
-                                                    <li><a href="#" target="_blank"><i class="fa fa-facebook"></i></a>
-                                                    </li>
-                                                    <li><a href="#" target="_blank"><i class="fa fa-twitter"></i></a>
-                                                    </li>
-                                                    <li><a href="#" target="_blank"><i class="fa fa-vk"></i></a></li>
-                                                    <li><a href="#" target="_blank"><i class="fa fa-whatsapp"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--box-widget-item end -->
-                                <!--box-widget-item -->
-                                <div class="box-widget-item fl-wrap">
-                                    <div class="box-widget-item-header">
-                                        <h3>Get in Touch : </h3>
-                                    </div>
-                                    <div class="box-widget">
-                                        <div class="box-widget-content">
-                                            <form id="add-comment" class="add-comment custom-form">
-                                                <fieldset>
-                                                    <label><i class="fa fa-user-o"></i></label>
-                                                    <input type="text" placeholder="Your Name *" value=""/>
-                                                    <div class="clearfix"></div>
-                                                    <label><i class="fa fa-envelope-o"></i> </label>
-                                                    <input type="text" placeholder="Email Address*" value=""/>
-                                                    <textarea cols="40" rows="3" placeholder="Your message:"></textarea>
-                                                </fieldset>
-                                                <button class="btn  big-btn  color-bg flat-btn">Send Message<i
-                                                        class="fa fa-angle-right"></i></button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--box-widget-item end -->
-                            </div>
-                        </div>
-                        <!--box-widget-wrap end-->
+                        
                     </div>
                 </div>
+            </form>
             </section>
         </div>
     </div>

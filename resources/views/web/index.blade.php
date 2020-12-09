@@ -10,7 +10,7 @@
                     <div class="bg mob-bg" style="background-image: url(images/1.jpg)"></div>
                     <div class="video-container">
                         <video controls autoplay loop muted class="bgvid">
-                            <source src="video/videoweb.mp4" type="video/mp4">
+                            <source src="video/video.mp4" type="video/mp4">
                         </video>
                     </div>
                 </div>
