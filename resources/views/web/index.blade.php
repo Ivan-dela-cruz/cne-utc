@@ -60,7 +60,7 @@
                 </div>
                 <div class="bubble-bg"></div>
                 <div class="header-sec-link">
-                    <div class="container"><a href="#sec2" class="custom-scroll-link">Let's Start</a></div>
+                    <div class="container"><a href="#sec2" class="custom-scroll-link">Lets Start</a></div>
                 </div>
             </section>
             <!--section -->

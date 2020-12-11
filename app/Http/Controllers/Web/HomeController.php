@@ -35,12 +35,15 @@ class HomeController extends Controller
         $enclosures = Enclosure::orderBy('name', 'ASC')->get(['id', 'name']);
         $cantons = Location::where('type', 2)->get(['id', 'name']);
         $parishes = Location::where('type', 3)->get(['id', 'name']);
-        $pres = Candidate::where('position_id', 1)
+
+        $pres = Candidate::where('indent', env('POSITION_PRESIDENT', 'PR'))
             ->orderBy('name', 'ASC')
             ->get();
-        $vice = Candidate::where('position_id', 2)
+        $vice = Candidate::where('indent',env('POSITION_VICEPRESIDENT', 'VP'))
             ->orderBy('name', 'ASC')
             ->get();
+        $organizations = Organization::orderBy('name','ASC')->get();
+        
         $num_org = Organization::where('status', 1)->count();
         $candidates = new Collection();
         foreach ($pres as $pre) {
@@ -55,7 +58,7 @@ class HomeController extends Controller
             }
             $candidates->push($lista);
         }
-        return view('web.selects.index', compact('candidates', 'num_org', 'enclosures', 'cantons', 'parishes'));
+        return view('web.selects.index', compact('candidates','organizations','num_org', 'enclosures', 'cantons', 'parishes'));
     }
 
     public function getSelectParish($id)

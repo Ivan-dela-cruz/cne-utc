@@ -40,16 +40,16 @@
 <div class="col-md-2">
     <div class="edit-profile-photo fl-wrap">
         @if(isset($candidate))
-            <img src="{{asset($candidate->url_image)}}" class="respimg" alt="">
+            <img id="show_img" src="{{asset($candidate->url_image)}}" class="respimg" alt="">
         @else
-            <img src="{{asset('assets/images/avatar/1.jpg')}}" class="respimg" alt="">
+            <img id="show_img" src="{{asset('assets/images/avatar/1.jpg')}}" class="respimg" alt="">
         @endif
 
 
         <div class="change-photo-btn">
             <div class="photoUpload">
                 <span><i class="fa fa-upload"></i> Upload Photo</span>
-                {!! Form::file('image', ['id'=>'image','class' => 'upload']) !!}
+                {!! Form::file('image', ['id'=>'url_image','class' => 'upload']) !!}
             </div>
         </div>
     </div>

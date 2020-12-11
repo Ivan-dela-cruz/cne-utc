@@ -16,6 +16,7 @@ class Candidate extends Model
         'position_id',
         'start_date',
         'end_date',
+        'indent'
     ];
 
     public function organization()
