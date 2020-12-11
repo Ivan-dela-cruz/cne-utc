@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Auth::routes();
-Route::get('/', 'Web\HomeController@index');
+Route::get('/', 'Web\HomeController@index')->name('inicio');
 Route::get('maps', 'Web\HomeController@getMapTemplate')->name('maps');
 
 
@@ -43,6 +43,7 @@ Route::group(['middleware' => ['auth']], function () {
     
     
 });
+Route::resource('dashboard/votes', 'Api\VoteController');
 
 
 

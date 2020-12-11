@@ -47,7 +47,7 @@
                                </div>
                             
                                 <button class="main-search-button">
-                                    <a href="#sec2" class="custom-scroll-link">
+                                    <a  id ="btnSelect" onclick="getSelectHiddenSectionVotes()" class="custom-scroll-link">
                                        <i style="color: #fff;" class="fa fa-handshake-o fa-2x"></i>
                                        </a>
                                 </button>
@@ -60,8 +60,9 @@
                    
                 </div>
             </section>
-            <section class="gray-bg" id="sec2">
-                <form action="">
+            <section class="gray-bg" id="sec2" style="display: none" >
+                {!! Form::open(['url' => route('votes.store'), 'method' => 'post']) !!}
+                    <input name="enclosure_id" id="enclosure_id" type="text">
 
               
                 <div class="container">
@@ -74,6 +75,9 @@
                                     <h4>Elije tus representantes</h4>
                                 </div>
                                 <div class="custom-form">
+                                    <div class="profile-edit-header fl-wrap">
+                                        <h4> Elije el genero de junta </h4>
+                                    </div>
                                     <div class="row">
                                        
                                     
@@ -90,17 +94,16 @@
                                                 <div class="col-md-6">
                                                     <div class="add-list-media-header">
                                                         <label class="radio inline"> 
-                                                        <input type="radio" name="gender">
+                                                        <input type="radio" name="gender" value="Femenino">
                                                         <span>Femenino</span> 
                                                         </label>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                       
                                         <div class="col-md-4">
                                             <select name="meeting" class="chosen-select" >
-                                            
+                    
                                                 <option value="1">1</option>
                                                 <option value="2">2</option>
                                                 <option value="3">3</option>
@@ -113,7 +116,7 @@
                                                 <div class="col-md-4">
                                                     <div class="add-list-media-header">
                                                         <label class="radio inline"> 
-                                                        <input type="radio" name="vote"  >
+                                                        <input type="radio" name="type_vote" id="btnVotoBlanco" onchange="showContent()">
                                                         <span>Voto en blanco</span> 
                                                         </label>
                                                     </div>
@@ -121,15 +124,15 @@
                                                 <div class="col-md-4">
                                                     <div class="add-list-media-header">
                                                         <label class="radio inline"> 
-                                                        <input type="radio" name="vote">
+                                                        <input type="radio" name="type_vote" id ="btnVotoNull" onchange="showContent()">
                                                         <span>Voto en null</span> 
                                                         </label>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-4">
+                                                <div class="col-md-4" >
                                                     <div class="add-list-media-header">
-                                                        <label class="radio inline"> 
-                                                        <input type="radio" name="vote" checked>
+                                                        <label class="radio inline" > 
+                                                        <input type="radio" name="type_vote"  id ="btnVotoCandidate" onchange="showContentCandidates()">
                                                         <span>Elegir candidato</span> 
                                                         </label>
                                                     </div>
@@ -137,7 +140,7 @@
                                             </div>
                                         </div>
                                         <div  class="col-md-4">
-                                            <button  style="width: 100%; 
+                                            <button id="btnfinished" type="submit"  style="width: 100%;display:none;
                                             height: 100%;
                                             position: relative;
                                             margin-top: -5px;
@@ -154,7 +157,7 @@
                         </div>
                     
                     </row>
-                    <div class="row">
+                    <div class="row" id ="ContentListCandidates">
                         <div class="col-md-12">
                             <div class="listsearch-header fl-wrap">
                                 <h3>Candidatos presidenciales</h3>
@@ -213,6 +216,7 @@
                                         </article>
                                     </div>
                                     <div class="row">
+                                        <input name="candidate_id" value="{{$candidates[$i]['presi']->id}}" id="candidate_id" type="text">
                                         <div class="col-md-12">
                                             <button type="submit" style="width: 100%; 
                                             position: relative;
@@ -234,7 +238,7 @@
                         
                     </div>
                 </div>
-            </form>
+                {!! Form::close() !!}
             </section>
         </div>
     </div>
@@ -268,6 +272,48 @@
                     $('.chosen-select-enclosure').niceSelect('update');
             });
         }
+        function getSelectHiddenSectionVotes(){
+            let x= document.getElementById("sec2")
+            let y= document.getElementById("ContentListCandidates");
+             if(x.style.display=="none"){
+                x.style.display = "block";
+                y.style.display = "none";
+             }
+        }
+        function showContent() {
+            element = document.getElementById("btnfinished");
+            element2 = document.getElementById("ContentListCandidates");
+ 
+
+            check = document.getElementById("btnVotoBlanco");
+            check2  = document.getElementById("btnVotoNull");
+            if (check.checked ||  check2.checked) {
+                element.style.display='block';
+                element2.style.display="none";
+            }
+            else {
+                element.style.display='none';
+                element2.style.display="none";
+            }
+        }
+        function showContentCandidates() {
+            element = document.getElementById("btnfinished");
+            element2 = document.getElementById("ContentListCandidates");
+
+            check = document.getElementById("btnVotoCandidate");
+           
+            if (check.checked) {
+                element.style.display='none';
+                element2.style.display="block";
+            }
+            else {
+                element.style.display='block';
+                element2.style.display="none";
+            }
+        }
+       
+       
+       
 
       $(document).on('change','.chosen-select-canton',function(){
             let id = $(this).val(); 
@@ -278,6 +324,13 @@
             let id = $(this).val(); 
             getSelectEnclosure(id);
       });
+
+      $(document).on('change','.chosen-select-enclosure',function(){
+        let id = $(this).val();
+        $('#enclosure_id').val(id); 
+        
+    });
+      
      
     </script>
 @endsection

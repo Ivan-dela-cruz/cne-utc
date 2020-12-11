@@ -19,6 +19,9 @@ class CreateVotesTable extends Migration
             $table->unsignedBigInteger('enclosure_id');
             $table->unsignedBigInteger('candidate_id');
             $table->unsignedBigInteger('election_id');
+            $table->integer('meeting')->nullable();
+            $table->integer('gender')->nullable();
+            $table->integer('type_vote')->nullable();
             $table->softDeletes();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
