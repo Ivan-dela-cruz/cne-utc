@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Vote;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class VoteController extends Controller
 {
@@ -15,6 +18,7 @@ class VoteController extends Controller
     public function index()
     {
         //
+
     }
 
     /**
@@ -36,6 +40,34 @@ class VoteController extends Controller
     public function store(Request $request)
     {
         //
+    
+             $user = Auth::user()->id;
+
+            DB::beginTransaction();
+            $data = $request->all();
+            $vote = new Vote();
+            $data['user_id']= $user;
+                if($data['gender']=="on") 
+                 {
+                    $data['gender']=1;
+
+                  }
+                  else{
+
+                     $data['gender']=0;
+
+                  }
+                  
+            $data['type_vote']=1;
+            $data['election_id']=1;
+            
+         
+            $vote->fill($data);
+            $vote->save();
+            DB::commit();
+            return redirect()->route('inicio')->with('status', '¡Voto realizado con exito!');
+
+
     }
 
     /**
