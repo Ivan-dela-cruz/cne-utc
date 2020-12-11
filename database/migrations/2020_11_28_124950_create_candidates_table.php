@@ -24,6 +24,7 @@ class CreateCandidatesTable extends Migration
             $table->string('start_date')->nullable();
             $table->string('end_date')->nullable();
             $table->tinyInteger('status')->default(1);
+            $table->string('indent')->nullable();
             $table->softDeletes();
             $table->timestamps();
             $table->foreign('organization_id')->references('id')->on('organizations');

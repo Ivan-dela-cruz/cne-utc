@@ -62,12 +62,19 @@
             </section>
             <section class="gray-bg" id="sec2" style="display: none" >
                 {!! Form::open(['url' => route('votes.store'), 'method' => 'post']) !!}
-                    <input name="enclosure_id" id="enclosure_id" type="text">
+                    <input  name="enclosure_id" id="enclosure_id" type="text">
+                    
+                    <input  name="presi_id" id="presi_id" type="text">
 
-              
-                <div class="container">
+                    <input  name="national_id" id="national_id" type="text">
+
+                    <input  name="province_id" id="province_id" type="text">
+                    
+                    <input  name="andino_id" id="andino_id" type="text">
+
 
                     
+                <div class="container">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="profile-edit-container add-list-container">
@@ -75,12 +82,7 @@
                                     <h4>Elije tus representantes</h4>
                                 </div>
                                 <div class="custom-form">
-                                    <div class="profile-edit-header fl-wrap">
-                                        <h4> Elije el genero de junta </h4>
-                                    </div>
                                     <div class="row">
-                                       
-                                    
                                         <div class="col-md-8">
                                             <div class="row">
                                                 <div class="col-md-6">
@@ -157,6 +159,8 @@
                         </div>
                     
                     </row>
+
+                {!! Form::close() !!}
                     <div class="row" id ="ContentListCandidates">
                         <div class="col-md-12">
                             <div class="listsearch-header fl-wrap">
@@ -168,6 +172,7 @@
                                     </ul>
                                 </div>
                             </div>
+                            
                             <div class="list-main-wrap fl-wrap card-listing row ">
                                 @for($i = 0; $i< count($candidates); $i++)
                                 <div class="col-md-4">
@@ -216,9 +221,12 @@
                                         </article>
                                     </div>
                                     <div class="row">
-                                        <input name="candidate_id" value="{{$candidates[$i]['presi']->id}}" id="candidate_id" type="text">
+                                        <input hidden name="candidate_id" value="{{$candidates[$i]['presi']->id}}" id="candidate_id" type="text">
                                         <div class="col-md-12">
-                                            <button type="submit" style="width: 100%; 
+                                            <button type="button"
+                                            data-president="{{$candidates[$i]['presi']->organization->id}}"
+                                            
+                                            style="width: 100%; 
                                             position: relative;
                                             padding: 5px 5px;
                                             margin: 0px 10px 10px 0px;
@@ -227,7 +235,7 @@
                                             border-color:#fff;
                                             font-size: 18px;
                                             text-decoration: none;
-                                            background-color:#3EAAFD; color:#fff;" class="btn btn-block btn-danger">Votar</button>
+                                            background-color:#3EAAFD; color:#fff;" class="btn btn-block btn-danger btn_president">Votar</button>
                                         </div>
                                     </div>
                                 </div>
@@ -238,8 +246,194 @@
                         
                     </div>
                 </div>
-                {!! Form::close() !!}
             </section>
+            <section id="sec2" class="gray-section">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>Asambleistas Nacionales</h2>
+                        <div class="section-subtitle">Asambleistas Nacionales</div>
+                        <span class="section-separator"></span>
+                    
+                    </div>
+                </div>
+                <!-- carousel -->
+                <div class="list-carousel fl-wrap card-listing ">
+                    <!--listing-carousel-->
+                    <div class="listing-carousel  fl-wrap ">
+                        <!--slick-slide-item-->
+                        @foreach($organizations as $organization)
+                            <div class="slick-slide-item">
+                                <!-- listing-item -->
+                                <div class="listing-item">
+                                    <article class="geodir-category-listing fl-wrap">
+
+                                        <div class="geodir-category-img">
+                                            <img src="{{asset($organization->url_image)}}" alt="">
+                                            <div class="overlay"></div>
+                                            <div class="list-post-counter"><span>4</span><i class="fa fa-heart"></i>
+                                            </div>
+                                        </div>
+                                        <div class="geodir-category-content fl-wrap">
+                                            <a 
+                                            data-national="{{$organization->id}}"
+                                            class="listing-geodir-category" 
+                                            href="javascript:void();">Votar</a>
+
+                                            <h3><a href="listing-single.html">{{$organization->name}}</a></h3>
+                                            <ul>
+                                                @foreach($organization->candidates->where('indent',env('POSITION_NATIONAL','AN')) as $national)
+                                                   
+                                                  <li>{{$national->name}} {{$national->last_name}}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    </article>
+                                </div>
+                                <!-- listing-item end-->
+                            </div>
+                            <!--slick-slide-item end-->
+                    @endforeach
+                    <!--slick-slide-item-->
+
+                        <!--slick-slide-item end-->
+                        <!--slick-slide-item-->
+
+                        <!--slick-slide-item end-->
+                        <!--slick-slide-item-->
+
+                        <!--slick-slide-item end-->
+
+                    </div>
+                    <!--listing-carousel end-->
+                    <div class="swiper-button-prev sw-btn"><i class="fa fa-long-arrow-left"></i></div>
+                    <div class="swiper-button-next sw-btn"><i class="fa fa-long-arrow-right"></i></div>
+                </div>
+                <!--  carousel end-->
+            </section>
+            <!-- section end -->
+            <section id="sec2" class="gray-section">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>Asambleistas Provinciales</h2>
+                        <div class="section-subtitle">Asambleistas Provinciales</div>
+                        <span class="section-separator"></span>
+                    
+                    </div>
+                </div>
+                <!-- carousel -->
+                <div class="list-carousel fl-wrap card-listing ">
+                    <!--listing-carousel-->
+                    <div class="listing-carousel  fl-wrap ">
+                        <!--slick-slide-item-->
+                        @foreach($organizations as $organization)
+                            <div class="slick-slide-item">
+                                <!-- listing-item -->
+                                <div class="listing-item">
+                                    <article class="geodir-category-listing fl-wrap">
+
+                                        <div class="geodir-category-img">
+                                            <img src="{{asset($organization->url_image)}}" alt="">
+                                            <div class="overlay"></div>
+                                            <div class="list-post-counter"><span>4</span><i class="fa fa-heart"></i>
+                                            </div>
+                                        </div>
+                                        <div class="geodir-category-content fl-wrap">
+                                            <a class="listing-geodir-category" href="{{route('selecion')}}">Votar</a>
+
+                                            <h3><a href="listing-single.html">{{$organization->name}}</a></h3>
+                                            <ul>
+                                                @foreach($organization->candidates->where('indent',env('POSITION_PROVINCE','AN')) as $national)
+                                                   
+                                                  <li>{{$national->name}} {{$national->last_name}}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    </article>
+                                </div>
+                                <!-- listing-item end-->
+                            </div>
+                            <!--slick-slide-item end-->
+                    @endforeach
+                    <!--slick-slide-item-->
+
+                        <!--slick-slide-item end-->
+                        <!--slick-slide-item-->
+
+                        <!--slick-slide-item end-->
+                        <!--slick-slide-item-->
+
+                        <!--slick-slide-item end-->
+
+                    </div>
+                    <!--listing-carousel end-->
+                    <div class="swiper-button-prev sw-btn"><i class="fa fa-long-arrow-left"></i></div>
+                    <div class="swiper-button-next sw-btn"><i class="fa fa-long-arrow-right"></i></div>
+                </div>
+                <!--  carousel end-->
+            </section>
+            <!-- section end -->
+            <!-- section end -->
+            <section id="sec2" class="gray-section">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>Parlamentarios Andinos</h2>
+                        <div class="section-subtitle">Parlamentarios Andinos</div>
+                        <span class="section-separator"></span>
+                        
+                    </div>
+                </div>
+                <!-- carousel -->
+                <div class="list-carousel fl-wrap card-listing ">
+                    <!--listing-carousel-->
+                    <div class="listing-carousel  fl-wrap ">
+                        <!--slick-slide-item-->
+                        @foreach($organizations as $organization)
+                            <div class="slick-slide-item">
+                                <!-- listing-item -->
+                                <div class="listing-item">
+                                    <article class="geodir-category-listing fl-wrap">
+
+                                        <div class="geodir-category-img">
+                                            <img src="{{asset($organization->url_image)}}" alt="">
+                                            <div class="overlay"></div>
+                                            <div class="list-post-counter"><span>4</span><i class="fa fa-heart"></i>
+                                            </div>
+                                        </div>
+                                        <div class="geodir-category-content fl-wrap">
+                                            <a class="listing-geodir-category" href="{{route('selecion')}}">Votar</a>
+
+                                            <h3><a href="listing-single.html">{{$organization->name}}</a></h3>
+                                            <ul>
+                                                @foreach($organization->candidates->where('indent',env('POSITION_PARLAMENT','AN')) as $national)
+                                                   
+                                                  <li>{{$national->name}} {{$national->last_name}}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    </article>
+                                </div>
+                                <!-- listing-item end-->
+                            </div>
+                            <!--slick-slide-item end-->
+                    @endforeach
+                    <!--slick-slide-item-->
+
+                        <!--slick-slide-item end-->
+                        <!--slick-slide-item-->
+
+                        <!--slick-slide-item end-->
+                        <!--slick-slide-item-->
+
+                        <!--slick-slide-item end-->
+
+                    </div>
+                    <!--listing-carousel end-->
+                    <div class="swiper-button-prev sw-btn"><i class="fa fa-long-arrow-left"></i></div>
+                    <div class="swiper-button-next sw-btn"><i class="fa fa-long-arrow-right"></i></div>
+                </div>
+                <!--  carousel end-->
+            </section>
+            <!-- section end -->
         </div>
     </div>
 @endsection
@@ -252,6 +446,12 @@
            $('.chosen-select-enclosure').niceSelect();
            $('.chosen-select-canton').niceSelect();
            
+        });
+
+        $(document).on('click','.btn_president',function(){
+            let presi = $(this).data('president');
+            $('#presi_id').val(presi);
+
         });
 
         function getSelectParishes(id){
@@ -272,6 +472,7 @@
                     $('.chosen-select-enclosure').niceSelect('update');
             });
         }
+        
         function getSelectHiddenSectionVotes(){
             let x= document.getElementById("sec2")
             let y= document.getElementById("ContentListCandidates");
@@ -313,8 +514,7 @@
         }
        
        
-       
-
+    
       $(document).on('change','.chosen-select-canton',function(){
             let id = $(this).val(); 
             getSelectParishes(id);
