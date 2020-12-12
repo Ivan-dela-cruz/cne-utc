@@ -34,7 +34,6 @@ class HomeController extends Controller
     {
         $enclosures = Enclosure::orderBy('name', 'ASC')->get(['id', 'name']);
         $cantons = Location::where('type', 2)->get(['id', 'name']);
-        $parishes = Location::where('type', 3)->get(['id', 'name']);
 
         $pres = Candidate::where('indent', env('POSITION_PRESIDENT', 'PR'))
             ->orderBy('name', 'ASC')
@@ -42,7 +41,7 @@ class HomeController extends Controller
         $vice = Candidate::where('indent',env('POSITION_VICEPRESIDENT', 'VP'))
             ->orderBy('name', 'ASC')
             ->get();
-        $organizations = Organization::orderBy('name','ASC')->get();
+        
         
         $num_org = Organization::where('status', 1)->count();
         $candidates = new Collection();
@@ -58,9 +57,41 @@ class HomeController extends Controller
             }
             $candidates->push($lista);
         }
-        return view('web.selects.index', compact('candidates','organizations','num_org', 'enclosures', 'cantons', 'parishes'));
+        return view('web.selects.index', compact('candidates','num_org', 'cantons'));
     }
 
+
+    public function getSelectTemplateNational()
+    {
+        
+        $enclosures = Enclosure::orderBy('name', 'ASC')->get(['id', 'name']);
+        $cantons = Location::where('type', 2)->get(['id', 'name']);
+        $parishes = Location::where('type', 3)->get(['id', 'name']);
+        $organizations = Organization::orderBy('name','ASC')->get();
+        $num_org = Organization::where('status', 1)->count();
+        
+        return view('web.selects.national', compact('organizations','num_org', 'enclosures', 'cantons', 'parishes'));
+    }
+   
+
+ public function getSelectTemplateProvince()
+    {
+        $enclosures = Enclosure::orderBy('name', 'ASC')->get(['id', 'name']);
+        $cantons = Location::where('type', 2)->get(['id', 'name']);
+        $parishes = Location::where('type', 3)->get(['id', 'name']);
+        $organizations = Organization::orderBy('name','ASC')->get();
+        $num_org = Organization::where('status', 1)->count();
+        return view('web.selects.province', compact('organizations','num_org', 'enclosures', 'cantons', 'parishes'));
+    }
+    public function getSelectTemplateParlament()
+    {
+        $enclosures = Enclosure::orderBy('name', 'ASC')->get(['id', 'name']);
+        $cantons = Location::where('type', 2)->get(['id', 'name']);
+        $parishes = Location::where('type', 3)->get(['id', 'name']);
+        $organizations = Organization::orderBy('name','ASC')->get();
+        $num_org = Organization::where('status', 1)->count();
+        return view('web.selects.parlament', compact('organizations','num_org', 'enclosures', 'cantons', 'parishes'));
+    }
     public function getSelectParish($id)
     {
         $parishes = Location::where('type_id',$id)->where('type',3)->get();
@@ -76,5 +107,11 @@ class HomeController extends Controller
         $enclosures = Enclosure::where('location_id',$id)->get();
         return view('web.selects.enclosures',compact('enclosures'))->render();
     }
-
+    public function getMeeting($id,$gender)
+    {
+        $enclosure = Enclosure::find($id);
+        $meetings = $enclosure[$gender];
+        
+        return view('web.selects.meeting',compact('meetings'))->render();
+    }
 }

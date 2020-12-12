@@ -20,7 +20,14 @@ Route::get('maps', 'Web\HomeController@getMapTemplate')->name('maps');
 Route::group(['middleware' => ['auth']], function () {
 
     Route::get('selects', 'Web\HomeController@getSelectTemplate')->name('selecion');
+    
+    Route::get('selects/national', 'Web\HomeController@getSelectTemplateNational')->name('national');
+
+    Route::get('selects/province', 'Web\HomeController@getSelectTemplateProvince')->name('province');
+    
+    Route::get('selects/parlament', 'Web\HomeController@getSelectTemplateParlament')->name('parlament');
     Route::get('/admin', function () {
+
         return view('admin.init.index');
     })->name('admin');
 
@@ -40,6 +47,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('dashboard/locations', 'Api\LocationController');
     Route::get('select-parishes/{id}', 'Web\HomeController@getSelectParish');
     Route::get('select-enclosures/{id}', 'Web\HomeController@getSelectEnclosure');
+     Route::get('select-gender/{id}/{gender}', 'Web\HomeController@getMeeting');
     
     
 });

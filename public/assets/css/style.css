@@ -222,12 +222,12 @@ blockquote p {
 	top:0;
 	left:0;
 	width:100%;
-	height:100%;
+	height:60%;
 	z-index:1;
-	background-size: cover;
+	background-size:cover;
 	background-attachment: scroll  ;
 	background-position: center  ;
-	background-repeat:repeat;
+	background-repeat:no-repeat;
 	background-origin: content-box;
 }
 .shapes-bg-small:before  , .shapes-bg-big:before  {
@@ -326,7 +326,7 @@ blockquote p {
 	box-shadow: 0px 0px 0px 7px rgba(0,0,0,0.2);
 }
 .dark-header {
-	background:#2F3B59;
+	background:#D0161A;
 }
 .fs-header {
 	padding:0px 50px;
@@ -768,7 +768,7 @@ section.gray-section {
 }
 section.hero-section .bg  {
 	height:120%;
-	top:-10%;
+	top:0;
 }
 section.parallax-section {
 	padding:110px 0;
