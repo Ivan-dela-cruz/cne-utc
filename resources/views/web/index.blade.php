@@ -5,65 +5,23 @@
     <div id="wrapper">
         <!-- Content-->
         <div class="content">
-            <section class="scroll-con-sec hero-section" data-scrollax-parent="true" id="sec1">
-                <div class="media-container video-parallax" data-scrollax="properties: { translateY: '200px' }">
-                    <div class="bg mob-bg" style="background-image: url(images/1.jpg)"></div>
-                    <div class="video-container">
-                        <video controls autoplay loop muted class="bgvid">
-                            <source src="video/video.mp4" type="video/mp4">
-                        </video>
-                    </div>
-                </div>
-                <div class="overlay"></div>
-                <div class="hero-section-wrap fl-wrap">
-                    <div class="container">
-                        <div class="intro-item fl-wrap">
-                            <h2>Elecciones presidenciales 2021</h2>
-                            <h3>Ejerce tu derecho al voto con responsabilidad.</h3>
-                        </div>
-                        <div class="main-search-input-wrap">
-                            <div class="main-search-input fl-wrap">
-                                <div class="main-search-input-item">
-                                    <select data-placeholder="All Categories" class="chosen-select">
-                                        <option>Selecciona un cantón</option>
-                                        <option>Latacunga</option>
-                                        <option>Pujíli</option>
-                                        <option>Salcedo</option>
-                                        <option>Mulalo</option>
-                                        <option>Guaytacama</option>
-                                    </select>
+            
+                    <section class="scroll-con-sec hero-section" data-scrollax-parent="true" id="sec1">
+                        <div class="bg"  data-bg="{{asset('assets/images/principal.png')}}" data-scrollax="properties: { translateY: '200px' }"></div>
+                      
+                        <div class="hero-section-wrap fl-wrap">
+                            <div class="container">
+                                <div class="main-search-input-wrap">
+                                      
+                                     
+                                       
                                 </div>
-                                <div class="main-search-input-item">
-                                    <select data-placeholder="All Categories" class="chosen-select">
-                                        <option>Selecciona una parroquia</option>
-                                        <option>Bellavista</option>
-                                        <option>El Salto</option>
-                                        <option>San Felipe</option>
-                                    </select>
-                                </div>
-                                <div class="main-search-input-item">
-                                    <select data-placeholder="All Categories" class="chosen-select">
-                                        <option>Selecciona un recinto</option>
-                                        <option>Recinto 1</option>
-                                        <option>Recinto 2</option>
-                                        <option>Recinto 3</option>
-                                        <option>Recinto 4</option>
-                                        <option>Recinto 5</option>
-                                    </select>
-                                </div>
-                                <button class="main-search-button"
-                                        onclick="window.location.href='{{route('maps')}}'">Resultados
-                                </button>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="bubble-bg"></div>
-                <div class="header-sec-link">
-                    <div class="container"><a href="#sec2" class="custom-scroll-link">Lets Start</a></div>
-                </div>
-            </section>
-            <!--section -->
+                        <div class="bubble-bg"> </div>
+                    </section>
+                    <!-- section end -->
+
             <section id="sec2" class="gray-section">
                 <div class="container">
                     <div class="section-title">
@@ -87,8 +45,7 @@
                                         <div class="geodir-category-img">
                                             <img src="{{asset($position->url_image)}}" alt="">
                                             <div class="overlay"></div>
-                                            <div class="list-post-counter"><span>4</span><i class="fa fa-heart"></i>
-                                            </div>
+                                            
                                         </div>
                                         <div class="geodir-category-content fl-wrap">
                                             <a class="listing-geodir-category" href="{{route('selecion')}}">Votar</a>
