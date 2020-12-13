@@ -5,6 +5,7 @@
     <div id="wrapper">
         <!-- Content-->
         <div class="content">
+
             <section class="scroll-con-sec hero-section" data-scrollax-parent="true" id="sec1">
                
                 <div class="custom-form">
@@ -49,12 +50,8 @@
                     </div>
                 </div>
             </section>
+            {!! Form::open(['url' => route('store-president'), 'method' => 'post','id'=>'form_data']) !!}
             <section class="gray-bg" id="sec2" >
-                
-              
-              {!! Form::open(['url' => route('store-president'), 'method' => 'post','id'=>'form_data']) !!}
-
-              
                 <div class="container">
                     <div class="row" id ="ContentListCandidates">
                         <div class="col-md-12">
@@ -121,9 +118,7 @@
                                                 <div class="custom-form">
                                                     {{ Form::text('list[]', null, ['class' => '','placeholder'=>'Ingrese votos']) }}
                                                     {{ Form::hidden('organizations[]',$candidates[$i]['vice']->organization->id , ['class' => '','placeholder'=>'id organizacion']) }}
-                                                    
                                                 </div>
-
                                         </div>
                                     </div>
                                 </div>
@@ -131,36 +126,47 @@
                                
                             </div>
                         </div>
-                        
                     </div>
                 </div>
+            </section>
+             <section>
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="list-single-main-item fl-wrap">
                                 <div class="list-single-main-item-title fl-wrap">
                                     <h3>Otros votos </h3>
                                 </div>
                                 <div class="custom-form">
-                                    <input hidden name="type_election" value="{{env('POSITION_PRESIDENT','PR')}}" type="text">
-                                    <input hidden name="canton" class="input-canton" id="input-canton" type="text">
-                                    <input hidden name="parish" class="input-parish" id="input-parish" type="text">
-                                    <input hidden name="enclosure" class="input-enclosure" id="input-enclosure" type="text">
-                                    <input hidden name="gender" class="input-gender" id="input-gender" type="text">
-                                    <input hidden name="meeting" class="input-meeting" id="input-meeting" type="text">
-                                    <input  placeholder="Votos en blanco" name="vote_null" class="input-blank" id="input-blank" type="text">
-                                    <input  placeholder="Votos nulos" name="vote_blank" class="input-null" id="input-null" type="text">
-                                    <button type="button" style="width: 40%; margin-right: 10px; background-color: #3a3939;" class="btn  big-btn  color-bg flat-btn" id="btn_block">Habilitar<i class="fa fa-unlock"></i></button>
-                                    <button type="button" style="width: 40%; background-color: #D0161A;" class="btn  big-btn  color-bg flat-btn" id="btn_send">Registar<i class="fa fa-angle-right"></i></button>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <input hidden name="type_election" value="{{env('POSITION_PRESIDENT','PR')}}" type="text">
+                                        <input hidden name="canton" class="input-canton" id="input-canton" type="text">
+                                        <input hidden name="parish" class="input-parish" id="input-parish" type="text">
+                                        <input hidden name="enclosure" class="input-enclosure" id="input-enclosure" type="text">
+                                        <input hidden name="gender" class="input-gender" id="input-gender" type="text">
+                                        <input hidden name="meeting" class="input-meeting" id="input-meeting" type="text">
+                                        <input  placeholder="Votos en blanco" name="vote_null" class="input-blank" id="input-blank" type="text">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input  placeholder="Votos nulos" name="vote_blank" class="input-null" id="input-null" type="text">
+                                    </div>
+                                    <div class="col-md-3">
+                                         <button type="button" style="width: 100%; margin-top: 0; margin-right: 10px; background-color: #3a3939;" class="btn  big-btn  color-bg flat-btn" id="btn_block">Habilitar<i class="fa fa-unlock"></i></button>
+                                    
+                                    </div>
+                                    <div class="col-md-3">
+
+                                   <button type="button" style="width: 100%; margin-top:0; background-color: #D0161A;" class="btn  big-btn  color-bg flat-btn" id="btn_send">Registar<i class="fa fa-angle-right"></i></button>
+                                    </div>
+                                </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-               
-              {!! Form::close() !!}
             </section>
-           
+            {!! Form::close() !!}
         </div>
     </div>
 @endsection
