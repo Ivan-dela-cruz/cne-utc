@@ -6,48 +6,54 @@
         <!-- Content-->
         <div class="content">
             <section class="scroll-con-sec hero-section" data-scrollax-parent="true" id="sec1">
-               
-                <div class="custom-form">
+                <div class="bg"  data-bg="{{asset('assets/images/principal.png')}}" data-scrollax="properties: { translateY: '200px' }"></div>
+                <div class="hero-section-wrap fl-wrap">
+                    <div class="container">
+                            <div class="custom-form">
                     
-                    <div style="padding-left: 80px;" class="row block-div">
-                            
-                        <div class="col-md-3">
-                            <select style="width: 100%;" data-placeholder="All Categories" class="chosen-select-canton">
-                        
-                                @foreach($cantons as $canton)
-                                    <option value="{{$canton->id}}">{{$canton->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="col-md-3">
-                            <select style="width: 100%;"  data-placeholder="All Categories" class="chosen-select-parish">
-                                    @include('web.selects.parishes')
-                            </select>
-                        </div>
-    
-                        <div class="col-md-3">
-                            <select style="width: 100%;" data-placeholder="All Categories" class="chosen-select-enclosure">
-                            
-                                @include('web.selects.enclosures')
-                            </select>
-                        </div>
-
-                        <div class="col-md-1">
-                            <select style="width: 100%;" data-placeholder="All Categories" class="chosen-select-gender">
-                                <option value="meeting_fem">F</option>
-                                <option value="meeting_mas">M</option>
-                            </select>
-                        </div>
-
-                        <div class="col-md-1">
-                            <select style="width: 100%;" data-placeholder="All Categories" class="chosen-select-meeting">
-                            
-                            @include('web.selects.meeting')
-                            </select>
-                        </div>
+                                <div  class="row block-div">
+                                        
+                                    <div class="col-md-3">
+                                        <select  data-placeholder="All Categories" class="chosen-select-canton">
+                                    
+                                            @foreach($cantons as $canton)
+                                                <option value="{{$canton->id}}">{{$canton->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+            
+                                    <div class="col-md-3">
+                                        <select   data-placeholder="All Categories" class="chosen-select-parish">
+                                                @include('web.selects.parishes')
+                                        </select>
+                                    </div>
+                
+                                    <div class="col-md-3">
+                                        <select  data-placeholder="All Categories" class="chosen-select-enclosure">
+                                        
+                                            @include('web.selects.enclosures')
+                                        </select>
+                                    </div>
+            
+                                    <div class="col-md-1">
+                                        <select  data-placeholder="All Categories" class="chosen-select-gender">
+                                            <option value="meeting_fem">F</option>
+                                            <option value="meeting_mas">M</option>
+                                        </select>
+                                    </div>
+            
+                                    <div class="col-md-1">
+                                        <select  data-placeholder="All Categories" class="chosen-select-meeting">
+                                        
+                                        @include('web.selects.meeting')
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                     </div>
                 </div>
+                <div class="bubble-bg"> </div>
+                
             </section>
                           
             {!! Form::open(['url' => route('store-president'), 'method' => 'post','id'=>'form_data']) !!}
@@ -91,12 +97,30 @@
                                         <div class="col-md-12">
 
                                                 <div class="custom-form">
+                                                   
                                                     {{ Form::text('list[]', null, ['class' => '','placeholder'=>'Ingrese votos']) }}
                                                     {{ Form::hidden('organizations[]',$organization->id , ['class' => '','placeholder'=>'id organizacion']) }}
+                                                </div>
+                                                <div class="accordion">
+                                                    <a class="toggle act-accordion" href="#"> Ver integrantes  <i class="fa fa-angle-down"></i></a>
+                                                    <div class="accordion-inner">
+                                                        <ul>
+                                                            @foreach($organization->candidates->where('indent',env('POSITION_NATIONAL','AN')) as $candidate)
+                                                            <li>
+                                                                <a href="javascript: return void;">
+                                                                    {{$candidate->name}} {{$candidate->last_name}}
+                                                                </a>
+                                                                
+                                                            </li>
+                                                            @endforeach
+                                                           
+                                                        </ul>
+                                                    </div>
                                                 </div>
                                         </div>
                                     </div>
                                 </div>
+                                
                                 @endforeach
                                
                             </div>
