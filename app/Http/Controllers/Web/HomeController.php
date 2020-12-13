@@ -12,7 +12,7 @@ use App\Organization;
 use Illuminate\Http\Request;
 use App\Position;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Auth;
+;
 
 class HomeController extends Controller
 {
