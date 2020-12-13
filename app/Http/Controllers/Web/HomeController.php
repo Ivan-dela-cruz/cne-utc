@@ -67,13 +67,11 @@ class HomeController extends Controller
     public function getSelectTemplateNational()
     {
         
-        $enclosures = Enclosure::orderBy('name', 'ASC')->get(['id', 'name']);
         $cantons = Location::where('type', 2)->get(['id', 'name']);
-        $parishes = Location::where('type', 3)->get(['id', 'name']);
         $organizations = Organization::orderBy('name','ASC')->get();
         $num_org = Organization::where('status', 1)->count();
         
-        return view('web.selects.national', compact('organizations','num_org', 'enclosures', 'cantons', 'parishes'));
+        return view('web.selects.national', compact('organizations','num_org' ,'cantons'));
     }
    
 
@@ -165,7 +163,7 @@ class HomeController extends Controller
             $vote2->type_election= $data['type_election'];
             $vote2->save();
 
-         return redirect()->route('selecion');
+         return redirect()->route('national');
     }
     public function redirectUrlSelect($path)
     {
