@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Web;
 
+
+use App\Vote;
 use App\Candidate;
 use App\Enclosure;
 use App\Http\Controllers\Controller;
@@ -10,6 +12,7 @@ use App\Organization;
 use Illuminate\Http\Request;
 use App\Position;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -113,5 +116,73 @@ class HomeController extends Controller
         $meetings = $enclosure[$gender];
         
         return view('web.selects.meeting',compact('meetings'))->render();
+    }
+
+    public function storeVotes(Request $request)
+    {
+        $id = Auth::user()->id;
+        $data = $request->all();
+        $list = $data['list'];
+        $org = $data['organizations'];
+        for ($i=0; $i < count($list); $i++) { 
+           $vote = new Vote();
+           $vote->user_id= $id;
+           $vote->organization_id= $org[$i];
+           $vote->canton= $data['canton'];
+           $vote->parish= $data['parish'];
+           $vote->enclosure= $data['enclosure'];
+           $vote->gender= $data['gender'];
+           $vote->meeting= $data['meeting'];
+           $vote->votes= $list[$i];
+           $vote->type_vote= env('TYPE_VOTE_ELECTION','T');
+           $vote->type_election= $data['type_election'];
+           $vote->save();
+        }
+        
+            $vote = new Vote();
+            $vote->user_id= $id;
+            $vote->organization_id= 0;
+            $vote->canton= $data['canton'];
+            $vote->parish= $data['parish'];
+            $vote->enclosure= $data['enclosure'];
+            $vote->gender= $data['gender'];
+            $vote->meeting= $data['meeting'];
+            $vote->votes= $data['vote_null'];
+            $vote->type_vote= env('TYPE_VOTE_NULL','N');
+            $vote->type_election= $data['type_election'];
+            $vote->save();
+
+            $vote2 = new Vote();
+            $vote2->user_id= $id;
+            $vote2->organization_id= 0;
+            $vote2->canton= $data['canton'];
+            $vote2->parish= $data['parish'];
+            $vote2->enclosure= $data['enclosure'];
+            $vote2->gender= $data['gender'];
+            $vote2->meeting= $data['meeting'];
+            $vote2->votes= $data['vote_blank'];
+            $vote2->type_vote= env('TYPE_VOTE_BLANK','B');
+            $vote2->type_election= $data['type_election'];
+            $vote2->save();
+
+         return redirect()->route('selecion');
+    }
+    public function redirectUrlSelect($path)
+    {
+        switch($path){
+            case env('POSITION_PRESIDENT','PR'):
+                return redirect()->route('president'); 
+                break;
+            case env('POSITION_NATIONAL','NA'): 
+                return redirect()->route('national'); 
+                break;
+            case env('POSITION_PROVINCE','AP'): 
+                return redirect()->route('province'); 
+            break;
+            case env('POSITION_PARLAMENT','PA'): 
+                return redirect()->route('parlament'); 
+            break;
+
+        }
     }
 }

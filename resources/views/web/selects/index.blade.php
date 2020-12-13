@@ -9,7 +9,7 @@
                
                 <div class="custom-form">
                     
-                    <div style="padding-left: 80px;" class="row">
+                    <div style="padding-left: 80px;" class="row block-div">
                             
                         <div class="col-md-3">
                             <select style="width: 100%;" data-placeholder="All Categories" class="chosen-select-canton">
@@ -50,6 +50,11 @@
                 </div>
             </section>
             <section class="gray-bg" id="sec2" >
+                
+              
+              {!! Form::open(['url' => route('store-president'), 'method' => 'post','id'=>'form_data']) !!}
+
+              
                 <div class="container">
                     <div class="row" id ="ContentListCandidates">
                         <div class="col-md-12">
@@ -114,8 +119,9 @@
                                         <div class="col-md-12">
 
                                                 <div class="custom-form">
-                                                    <input placeholder="Ingrese votos" type="text">
-                                                    <button style="width: 100%; margin-top: -10px;" type="submit" class="btn color-bg flat-btn">Guardar</button>
+                                                    {{ Form::text('list[]', null, ['class' => '','placeholder'=>'Ingrese votos']) }}
+                                                    {{ Form::hidden('organizations[]',$candidates[$i]['vice']->organization->id , ['class' => '','placeholder'=>'id organizacion']) }}
+                                                    
                                                 </div>
 
                                         </div>
@@ -128,6 +134,31 @@
                         
                     </div>
                 </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="list-single-main-item fl-wrap">
+                                <div class="list-single-main-item-title fl-wrap">
+                                    <h3>Otros votos </h3>
+                                </div>
+                                <div class="custom-form">
+                                    <input hidden name="type_election" value="{{env('POSITION_PRESIDENT','PR')}}" type="text">
+                                    <input hidden name="canton" class="input-canton" id="input-canton" type="text">
+                                    <input hidden name="parish" class="input-parish" id="input-parish" type="text">
+                                    <input hidden name="enclosure" class="input-enclosure" id="input-enclosure" type="text">
+                                    <input hidden name="gender" class="input-gender" id="input-gender" type="text">
+                                    <input hidden name="meeting" class="input-meeting" id="input-meeting" type="text">
+                                    <input  placeholder="Votos en blanco" name="vote_null" class="input-blank" id="input-blank" type="text">
+                                    <input  placeholder="Votos nulos" name="vote_blank" class="input-null" id="input-null" type="text">
+                                    <button type="button" style="width: 40%; margin-right: 10px; background-color: #3a3939;" class="btn  big-btn  color-bg flat-btn" id="btn_block">Habilitar<i class="fa fa-unlock"></i></button>
+                                    <button type="button" style="width: 40%; background-color: #D0161A;" class="btn  big-btn  color-bg flat-btn" id="btn_send">Registar<i class="fa fa-angle-right"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+              {!! Form::close() !!}
             </section>
            
         </div>
@@ -135,77 +166,5 @@
 @endsection
 
 @section('scripts')
-    <script type="text/javascript" src="{{asset('js/locations.js')}}"></script>
-    <script type="text/javascript">
-        $(document).ready(function(){
-           $('.chosen-select-parish').niceSelect();
-           $('.chosen-select-enclosure').niceSelect();
-           $('.chosen-select-canton').niceSelect();
-           $('.chosen-select-gender').niceSelect();
-           $('.chosen-select-meeting').niceSelect();
-           
-        });
-
-        $(document).on('click','.btn_president',function(){
-            let presi = $(this).data('president');
-            $('#presi_id').val(presi);
-
-        });
-
-        function getSelectParishes(id){
-           
-            let url ='select-parishes/'+id;
-            axios.get(url).then(function(response){
-                    $('.chosen-select-parish').empty();
-                    $('.chosen-select-parish').html(response.data.view);
-                    $('.chosen-select-parish').niceSelect('update');
-                    getSelectEnclosure(response.data.location_id);
-            });
-        }
-        function getSelectEnclosure(id){
-            let url ='select-enclosures/'+id;
-            axios.get(url).then(function(response){
-                    $('.chosen-select-enclosure').empty();
-                    $('.chosen-select-enclosure').html(response.data);
-                    $('.chosen-select-enclosure').niceSelect('update');
-            });
-        }
-        
-        function getSelectGender(id,gender){
-            let url ='select-gender/'+id+'/'+gender;
-            axios.get(url).then(function(response){
-                    $('.chosen-select-meeting').empty();
-                    $('.chosen-select-meeting').html(response.data);
-                    $('.chosen-select-meeting').niceSelect('update');
-            });
-        }
-       
-    
-      $(document).on('change','.chosen-select-canton',function(){
-            let id = $(this).val(); 
-            getSelectParishes(id);
-
-      });
-      $(document).on('change','.chosen-select-parish',function(){
-            let id = $(this).val(); 
-            getSelectEnclosure(id);
-      });
-
-      $(document).on('change','.chosen-select-enclosure',function(){
-            let id = $(this).val();
-            $('#enclosure_id').val(id); 
-        
-      });
-       $(document).on('change','.chosen-select-gender',function(){
-            let gender = $(this).val();
-            let enclosure_id = $('.chosen-select-enclosure').val();
-            if(enclosure_id != 0){
-                getSelectGender(enclosure_id,gender);
-            }else{
-                alert('Selecciona un recinto para continuar');
-            }
-        });
-      
-     
-    </script>
+    <script type="text/javascript" src="{{asset('js/script_pages.js')}}"></script>
 @endsection

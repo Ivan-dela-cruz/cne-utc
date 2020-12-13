@@ -19,13 +19,16 @@ Route::get('maps', 'Web\HomeController@getMapTemplate')->name('maps');
 
 Route::group(['middleware' => ['auth']], function () {
 
-    Route::get('selects', 'Web\HomeController@getSelectTemplate')->name('selecion');
+    Route::get('redirect-route/{path}','HomeController@redirectUrlSelect')->name('redirect-route');
     
-    Route::get('selects/national', 'Web\HomeController@getSelectTemplateNational')->name('national');
+    Route::get('president', 'Web\HomeController@getSelectTemplate')->name('president');
+    
+    Route::get('national', 'Web\HomeController@getSelectTemplateNational')->name('national');
 
-    Route::get('selects/province', 'Web\HomeController@getSelectTemplateProvince')->name('province');
+    Route::get('province', 'Web\HomeController@getSelectTemplateProvince')->name('province');
     
-    Route::get('selects/parlament', 'Web\HomeController@getSelectTemplateParlament')->name('parlament');
+    Route::get('parlament', 'Web\HomeController@getSelectTemplateParlament')->name('parlament');
+    
     Route::get('/admin', function () {
 
         return view('admin.init.index');
@@ -47,7 +50,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('dashboard/locations', 'Api\LocationController');
     Route::get('select-parishes/{id}', 'Web\HomeController@getSelectParish');
     Route::get('select-enclosures/{id}', 'Web\HomeController@getSelectEnclosure');
-     Route::get('select-gender/{id}/{gender}', 'Web\HomeController@getMeeting');
+    Route::get('select-gender/{id}/{gender}', 'Web\HomeController@getMeeting');
+    Route::post('store-president','Web\HomeController@storeVotes')->name('store-president');
     
     
 });
