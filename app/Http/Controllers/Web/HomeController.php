@@ -77,21 +77,19 @@ class HomeController extends Controller
 
  public function getSelectTemplateProvince()
     {
-        $enclosures = Enclosure::orderBy('name', 'ASC')->get(['id', 'name']);
         $cantons = Location::where('type', 2)->get(['id', 'name']);
-        $parishes = Location::where('type', 3)->get(['id', 'name']);
         $organizations = Organization::orderBy('name','ASC')->get();
         $num_org = Organization::where('status', 1)->count();
-        return view('web.selects.province', compact('organizations','num_org', 'enclosures', 'cantons', 'parishes'));
+        
+        return view('web.selects.province', compact('organizations','num_org' ,'cantons'));
     }
     public function getSelectTemplateParlament()
     {
-        $enclosures = Enclosure::orderBy('name', 'ASC')->get(['id', 'name']);
         $cantons = Location::where('type', 2)->get(['id', 'name']);
-        $parishes = Location::where('type', 3)->get(['id', 'name']);
         $organizations = Organization::orderBy('name','ASC')->get();
         $num_org = Organization::where('status', 1)->count();
-        return view('web.selects.parlament', compact('organizations','num_org', 'enclosures', 'cantons', 'parishes'));
+        
+        return view('web.selects.parlament', compact('organizations','num_org' ,'cantons'));
     }
     public function getSelectParish($id)
     {

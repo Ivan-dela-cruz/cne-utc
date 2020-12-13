@@ -56,7 +56,7 @@
                     <div class="row" id ="ContentListCandidates">
                         <div class="col-md-12">
                             <div class="listsearch-header fl-wrap">
-                                <h3>Candidatos presidenciales</h3>
+                                <h3>Asambleistas Nacionales</h3>
                                 <div class="listing-view-layout">
                                     <ul>
                                         <li><a class="grid active" href="#"><i class="fa fa-th-large"></i></a></li>
