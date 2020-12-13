@@ -77,7 +77,7 @@
                                             </div>
                                         </div>
                                         <div class="geodir-category-content fl-wrap">
-                                            <a class="listing-geodir-category" href="{{route('selecion')}}">Votar</a>
+                                            <a class="listing-geodir-category" href="">Votar</a>
 
                                             <h3><a href="listing-single.html">{{$organization->name}}</a></h3>
                                             <ul>

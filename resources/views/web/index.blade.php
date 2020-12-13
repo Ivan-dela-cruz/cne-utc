@@ -48,7 +48,7 @@
                                             
                                         </div>
                                         <div class="geodir-category-content fl-wrap">
-                                            <a class="listing-geodir-category" href="{{route('selecion')}}">INGRESAR</a>
+                                            <a class="listing-geodir-category" href="{{route('redirect-route',$position->indent)}}">INGRESAR</a>
 
                                             <h3><a href="listing-single.html">{{$position->name}}</a></h3>
                                             <p>{{$position->description}} </p>

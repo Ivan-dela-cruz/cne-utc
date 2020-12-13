@@ -19,8 +19,8 @@ Route::get('maps', 'Web\HomeController@getMapTemplate')->name('maps');
 
 Route::group(['middleware' => ['auth']], function () {
 
-    Route::get('redirect-route/{path}','HomeController@redirectUrlSelect')->name('redirect-route');
-    
+    Route::get('redirect-route/{path}','Web\HomeController@redirectUrlSelect')->name('redirect-route');
+
     Route::get('president', 'Web\HomeController@getSelectTemplate')->name('president');
     
     Route::get('national', 'Web\HomeController@getSelectTemplateNational')->name('national');
