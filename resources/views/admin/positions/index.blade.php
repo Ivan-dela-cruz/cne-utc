@@ -5,8 +5,9 @@
         <div class="dashboard-list-box fl-wrap">
             <div class="dashboard-header fl-wrap">
                 <h3>Indox</h3>
-                <a  href="{{route('positions.create') }}" class="new-dashboard-item">Nuevo</a>
-                
+                @can('create_position')
+                  <a  href="{{route('positions.create') }}" class="new-dashboard-item">Nuevo</a>
+                @endcan
             </div>
             @include('admin.positions.table')
         </div>

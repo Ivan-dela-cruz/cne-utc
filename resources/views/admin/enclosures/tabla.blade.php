@@ -36,11 +36,15 @@
                     </div>
                 </div>
                 <ul class="dashboard-listing-table-opt  fl-wrap">
+                    @can('update_enclosure')
                     <li><a href="{{route('enclosures.edit',$enclosure->id)}}">Editar <i class="fa fa-pencil-square-o"></i></a>
                     </li>
+                    @endcan
                     {!! Form::open(['route' => ['enclosures.destroy', $enclosure->id], 'method' => 'DELETE','class'=>'delete-item'.$enclosure->id]) !!}
                     <li><a href="#" class="btn del-btn">Eliminar <i class="fa fa-trash-o"></i></a></li>
+                    @can('destroy_enclosure') 
                     <button type="submit">Borrar</button>
+                    @endcan
                     {!! Form::close() !!}
                 </ul>
             </div>
