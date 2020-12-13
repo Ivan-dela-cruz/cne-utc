@@ -5,7 +5,9 @@
         <div class="dashboard-list-box fl-wrap">
             <div class="dashboard-header fl-wrap">
                 <h3>Roles</h3>
+                @can('create_rol')
                 <span class="new-dashboard-item"><a href="{{route('roles.create')}}">Nuevo</a></span>
+                @endcan
             </div>
             @foreach($roles as $role)
                 <div class="dashboard-list">

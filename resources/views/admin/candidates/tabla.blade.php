@@ -18,11 +18,15 @@
                     </div>
                 </div>
                 <ul class="dashboard-listing-table-opt  fl-wrap">
+                    @can('update_candidate')
                     <li><a href="{{route('candidates.edit',$candidate->id)}}">Editar <i class="fa fa-pencil-square-o"></i></a>
                     </li>
+                    @endcan
                     {!! Form::open(['route' => ['candidates.destroy', $candidate->id], 'method' => 'DELETE','class'=>'delete-item'.$candidate->id]) !!}
                     <li><a href="#" class="btn del-btn">Eliminar <i class="fa fa-trash-o"></i></a></li>
+                    @can('destroy_candidate') 
                     <button type="submit">Borrar</button>
+                    @endcan
                     {!! Form::close() !!}
                 </ul>
             </div>

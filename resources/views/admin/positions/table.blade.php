@@ -23,11 +23,17 @@
                                        
                             </div>   
                             <ul class="dashboard-listing-table-opt  fl-wrap">
-                                <li><a href="{{route('positions.edit',$position->id)}}">Editar <i
+                                @can('update_position')
+                                 <li><a href="{{route('positions.edit',$position->id)}}">Editar <i
                                     class="fa fa-pencil-square-o"></i></a></li>
+                                    @endcan
                         {!! Form::open(['route' => ['positions.destroy', $position->id], 'method' => 'DELETE','class'=>'delete-item'.$position->id]) !!}
-                        <li><a href="#" class="btn del-btn">Eliminar <i class="fa fa-trash-o"></i></a></li>
+                    
+                         <li><a href="#" class="btn del-btn">Eliminar <i class="fa fa-trash-o"></i></a></li>
+                       
+                         @can('destroy_position')
                         <button type="submit">Borrar</button>
+                        @endcan
                         {!! Form::close() !!}
                             </ul>
                         </div>

@@ -2,7 +2,7 @@
     <div class="header-inner">
         <div class="header-inner">
             <div class="logo-holder">
-                <a style="color: white; font-size: 20px;" href="{{route('admin')}}"><img
+                <a style="color: white; font-size: 20px;" href="{{url('/')}}"><img
                         src="{{asset('assets/images/logo.png')}}" alt="">
                     <b> Elecciones 2021</b> </a>
             </div>
