@@ -1,4 +1,5 @@
-<footer class="main-footer dark-footer  ">
+ {{-- <footer class="main-footer dark-footer">
+    
     <div class="container">
         <div class="row">
             <div class="col-md-3">
@@ -89,6 +90,8 @@
             </div>
         </div>
     </div>
+    </footer>
+ --}}
     <div class="sub-footer fl-wrap">
         <div class="container">
             <div class="row">
@@ -98,7 +101,7 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="copyright"> &#169; CityBook 2018 . All rights reserved.</div>
+                    <div class="copyright"> &#169; UTC 2020 . All rights reserved.</div>
                 </div>
                 <div class="col-md-4">
                     <div class="footer-social">
@@ -114,4 +117,3 @@
             </div>
         </div>
     </div>
-</footer>
