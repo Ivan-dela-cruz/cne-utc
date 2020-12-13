@@ -18,8 +18,8 @@ class CreatePositionsTable extends Migration
             $table->string('name')->nullable();
             $table->string('description')->nullable();
             $table->string('url_image')->nullable();
-
             $table->tinyInteger('status')->default(1);
+            $table->string('indent')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

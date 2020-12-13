@@ -16,20 +16,19 @@ class CreateVotesTable extends Migration
         Schema::create('votes', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('enclosure_id');
-            $table->unsignedBigInteger('election_id');
-            $table->unsignedBigInteger('president');
-            $table->unsignedBigInteger('national');
-            $table->unsignedBigInteger('province');
-            $table->unsignedBigInteger('parlament');
+            $table->unsignedBigInteger('organization_id')->nullable();
+            $table->unsignedBigInteger('canton')->nullable();
+            $table->unsignedBigInteger('parish')->nullable();
+            $table->unsignedBigInteger('enclosure')->nullable();
+            $table->string('gender')->nullable();
             $table->integer('meeting')->nullable();
-            $table->integer('gender')->nullable();
-            $table->integer('type_vote')->nullable();
+            $table->string('votes')->nullable();
+            $table->string('type_vote')->nullable();
+            $table->string('type_election')->nullable();
             $table->softDeletes();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('enclosure_id')->references('id')->on('enclosures');
-            $table->foreign('election_id')->references('id')->on('elections');
+           
         });
     }
 
