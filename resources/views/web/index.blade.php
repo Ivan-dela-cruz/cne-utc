@@ -25,10 +25,10 @@
             <section id="sec2" class="gray-section">
                 <div class="container">
                     <div class="section-title">
-                        <h2>Cargos a elejir</h2>
+                        <h2>INGRESAR RESULTADOS</h2>
                         <div class="section-subtitle">Elije con responsabilidad</div>
                         <span class="section-separator"></span>
-                        <p>No votes por Lasso y correa.</p>
+                    {{--  <p>No votes por Lasso y correa.</p> --}}  
                     </div>
                 </div>
                 <!-- carousel -->
@@ -48,7 +48,7 @@
                                             
                                         </div>
                                         <div class="geodir-category-content fl-wrap">
-                                            <a class="listing-geodir-category" href="{{route('selecion')}}">Votar</a>
+                                            <a class="listing-geodir-category" href="{{route('selecion')}}">INGRESAR</a>
 
                                             <h3><a href="listing-single.html">{{$position->name}}</a></h3>
                                             <p>{{$position->description}} </p>
@@ -79,23 +79,7 @@
             <!-- section end -->
 
             <!--section -->
-            <section class="gradient-bg">
-                <div class="cirle-bg">
-                    <div class="bg" data-bg="images/bg/circle.png"></div>
-                </div>
-                <div class="container">
-                    <div class="join-wrap fl-wrap">
-                        <div class="row">
-                            <div class="col-md-8">
-                                <h3>Do You Have Questions ?</h3>
-                                <p>Lorem ipsum dolor sit amet, harum dolor nec in, usu molestiae at no.</p>
-                            </div>
-                            <div class="col-md-4"><a href="contacts.html" class="join-wrap-btn">Get In Touch <i
-                                        class="fa fa-envelope-o"></i></a></div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            
             <!-- section end -->
         </div>
         <!-- Content end -->

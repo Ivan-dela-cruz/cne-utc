@@ -50,7 +50,7 @@ body{
 	font-size: 13px;
 	height:100%;
 	text-align:center;
-	background:#2F3B59;
+	background:#D0161A;
 	color:#000;
 	font-family: 'Quicksand', sans-serif;
 }
@@ -4782,7 +4782,7 @@ footer.main-footer.fixed-footer {
 }
 .sub-footer {
 	margin-top:40px;
-	background:#24324F;
+	background:#D0161A;
 	padding:28px 0;
 }
 .copyright {
