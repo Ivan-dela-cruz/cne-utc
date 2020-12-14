@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Web;
 
-use Illuminate\Support\Facades\Auth;
 use App\Vote;
 use App\Candidate;
 use App\Enclosure;
