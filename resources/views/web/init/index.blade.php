@@ -11,6 +11,7 @@
     <meta name="description" content=""/>
     <!--=============== css  ===============-->
     @include('web.init.css')
+    @yield('css')
 </head>
 <body>
 <!--loader-->
@@ -35,5 +36,6 @@
 <!-- Main end -->
 <!--=============== scripts  ===============-->
 @include('web.init.js')
+
 </body>
 </html>
