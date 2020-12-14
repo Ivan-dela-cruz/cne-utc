@@ -43,7 +43,7 @@
                 <nav>
                     <ul>
                         <li>
-                            <a href="blog.html">Resultados</a>
+                            <a href="{{route('results')}}">Resultados</a>
                         </li>
                         <li>
                             <a href="{{url('/')}}">Home</a>

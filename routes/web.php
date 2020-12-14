@@ -73,6 +73,6 @@ Route::group(['middleware' => ['auth','role:Votante']], function () {
 });
 Route::resource('dashboard/votes', 'Api\VoteController');
 
-
+Route::get('results','Web\ResultController@index')->name('results');
 
 

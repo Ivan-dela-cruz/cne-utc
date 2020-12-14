@@ -22,4 +22,8 @@ class Organization extends Model
 
         return $this->hasMany(Candidate::class,'organization_id');
     }
+     public function votes(){
+
+        return $this->hasMany(Vote::class,'organization_id');
+    }
 }

@@ -17,5 +17,8 @@ class Vote extends Model
          'type_vote'
         ];
 
-
+    public function organization()
+    {
+        return $this->belongsTo(Organization::class, 'organization_id');
+    }
 }
