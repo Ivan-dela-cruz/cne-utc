@@ -15,24 +15,9 @@
                             <div class="custom-form">
                     
                                 <div  class="row block-div">
-                                        
-                                    <div class="col-md-3">
-                                        <select data-placeholder="All Categories" class="chosen-select-canton">
-                                
-                                            @foreach($cantons as $canton)
-                                                <option value="{{$canton->id}}">{{$canton->name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-            
-                                    <div class="col-md-3">
-                                        <select   data-placeholder="All Categories" class="chosen-select-result">
-                                                @include('web.selects.parishes')
-                                        </select>
-                                    </div>
                 
-                                    <div class="col-md-3">
-                                        <select  data-placeholder="Dignidades" class="chosen-select-position">
+                                    <div class="col-md-12">
+                                        <select  data-placeholder="Dignidades" class="chosen-select-position-web">
                                         
                                             @include('web.selects.positions')
                                         </select>
@@ -46,23 +31,26 @@
             </section>
             <section >
                 <div class="row ml-5 mr-5">
-                    <div class="col-md-6 table_resum">
-                        
+                    <div class="col-md-12">
+                        <h5>Resultados generales</h5>
                     </div>
-                    <div class="col-md-6 table_total">
-                        
+                    <div class="col-md-12 table-responsive">
+                        <div class="table-webster">
+                            <div class="text-center">
+                                <img height="320" src="{{asset('assets/images/select.jpg')}}" alt="">
+                                <h6>Selecciona una opción para ver los resultados</h6>
+                            </div>
+                            
+                        </div>
                     </div>
-                    <div style="background-color: #323539;" class="col-md-12">
-                        <canvas id="myChart" style="height: 400px; width: 100%;"></canvas>
-                    </div>
+                   
                 </div>
+                
             </section>
         </div>
     </div>
 @endsection
 
 @section('scripts')
-   
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
      <script type="text/javascript" src="{{asset('js/script_pages.js')}}"></script>
 @endsection

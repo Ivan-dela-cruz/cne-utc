@@ -50,7 +50,7 @@ Route::group(['middleware' => ['auth']], function () {
     
 });
 ///PERMISO PARA EL USUARIO DE REGISTRAR LOS RESULTADOS DE LOS VOTOS/////
-Route::group(['middleware' => ['auth','role:Votante']], function () {
+Route::group(['middleware' => ['auth','role:Votante|Administrador']], function () {
     Route::post('store-president','Web\HomeController@storeVotes')->name('store-president');
     Route::get('redirect-route/{path}','Web\HomeController@redirectUrlSelect')->name('redirect-route');
 
@@ -66,13 +66,21 @@ Route::group(['middleware' => ['auth','role:Votante']], function () {
         return view('admin.organizations.index');
     });
     
-    Route::get('select-parishes/{id}', 'Web\HomeController@getSelectParish');
-    Route::get('select-enclosures/{id}', 'Web\HomeController@getSelectEnclosure');
-    Route::get('select-gender/{id}/{gender}', 'Web\HomeController@getMeeting');
+   
     
 });
-Route::resource('dashboard/votes', 'Api\VoteController');
+Route::get('select-parishes/{id}', 'Web\HomeController@getSelectParish');
+Route::get('select-enclosures/{id}', 'Web\HomeController@getSelectEnclosure');
+Route::get('select-gender/{id}/{gender}', 'Web\HomeController@getMeeting');
+//RESULTS
+Route::get('resum/{id}/results', 'Web\ResultController@getResum');
+Route::get('total/{id}/results', 'Web\ResultController@getTotal');
+Route::get('chart/{id}/results', 'Web\ResultController@getChart');
 
+Route::resource('dashboard/votes', 'Api\VoteController');
 Route::get('results','Web\ResultController@index')->name('results');
+
+Route::get('webster/table','Web\ResultController@webster')->name('webstertable');
+Route::get('webster','Web\ResultController@websterTemplate')->name('webster');
 
 

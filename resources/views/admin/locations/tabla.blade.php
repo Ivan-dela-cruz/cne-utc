@@ -24,9 +24,16 @@
                     </li>
                     @endcan
                     {!! Form::open(['route' => ['locations.destroy', $province->id], 'method' => 'DELETE','class'=>'delete-item'.$province->id]) !!}
-                    <li><a href="#" class="btn del-btn">Eliminar <i class="fa fa-trash-o"></i></a></li>
+                   
                     @can('destroy_location')
-                     <button type="submit">Borrar</button>
+                     <button style="
+                     all: unset;
+                     cursor: pointer;
+                     color:#fff;
+                     padding:9px 22px;
+                     border-radius:30px;
+                     background: #f91942;
+                     float:left;" type="submit">Eliminar <i class="fa fa-trash-o"></i></button>
                      @endcan
                     {!! Form::close() !!}
                 </ul>
