@@ -59,9 +59,9 @@
                 <div class="bubble-bg"> </div>
                 
             </section>
-                          
+            <section class="gray-bg" id="sec2"  style="display: none">     
             {!! Form::open(['url' => route('store-president'), 'method' => 'post','id'=>'form_data']) !!}
-            <section class="gray-bg" id="sec2" >
+            <section class="gray-bg" >
                 <div class="container">
                     <div class="row" id ="ContentListCandidates">
                         <div class="col-md-12">
@@ -101,7 +101,7 @@
                                         <div class="col-md-12">
 
                                                 <div class="custom-form">
-                                                    {{ Form::text('list[]', null, ['class' => '','placeholder'=>'Ingrese votos']) }}
+                                                    {{ Form::text('list[]', null, ['class' => '','placeholder'=>'Ingrese votos','required'=>true, 'onKeyPress'=>'return soloNumeros(event)']) }}
                                                     {{ Form::hidden('organizations[]',$organization->id , ['class' => '','placeholder'=>'id organizacion']) }}
                                                 </div>
                                                 <div class="accordion">
@@ -207,10 +207,10 @@
                                         <input hidden  name="enclosure" class="input-enclosure" id="input-enclosure" type="text">
                                         <input hidden  name="gender" class="input-gender" id="input-gender" type="text">
                                         <input hidden  name="meeting" class="input-meeting" id="input-meeting" type="text">
-                                        <input  placeholder="Votos en blanco" name="vote_null" class="input-blank" id="input-blank" type="text">
+                                        <input  placeholder="Votos en blanco" name="vote_null"  onKeyPress="return soloNumeros(event)"   class="input-blank" id="input-blank" type="text" required >
                                     </div>
                                     <div class="col-md-3">
-                                        <input  placeholder="Votos nulos" name="vote_blank" class="input-null" id="input-null" type="text">
+                                        <input  placeholder="Votos nulos" name="vote_blank"  onKeyPress="return soloNumeros(event)"   class="input-null" id="input-null" type="text"     required >
                                     </div>
                                     <div class="col-md-3">
                                          <button type="button" style="width: 100%; margin-top: 0; margin-right: 10px; background-color: #3a3939;" class="btn  big-btn  color-bg flat-btn" id="btn_block">Habilitar<i class="fa fa-unlock"></i></button>
@@ -218,7 +218,7 @@
                                     </div>
                                     <div class="col-md-3">
 
-                                   <button type="button" style="width: 100%; margin-top:0; background-color: #D0161A;" class="btn  big-btn  color-bg flat-btn" id="btn_send">Registar<i class="fa fa-angle-right"></i></button>
+                                   <button type="submit" style="width: 100%; margin-top:0; background-color: #D0161A;" class="btn  big-btn  color-bg flat-btn" id="btn_send">Registar<i class="fa fa-angle-right"></i></button>
                                     </div>
                                 </div>
                                 
@@ -231,6 +231,8 @@
                 </div>
             </section>
             {!! Form::close() !!}
+        </section>
+
         </div>
     </div>
 @endsection
