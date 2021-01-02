@@ -29,8 +29,14 @@ class PositionController extends Controller
      */
     public function create()
     {
-        //
-        return view('admin.positions.create');
+        $list = [
+          'PR'=>'PRESIDENCIA',
+          'VP'=>'VICE PRESIDENCIA',
+          'AN'=>'NACIONAL',
+          'AP'=>'PROVINCIAL',
+          'PA'=>'PARLAMENTARIO'
+        ];
+        return view('admin.positions.create',compact('list'));
     }
 
     /**
@@ -53,7 +59,7 @@ class PositionController extends Controller
           return redirect()->route('positions.index')->with('status', '¡Registro creado con exito!');
       } catch (\Exception $e) {
           DB::rollBack();
-          return redirect()->route('positions.index')->with('error', '¡Error al eliminar!');
+          return redirect()->route('positions.index')->with('status', 'error');
       }
     }
 
@@ -87,12 +93,18 @@ class PositionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $list = [
+          'PR'=>'PRESIDENCIA',
+          'VP'=>'VICE PRESIDENCIA',
+          'AN'=>'NACIONAL',
+          'AP'=>'PROVINCIAL',
+          'PA'=>'PARLAMENTARIO'
+        ];
         $position = Position::find($id);
         if (isset($position)) {
-            return view('admin.positions.edit', compact('position'));
+            return view('admin.positions.edit', compact('position','list'));
         }
-        return redirect()->route('positions.index')->with('error', '¡Cargo no encontrado!');
+        return redirect()->route('positions.index')->with('status', 'error');
     }
 
     /**
@@ -118,7 +130,7 @@ class PositionController extends Controller
           return redirect()->route('positions.index')->with('status', '¡Modificado  con exito!');
       } catch (\Exception $e) {
           DB::rollBack();
-          return redirect()->route('positions.index')->with('error', '¡Error al eliminar!');
+          return redirect()->route('positions.index')->with('status', 'error');
       }
     }
 
@@ -141,7 +153,7 @@ class PositionController extends Controller
 
       } catch (\Exception $e) {
           DB::rollBack();
-          return redirect()->route('positions.index')->with('error', '¡Error al eliminar!');
+          return redirect()->route('positions.index')->with('status', 'error');
 
       }
     }

@@ -1,11 +1,12 @@
 <?php
 
 namespace App;
-
+use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\Model;
 
 class Candidate extends Model
 {
+    use Filterable;
     //
     protected $table = 'candidates';
     protected $fillable = [

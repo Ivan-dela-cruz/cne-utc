@@ -1,16 +1,24 @@
 @foreach($candidates as $candidate)
+
     <div class="dashboard-list">
         <div class="dashboard-message">
             <div class="dashboard-listing-table-image">
-                <a href="listing-single.html"><img src="{{asset($candidate->url_image)}}" alt=""></a>
+                <a href="javascript:void(0);">
+                    @if (!is_null($candidate->url_image))
+                    <img style="width: 180px; height: 180px;" src="{{asset($candidate->url_image)}}" alt="imagen candidato">
+                    @else
+                    <img style="width: 180px; height: 180px;" src="{{asset('assets/images/user.png')}}" alt="imagen candidato">
+                    @endif
+                    
+                </a>
             </div>
             <div class="dashboard-listing-table-text">
                 <div class="row">
-                    <h4>{{$candidate->name}}<span>{{$candidate->last_name}}</span></h4>
+                    <h4>{{$candidate->name}} <span> {{$candidate->last_name}}</span></h4>
                     <div class="booking-details fl-wrap">
                         <span class="booking-title">Lista:</span> :
                         <span class="booking-text"><a
-                                href="listing-sinle.html">{{$candidate->organization->name}}</a></span>
+                                href="javascript:void(0);">{{$candidate->organization->name}}</a></span>
                     </div>
                     <div class="booking-details fl-wrap">
                         <span class="booking-title">Cargo:</span> :
@@ -32,7 +40,10 @@
                     padding:9px 22px;
                     border-radius:30px;
                     background: #f91942;
-                    float:left;" type="submit">Eliminar <i class="fa fa-trash-o"></i></button>
+                    float:left;" 
+                    data-id="{{ $candidate->id}}"
+                    class="delete-item-table"
+                    type="submit">Eliminar <i class="fa fa-trash-o"></i></button>
                     @endcan
                     {!! Form::close() !!}
                 </ul>

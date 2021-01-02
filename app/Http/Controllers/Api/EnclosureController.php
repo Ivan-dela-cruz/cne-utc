@@ -15,12 +15,12 @@ class EnclosureController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $enclosures = Enclosure::orderBy('name', 'ASC')->get();
-        $locations = Location::all();
-  
-        return view('admin.enclosures.index', compact('enclosures', 'locations'));
+        $keyword = $request->query('keyword');
+        $enclosures = Enclosure::filter($request->all())->orderBy('name', 'ASC')->paginate(10);
+        
+        return view('admin.enclosures.index', compact('enclosures','keyword'));
     }
 
     /**
@@ -49,7 +49,7 @@ class EnclosureController extends Controller
             $data = $request->all();
             $m_fem = $request->meeting_fem;
             $m_ma = $request->meeting_mas;
-            $total = $m_fem + $m_ma;
+            $total = (int)$m_fem + (int)$m_ma;
             $data['meeting_total'] = $total;
             $enclosure = new Enclosure();
             $enclosure->fill($data);
@@ -61,7 +61,7 @@ class EnclosureController extends Controller
 
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->route('enclosures.index')->with('error', '¡Error al eliminar!');
+            return redirect()->route('enclosures.index')->with('status', 'error');
         }
     }
 
@@ -101,7 +101,7 @@ class EnclosureController extends Controller
         if (isset($enclosure)) {
             return view('admin.enclosures.edit', compact('enclosure', 'parishes'));
         }
-        return redirect()->route('enclosures.index')->with('error', '¡Candidato no encontrado!');
+        return redirect()->route('enclosures.index')->with('status', 'error');
     }
 
     /**
@@ -128,7 +128,7 @@ class EnclosureController extends Controller
             return redirect()->route('enclosures.index')->with('status', '¡Modificado  con exito!');
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->route('enclosures.index')->with('error', '¡Error al eliminar!');
+            return redirect()->route('enclosures.index')->with('status', 'error');
 
         }
     }
@@ -150,7 +150,7 @@ class EnclosureController extends Controller
             return redirect()->route('enclosures.index')->with('status', '¡Elimindado  con exito!');
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->route('enclosures.index')->with('error', '¡Error al eliminar!');
+            return redirect()->route('enclosures.index')->with('status', 'error');
 
         }
     }

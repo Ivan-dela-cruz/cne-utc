@@ -11,16 +11,16 @@
         <div class="custom-form">
 
             <label>Nombre <i class="fa fa-user-o"></i></label>
-            {!! Form::text('name', null,['id'=>'name']) !!}
+            {!! Form::text('name', null,['id'=>'name','required'=>'required']) !!}
 
             <label> Apellido <i class="fa fa-globe"></i> </label>
-            {!! Form::text('last_name', null,['id'=>'last_name']) !!}
+            {!! Form::text('last_name', null,['id'=>'last_name','required'=>'required']) !!}
 
             <label> Partido politico <i class="fa fa-globe"></i> </label>
-            {!! Form::select('organization_id', $organizations , null , ['class' => 'chosen-select']) !!}
+            {!! Form::select('organization_id', $organizations , null , ['class' => 'chosen-select','required'=>'required']) !!}
 
             <label> Cargo: <i class="fa fa-globe"></i> </label>
-            {!! Form::select('position_id', $positions , null , ['class' => 'chosen-select']) !!}
+            {!! Form::select('position_id', $positions , null , ['class' => 'chosen-select','required'=>'required']) !!}
             <label>Inicio de Cargo<i class="fa fa-calendar-check-o"></i></label>
             <input name="start_date" type="text" placeholder="Date" class="datepicker"   data-large-mode="true" data-large-default="true" value=""/>
             @error('start_date')

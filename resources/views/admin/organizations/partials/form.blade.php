@@ -6,37 +6,37 @@
         </div>
         <div class="custom-form">
             <label>Nombre <i class="fa fa-user-o"></i></label>
-            {!! Form::text('name',null, ['id'=>'name']) !!}
+            {!! Form::text('name',null, ['id'=>'name','required'=>'required']) !!}
             @error('name')
             <strong class="text-danger">{{ $message }}</strong>
             @enderror
             <label>Lista<i class="fa fa-envelope-o"></i> </label>
-            {!! Form::text('list',null, ['id'=>'list']) !!}
+            {!! Form::text('list',null, ['id'=>'list','required'=>'required']) !!}
             @error('list')
             <strong class="text-danger">{{ $message }}</strong>
             @enderror
             <label>Siglas<i class="fa fa-phone"></i> </label>
-            {!! Form::text('acronym',null, ['id'=>'acronym']) !!}
+            {!! Form::text('acronym',null, ['id'=>'acronym','required'=>'required']) !!}
             @error('acronym')
             <strong class="text-danger">{{ $message }}</strong>
             @enderror
             <label> Representante <i class="fa fa-map-marker"></i> </label>
-            {!! Form::text('representative',null, ['id'=>'representative']) !!}
+            {!! Form::text('representative',null, ['id'=>'representative','required'=>'required']) !!}
             @error('representative')
             <strong class="text-danger">{{ $message }}</strong>
             @enderror
             <label> Asambleistas <i class="fa fa-globe"></i> </label>
-            {!! Form::text('assembly_members',null, ['id'=>'assembly_members']) !!}
+            {!! Form::text('assembly_members',null, ['id'=>'assembly_members','required'=>'required']) !!}
             @error('assembly_members')
             <strong class="text-danger">{{ $message }}</strong>
             @enderror
             <label> Prefectos <i class="fa fa-globe"></i> </label>
-            {!! Form::text('prefects',null, ['id'=>'prefects']) !!}
+            {!! Form::text('prefects',null, ['id'=>'prefects','required'=>'required']) !!}
             @error('prefects')
             <strong class="text-danger">{{ $message }}</strong>
             @enderror
             <label> Alcaldes <i class="fa fa-globe"></i> </label>
-            {!! Form::text('mayors',null, ['id'=>'mayors']) !!}
+            {!! Form::text('mayors',null, ['id'=>'mayors','required'=>'required']) !!}
             @error('mayors')
             <strong class="text-danger">{{ $message }}</strong>
             @enderror

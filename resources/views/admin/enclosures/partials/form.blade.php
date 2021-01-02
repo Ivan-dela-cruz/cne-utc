@@ -11,9 +11,9 @@
         <div class="custom-form">
 
             <label>Nombre <i class="fa fa-user-o"></i></label>
-            {!! Form::text('name', null,['id'=>'name']) !!}
+            {!! Form::text('name', null,['id'=>'name','required'=>'required']) !!}
             <label> Localidad: <i class="fa fa-globe"></i> </label>
-            {!! Form::select('location_id', $parishes , null , ['class' => 'chosen-select']) !!}
+            {!! Form::select('location_id', $parishes , null , ['class' => 'chosen-select','required'=>'required']) !!}
             <label> Junta femenina <i class="fa fa-globe"></i> </label>
             {!! Form::select('meeting_fem', [
                 '1'=>'1',
@@ -21,7 +21,7 @@
                 '3'=>'3',
                 '4'=>'4',
                 '5'=>'5',
-        ] , null , ['class' => 'chosen-select']) !!}
+        ] , null , ['class' => 'chosen-select','required'=>'required']) !!}
 
             <label> Junta Masculina: <i class="fa fa-globe"></i> </label>
       
@@ -31,11 +31,11 @@
                 '3'=>'3',
                 '4'=>'4',
                 '5'=>'5',
-        ] , null , ['class' => 'chosen-select']) !!}
+        ] , null , ['class' => 'chosen-select','required'=>'required']) !!}
         <label>Electores <i class="fa fa-user-o"></i></label>
-        {!! Form::text('voters', null,['id'=>'voters']) !!}
+        {!! Form::text('voters', null,['id'=>'voters','required'=>'required']) !!}
         <label>Zona <i class="fa fa-user-o"></i></label>
-        {!! Form::text('zone', null,['id'=>'zone']) !!}
+        {!! Form::text('zone', null,['id'=>'zone','required'=>'required']) !!}
 
             <button type="submit" class="btn  big-btn  color-bg flat-btn">Guardar<i
                     class="fa fa-angle-right"></i></button>

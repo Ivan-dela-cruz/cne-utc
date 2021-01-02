@@ -2,10 +2,12 @@
 
 namespace App;
 
+use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\Model;
 
 class Organization extends Model
 {
+    use Filterable;
     //
     protected $table = 'organizations';
     protected $fillable = [

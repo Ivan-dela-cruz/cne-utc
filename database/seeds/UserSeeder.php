@@ -76,24 +76,40 @@ class UserSeeder extends Seeder
 
 
 
-        /// creamos los roles para que son admin
-        $role = Role::create(['name' => 'Administrador', 'status' => 1]);
-        //asignación de los permisos al rol admin
+        /// creamos los roles para que son superadmin
+        $role = Role::create(['name' => 'SuperAdmin', 'description'=>'Todos los provilegios','status' => 1]);
+        $role->givePermissionTo(Permission::all());
+        //role de digitador
+        $role = Role::create(['name' => 'Digitador', 'description'=>'Para digitadores','status' => 1]);
+        //role admin
+        $role = Role::create(['name' => 'Administrador', 'description'=>'Permisos de administrador','status' => 1]);
         $role->givePermissionTo(Permission::all());
         
-        $role = Role::create(['name' => 'Votante', 'status' => 1]);
-        $role = Role::create(['name' => 'Moderador', 'status' => 1]);
+        //role moderador
+        $role = Role::create(['name' => 'Moderador', 'description'=>'Auxiliar de administración','status' => 1]);
 
         
 
         ///crearmos el usario por defecto
+        $user_password = Hash::make('Elecciones2021');
+        $user = User::create([
+            'name' => 'SuperAdmin',
+            'last_name' => 'Proviliegios',
+            'username' => 'superadmin',
+            'status' => 1,
+            'avatar' => 'assets/images/superadmin.png',
+            'email' => 'superadmin@gmail.com',
+            'password' => $user_password]);
+        $user->assignRole('SuperAdmin');
+
+        ///crearmos el usario por defecto
         $user_password = Hash::make('root1234');
         $user = User::create([
-            'name' => 'Ivan',
-            'last_name' => 'De la Cruz',
+            'name' => 'Admin',
+            'last_name' => 'Usuario',
             'username' => 'admin',
             'status' => 1,
-            'avatar' => '#',
+            'avatar' => 'assets/images/user.png',
             'email' => 'admin@gmail.com',
             'password' => $user_password]);
         $user->assignRole('Administrador');

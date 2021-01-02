@@ -3,131 +3,6 @@ let status = 1;
 let answer_valid = 1;
 let question_id = 0;
 
-$(document).ready(function () {
-    $('.js-example-basic-single').select2();
-    $('.js-select-question').select2();
-});
-
-//SECCION DE UNIDADES *********************+
-
-
-//Metodo ordenar unidades
-$(document).on('click', '.list-units-course', function () {
-    let id = $(this).data('id');
-    let title = $(this).data('title');
-
-    getUnitsByCourseModal(id);
-    $('#courseModalLabel').text(title);
-
-});
-
-function getUnitsByCourseModal(id) {
-    let url = "list-units/" + id + "/modal/course";
-    axios.get(url).then(function (response) {
-        $('.data-units-course').empty();
-        $('.data-units-course').html(response.data);
-
-
-        var unit_item = $('.unit-item');
-        console.log(unit_item);
-        $('.todo-list').sortable(
-            {
-                placeholder: 'sort-highlight',
-                handle: '.handle',
-                forcePlaceholderSize: true,
-                zIndex: 999999,
-                stop: function (event) {
-                    for (var i = 0; i < unit_item.length; i++) {
-                        var datos = new FormData();
-                        datos.append('unit_id', event.target.children[i].id);
-                        datos.append('order', i + 1);
-                        $.ajax({
-                            type: 'post',
-                            url: '/dashboard/units/order',
-                            dataType: 'json',
-                            contentType: false,
-                            processData: false,
-                            data: datos,
-                            success: function (res) {
-                                // toastr.success('¡Orden cambiado con exíto!');
-                            }, error: function () {
-                                // toastr.error('¡Error al  cambiar el orden!');
-                            }
-                        })
-                    }
-                }
-            }
-        );
-
-
-    }).catch(function (error) {
-        console.log(error);
-    });
-}
-
-//METODOS PARA LISTAR PREGUNTAS RELACIONADAS A UNA UNIDAD
-
-$(document).on('click', '.list-questions-unit', function () {
-    let id = $(this).data('id');
-    let title = $(this).data('title');
-
-    getQuestionsUnit(id);
-    $('#unitModalLabel').text(title);
-});
-$(document).on("change", ".selected-filter-course", function (e) {
-    let id = $(this).val();
-    getDataUnitsByCourse(id);
-});
-
-function getDataUnitsByCourse(id) {
-    let url = "list-units/" + id + "/course";
-    axios.get(url).then(function (response) {
-        $('.table-units-course').empty();
-        $('.table-units-course').html(response.data);
-        $('#sectionsTable').DataTable({responsive: true});
-    }).catch(function (error) {
-        console.log(error);
-    });
-}
-
-//Método para obetener la tabla de preguntas de una unidad
-function getQuestionsUnit(id) {
-    let url = "list-questions-units/" + id;
-    axios.get(url).then(function (response) {
-        $('.data-questions').empty();
-        $('.data-questions').html(response.data);
-    }).catch(function (error) {
-        console.log(error);
-    });
-}
-
-//Método delete type_answer_questions
-$(document).on('click', '.delete-answer-btn', function () {
-    let id = $(this).data('id');
-    let question_id = $(this).data('question');
-    let url = 'answers-questions/' + id + '/delete';
-    Swal.fire({
-        title: '¿Estas Seguro?',
-        text: "No podrás revertir esta acción!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Eliminar',
-        cancelButtonText: 'Cancelar'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            axios.delete(url).then(function (response) {
-                toastr.success('¡Registro eliminado con exíto!')
-                getQuestionAnswers(question_id);
-            }).catch(error => {
-                toastr.error('Error en la petición ')
-            });
-        }
-    });
-
-
-});
 
 //Método para eliminar la imagen de una unidad
 $(document).on('click', '.delete_image_unit', function () {
@@ -364,9 +239,11 @@ $(document).on("change", ".selected-course", function (e) {
 });
 
 /// ITEM DELETE TABLE
-$(document).on('click', '.delete-item-table', function () {
+$(document).on('click', '.delete-item-table', function (e) {
+    e.preventDefault();
     let id = $(this).data('id');
     let class_form = '.delete-item' + id;
+   
     Swal.fire({
         title: '¿Estas Seguro?',
         text: "No podrás revertir esta acción!",
@@ -382,6 +259,31 @@ $(document).on('click', '.delete-item-table', function () {
         }
     });
 });
+/// ITEM DELETE TABLE
+$(document).on('change', '.onoffswitch-checkbox', function (e) {
+   
+    let id = $(this).data('id');
+    let module = $(this).data('url');
+    let url = module+'/status/' + id;
+    axios.get(url).then(function (response) {
+       
+    }).catch(error => {
+       alert('Error en la petición')
+    });
+});
+
+$(document).on('change', '.type-location', function () {
+    let valor = $(this).val();
+    if(valor==1){
+        $('.province').attr("hidden","hidden");
+        $('.canton').attr("hidden","hidden");
+    }else{
+        $('.province').removeAttr("hidden");
+        $('.canton').removeAttr("hidden");
+    }
+    
+  
+ });
 
 
 //UPLOAD IMAGE ON CONTAINER
@@ -396,3 +298,4 @@ function readFile() {
 }
 
 document.getElementById("url_image").addEventListener("change", readFile);
+

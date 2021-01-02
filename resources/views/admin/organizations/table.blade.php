@@ -61,7 +61,10 @@
                       padding:9px 22px;
                       border-radius:30px;
                       background: #f91942;
-                      float:left;" type="submit">Eliminar <i class="fa fa-trash-o"></i></button>
+                      float:left;"
+                      data-id="{{ $organization->id}}"
+                        class="delete-item-table"
+                      type="submit">Eliminar <i class="fa fa-trash-o"></i></button>
                       @endcan
                     {!! Form::close() !!}
                 </ul>

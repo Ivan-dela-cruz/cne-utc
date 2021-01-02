@@ -3,23 +3,16 @@
                     <div class="dashboard-message">
                         
                         <div class="dashboard-listing-table-image">
-                            <a href="listing-single.html"><img src="{{asset($position->url_image)}}" alt=""></a>
+                            <a href="javascript:void(0);"><img  src="{{asset($position->url_image)}}" alt="IMG cargo"></a>
                         </div>
                         <div class="dashboard-listing-table-text">
                             <div class="row">
                                         <h4><span>{{$position->name}}</span></h4>
                                         <div class="booking-details fl-wrap">
-                                            <span class="booking-title">Descripciòn</span> :
+                            
                                             <span class="booking-text"><a href="listing-sinle.html">{{$position->description}}</a></span>
                                         </div>
-                                        <div class="booking-details fl-wrap">
-                                            <span class="booking-title">Inicio de Cargo: </span> : 
-                                            <span class="booking-text">{{$position->start_date}}</span>
-                                        </div>
-                                        <div class="booking-details fl-wrap">
-                                            <span class="booking-title">Fin de Cargo</span> : 
-                                            <span class="booking-text">{{$position->end_date}}</span>
-                                        </div>
+                                        
                                        
                             </div>   
                             <ul class="dashboard-listing-table-opt  fl-wrap">
@@ -36,7 +29,11 @@
                                     padding:9px 22px;
                                     border-radius:30px;
                                     background: #f91942;
-                                    float:left;" type="submit">Eliminar <i class="fa fa-trash-o"></i></button>
+                                    float:left;" 
+                                    type="submit"
+                                    data-id="{{ $position->id}}"
+                                    class="delete-item-table" >
+                                    Eliminar <i class="fa fa-trash-o"></i></button>
                                 @endcan
                                 {!! Form::close() !!}
                             </ul>

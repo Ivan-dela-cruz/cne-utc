@@ -10,6 +10,7 @@
     <meta name="keywords" content=""/>
     <meta name="description" content=""/>
     @include('admin.init.css')
+    @yield('css')
 </head>
 <body>
 <!-- loader -->
@@ -40,7 +41,7 @@
                         Hola, {{\Illuminate\Support\Facades\Auth::user()->name}}
                     </div>
                     <ul>
-                        <li><a href="dashboard-myprofile.html"> Mi perfil</a></li>
+                        <li><a href="{{route('profile')}}"> Mi perfil</a></li>
                         <li><a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                     document.getElementById('logout-form').submit();">Cerrar sesión</a>
                         </li>
@@ -86,10 +87,10 @@
                     <div class="profile-edit-wrap">
                         <div class="profile-edit-page-header">
                             <h2>Panel de Control</h2>
-                            <div class="breadcrumbs"><a href="#">Panel</a><a
-                                    href="#">Menú</a><span>Estadísticas</span></div>
+                            @yield('position')
                         </div>
-                        <div class="row">
+                       
+                        <div class="row panel-height">
                             @include('admin.init.sidebar')
                             @yield('content')
                         </div>
@@ -106,10 +107,12 @@
         </div>
     </div>
     <!-- wrapper end -->
-
+   
     <a class="to-top"><i class="fa fa-angle-up"></i></a>
 </div>
 <!-- Main end -->
+
 @include('admin.init.js')
+@yield('scripts')
 </body>
 </html>

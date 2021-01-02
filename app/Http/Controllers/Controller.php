@@ -14,7 +14,7 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     public function loadFile(Request $request, $key, $path_image, $disk)
     {
-        $path_complete = "";
+        $path_complete = null;
         if ($request->file($key)) {
             $file = $request->file($key);
             $name = "file-" . time() . '.' . $file->getClientOriginalExtension();

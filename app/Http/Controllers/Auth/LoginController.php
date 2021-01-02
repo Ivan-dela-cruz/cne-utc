@@ -48,11 +48,12 @@ class LoginController extends Controller
 
             $user = Auth::user();
             
-            if ( $user->hasAnyRole(['Moderador', 'Administrador']) ) {// do your margic here
-                return redirect()->route('admin');
-            }
+            if ( $user->hasAnyRole(['Digitador']) ) {// do your margic here
 
-            return redirect()->route('president');
+                return redirect()->route('president');
+            }
+            
+            return redirect()->route('admin');
         }
 
         return back()->withErrors([

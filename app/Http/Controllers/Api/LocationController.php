@@ -6,17 +6,23 @@ use App\Http\Controllers\Controller;
 use App\Location;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-
+use Illuminate\Support\Facades\DB;
 class LocationController extends Controller
 {
 
     public function index(Request $request)
     {
-        $provinces = Location::where('type', 1)->get();
-        $cantons = Location::where('type', 2)->get();
-        $parishes = Location::where('type', 3)->get();
-
-        return view('admin.locations.index', compact('provinces', 'cantons', 'parishes'));
+        $keyword = $request->query('keyword');
+        $type = $request->query('type');
+        if(!is_null($type)){
+            $locations = Location::where('type', $type)
+            ->where('name', 'like', "%{$keyword}%")
+            ->paginate(10);
+        }else{
+            $locations = Location::where('type', 1)->paginate(10);
+            $type = "1";
+        }
+        return view('admin.locations.index', compact('locations', 'keyword','type'));
     }
 
 
@@ -30,37 +36,46 @@ class LocationController extends Controller
 
     public function store(Request $request)
     {
-        $type = $request->type;
-        $type_id = 0;
-        switch ($type) {
-            case 1:
-                $type_id = 0;
-                break;
-            case 2:
-                $type_id = $request->provincie_id;
-                break;
-            case 3:
-                $type_id = $request->canton_id;
-                break;
+        try {
+            DB::beginTransaction();
+            $type = $request->type;
+            $type_id = 0;
+            switch ($type) {
+                case 1:
+                    $type_id = 0;
+                    break;
+                case 2:
+                    $type_id = $request->provincie_id;
+                    break;
+                case 3:
+                    $type_id = $request->canton_id;
+                    break;
+            }
+            $data = [
+                'code' => $request->code,
+                'name' => $request->name,
+                'long_name' => $request->long_name,
+                'slug' => Str::slug($request->long_name, '-'),
+                'type' => $request->type,
+                'type_id' => $type_id
+            ];
+            $location = new Location();
+            $location->fill($data);
+            $location->save();
+            DB::commit();
+            return redirect()->route('locations.index')->with('status', '¡Registro creado con exito!');
+
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('locations.index')->with('status', 'error');
         }
-        $data = [
-            'code' => $request->code,
-            'name' => $request->name,
-            'long_name' => $request->long_name,
-            'slug' => Str::slug($request->long_name, '-'),
-            'type' => $request->type,
-            'type_id' => $type_id
-        ];
-        $location = new Location();
-        $location->fill($data);
-        $location->save();
-        return redirect()->route('locations.index')->with('status', '¡Registrado con exíto!');
     }
 
 
     public function show($id)
     {
-        //
+        
     }
 
 
@@ -75,17 +90,73 @@ class LocationController extends Controller
 
     public function update(Request $request, $id)
     {
-        $data = array_merge($request->all());
-        $location = Location::find($id);
-        $location->fill($data);
-        $location->save();
-        return redirect()->route('locations.index')->with('status', '¡Modificado con exíto!');
+        try {
+            DB::beginTransaction();
+            $type = $request->type;
+            $type_id = 0;
+            switch ($type) {
+                case 1:
+                    $type_id = 0;
+                    break;
+                case 2:
+                    $type_id = $request->provincie_id;
+                    break;
+                case 3:
+                    $type_id = $request->canton_id;
+                    break;
+            }
+            $data = [
+                'code' => $request->code,
+                'name' => $request->name,
+                'long_name' => $request->long_name,
+                'slug' => Str::slug($request->long_name, '-'),
+                'type' => $request->type,
+                'type_id' => $type_id
+            ];
+            $location = Location::find($id);
+            $location->fill($data);
+            $location->save();
+        
+            DB::commit();
+            return redirect()->route('locations.index')->with('status', '¡Registro modificado con exito!');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('locations.index')->with('status', 'error');
+        }
     }
 
     public function destroy($id)
     {
-        Location::find($id)->delete();
-        return redirect()->route('locations.index')->with('status', '¡Eliminado con exíto!');
+        try {
+            DB::beginTransaction();
+            Location::find($id)->delete();
+            DB::commit();
+            return redirect()->route('locations.index')->with('status', '¡Registro eliminado con exito!');
 
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('locations.index')->with('status', 'error');
+        }
+        
+
+    }
+    public function changeStatus($id)
+    {
+        $location = Location::find($id);
+        if($location->status==1){
+           
+            $location->status = 0;
+        }else{
+           
+            $location->status = 1;
+        }
+        $location->save();
+
+        return response()->json([
+            'status'=>true,
+            'location'=>$location
+        ],200);
+        
     }
 }

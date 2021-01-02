@@ -1,11 +1,12 @@
 <?php
 
 namespace App;
-
+use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\Model;
 
 class Enclosure extends Model
 {
+    use Filterable;
     protected $table = 'enclosures';
     protected $fillable = [
         'name',

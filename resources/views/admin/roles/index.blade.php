@@ -1,31 +1,35 @@
 @extends('admin.init.index')
 @section('title','Roles')
+@section('position')
+<div class="breadcrumbs">
+    <a href="{{route('admin')}}">Home</a>
+    <a href="{{route('roles.index')}}">Roles</a>
+    <span>Listado</span>
+</div>
+@endsection
 @section('content')
     <div class="col-md-9">
+        @if (session('status'))
+            @if (session('status')!="error")
+                <div class="notification success fl-wrap">
+                    <p>{{session('status')}}</p>
+                    <a class="notification-close" href="javascript:void(0);"><i class="fa fa-times"></i></a>
+                </div>
+            @else
+                <div class="notification reject fl-wrap">
+                    <p>Error al realizar la petición</p>
+                    <a class="notification-close" href="javascript:void(0);"><i class="fa fa-times"></i></a>
+                </div>
+            @endif
+        @endif
         <div class="dashboard-list-box fl-wrap">
             <div class="dashboard-header fl-wrap">
-                <h3>Roles</h3>
+                <h3>Listado de roles</h3>
                 @can('create_rol')
-                <span class="new-dashboard-item"><a href="{{route('roles.create')}}">Nuevo</a></span>
+                <a href="{{ route('roles.create')}}" class="new-dashboard-item">Nuevo</a>
                 @endcan
             </div>
-            @foreach($roles as $role)
-                <div class="dashboard-list">
-                    <div class="dashboard-message">
-                        <div class="dashboard-listing-table-text">
-                            <h4><a href="listing-single.html">{{$role->name}}</a></h4>
-                            <span class="dashboard-listing-table-address"><i class="fa fa-map-marker"></i><a href="#">USA 27TH Brooklyn NY</a></span>
-                            <div class="listing-rating card-popup-rainingvis fl-wrap" data-starrating2="5">
-                                <span>(2 reviews)</span>
-                            </div>
-                            <ul class="dashboard-listing-table-opt  fl-wrap">
-                                <li><a href="{{route('roles.edit',$role->id)}}">Edit <i class="fa fa-pencil-square-o"></i></a></li>
-                                <li><a href="#" class="del-btn">Delete <i class="fa fa-trash-o"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
+            @include('admin.roles.table')
 
         </div>
     </div>
