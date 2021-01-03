@@ -51,7 +51,7 @@
                                 class="fa fa-pencil-square-o"></i></a></li>
                                 @endcan
                     {!! Form::open(['route' => ['organizations.destroy', $organization->id], 'method' => 'DELETE','class'=>'delete-item'.$organization->id]) !!}
-    
+                    <li><a href="#" class="btn del-btn">Eliminar <i class="fa fa-trash-o"></i></a></li>
                   
                     @can('destroy_organization')
                       <button style="

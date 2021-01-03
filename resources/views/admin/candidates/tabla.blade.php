@@ -31,7 +31,7 @@
                     </li>
                     @endcan
                     {!! Form::open(['route' => ['candidates.destroy', $candidate->id], 'method' => 'DELETE','class'=>'delete-item'.$candidate->id]) !!}
-                   
+                    <li><a href="#" class="btn del-btn">Eliminar <i class="fa fa-trash-o"></i></a></li>
                     @can('destroy_candidate') 
                     <button style="
                     all: unset;
