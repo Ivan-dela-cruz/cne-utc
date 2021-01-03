@@ -46,20 +46,21 @@
                 <a href="{{ route('locations.create')}}" class="new-dashboard-item">Nuevo</a>
                 @endcan
             </div>
-            @if (count($locations)>0)
-            <div class="container-table">
-                @include('admin.locations.tabla')
-            </div>
-            {{$locations->links()}}
-            @else
-            <div class="text-center">
-                <img height="320" src="{{asset('assets/images/select.jpg')}}" alt="">
-                @if (isset($keyword))
-                    <h6>No se hallaron resultados para <b> "{{$keyword}}"</b> </h6>
-                @endif   
-            </div>
-            @endif  
+           
         </div>
+        @if (count($locations)>0)
+        <div class="container-table">
+            @include('admin.locations.tabla')
+        </div>
+        {{$locations->links()}}
+        @else
+        <div class="text-center">
+            <img height="320" src="{{asset('assets/images/select.jpg')}}" alt="">
+            @if (isset($keyword))
+                <h6>No se hallaron resultados para <b> "{{$keyword}}"</b> </h6>
+            @endif   
+        </div>
+        @endif  
     </div>
 @endsection
 @section('scripts')

@@ -8,9 +8,24 @@
 </div>
 @endsection
 @section('content')
-
+      
+           
+       
         {!! Form::model($user,['url' => route('update-profile',$user->id),'method' => 'PUT','files' => true]) !!}
         <div class="col-md-7">
+            @if (session('status'))
+                @if (session('status')!="error")
+                    <div class="notification success fl-wrap">
+                        <p>{{session('status')}}</p>
+                        <a class="notification-close" href="javascript:void(0);"><i class="fa fa-times"></i></a>
+                    </div>
+                @else
+                    <div class="notification reject fl-wrap">
+                        <p>Error al realizar la petición</p>
+                        <a class="notification-close" href="javascript:void(0);"><i class="fa fa-times"></i></a>
+                    </div>
+                @endif
+            @endif
             <div class="profile-edit-container">
                 <div class="profile-edit-header fl-wrap">
                     <h4> Mi perfil </h4>

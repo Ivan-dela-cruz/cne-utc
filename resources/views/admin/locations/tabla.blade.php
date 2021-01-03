@@ -40,7 +40,6 @@
                         
                 @endswitch
             <td >
-                
                 <div class="onoffswitch">
                     <input @if ($location->status==1)checked @endif
                     data-id="{{$location->id}}"

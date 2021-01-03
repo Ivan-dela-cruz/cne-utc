@@ -82,10 +82,10 @@ class UserController extends Controller
             $user->fill($data);
             $user->save();
             DB::commit();
-            return redirect()->route('users.index')->with('status', '¡Perfil modificado con exíto!');
+            return redirect()->route('profile')->with('status', '¡Perfil modificado con exíto!');
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->route('users.index')->with('status', 'error');
+            return redirect()->route('profile')->with('status', 'error');
         }
     }
 
@@ -171,10 +171,10 @@ class UserController extends Controller
             DB::beginTransaction();
             User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
             DB::commit();
-            return redirect()->route('users.index')->with('status', 'Contraseña cambiado con exíto!');
+            return redirect()->route('change-my-password')->with('status', 'Contraseña cambiado con exíto!');
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->route('users.index')->with('status', 'error');
+            return redirect()->route('change-my-password')->with('status', 'error');
         }
 
         

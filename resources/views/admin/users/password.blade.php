@@ -9,6 +9,19 @@
 @endsection
 @section('content')
     <div class="col-md-9">
+        @if (session('status'))
+        @if (session('status')!="error")
+            <div class="notification success fl-wrap">
+                <p>{{session('status')}}</p>
+                <a class="notification-close" href="javascript:void(0);"><i class="fa fa-times"></i></a>
+            </div>
+        @else
+            <div class="notification reject fl-wrap">
+                <p>Error al realizar la petición</p>
+                <a class="notification-close" href="javascript:void(0);"><i class="fa fa-times"></i></a>
+            </div>
+        @endif
+        @endif
         {!! Form::open(['url' => route('password-post')]) !!}
    
         <div class="profile-edit-container">
