@@ -12,13 +12,13 @@ use Illuminate\Support\Facades\DB;
 class CandidateController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        //
-        $candidates = Candidate::orderBy('name', 'ASC')->get();
+        $keyword = $request->query('keyword');
+        $candidates = Candidate::filter($request->all())->orderBy('name', 'ASC')->paginate(5);
         $organizations = Organization::all();
         $positions = Position::all();
-        return view('admin.candidates.index', compact('candidates', 'organizations', 'positions'));
+        return view('admin.candidates.index', compact('candidates', 'organizations', 'positions','keyword'));
     }
 
 
@@ -44,7 +44,7 @@ class CandidateController extends Controller
 
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->route('candidates.index')->with('error', '¡Error al eliminar!');
+            return redirect()->route('candidates.index')->with('status', 'error');
         }
     }
 
@@ -73,7 +73,7 @@ class CandidateController extends Controller
         if (isset($candidate)) {
             return view('admin.candidates.edit', compact('organizations', 'positions', 'candidate'));
         }
-        return redirect()->route('candidates.index')->with('error', '¡Candidato no encontrado!');
+        return redirect()->route('candidates.index')->with('status', 'error');
 
     }
 
@@ -95,7 +95,7 @@ class CandidateController extends Controller
 
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->route('candidates.index')->with('error', '¡Error al eliminar!');
+            return redirect()->route('candidates.index')->with('status', '¡Error al eliminar!');
 
         }
     }
@@ -114,7 +114,7 @@ class CandidateController extends Controller
 
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->route('candidates.index')->with('error', '¡Error al eliminar!');
+            return redirect()->route('candidates.index')->with('status', 'error');
 
         }
     }

@@ -43,9 +43,6 @@
                 <nav>
                     <ul>
                         <li>
-                            <a href="{{route('webster')}}">Webster</a>
-                        </li>
-                        <li>
                             <a href="{{route('results')}}">Resultados</a>
                         </li>
                         <li>

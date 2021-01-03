@@ -11,7 +11,8 @@ class Position extends Model
     protected $fillable = [
         'name',
         'description',
-        'url_image'
+        'url_image',
+        'indent'
     ];
     public function candidate(){
 

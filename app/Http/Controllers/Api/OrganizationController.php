@@ -10,10 +10,12 @@ use Illuminate\Support\Facades\DB;
 class OrganizationController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $organizations = Organization::orderBy('name', 'ASC')->get();
-        return view('admin.organizations.index', compact('organizations'));
+        $keyword = $request->query('keyword');
+        $organizations = Organization::filter($request->all())->orderBy('name', 'ASC')->paginate(4);
+        return view('admin.organizations.index', compact('organizations','keyword'));
+        
     }
 
 
@@ -33,14 +35,11 @@ class OrganizationController extends Controller
             $organization->fill($data);
             $organization->save();
             DB::commit();
-            return redirect()->route('organizations.index');
+            return redirect()->route('organizations.index')->with('status', '¡Registro creado con exito!');
 
         } catch (\Exception $e) {
             DB::rollBack();
-            return response()->json([
-                'status' => false,
-                'message' => $e->getMessage()
-            ], 500);
+            return redirect()->route('organizations.index')->with('status', 'error');
         }
     }
 
@@ -66,10 +65,7 @@ class OrganizationController extends Controller
         if (isset($organization)) {
             return view('admin.organizations.edit', compact('organization'));
         }
-        return response()->json([
-            'status' => false,
-            'message' => 'organizaciòn no editado'
-        ], 404);
+        return redirect()->route('organizations.index')->with('status', 'error');
     }
 
     public function update(Request $request, $id)
@@ -84,10 +80,10 @@ class OrganizationController extends Controller
             $organization->fill($data);
             $organization->save();
             DB::commit();
-            return redirect()->route('organizations.index');
+            return redirect()->route('organizations.index')->with('status', '¡Registro modificado con exito!');
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->route('organizations.index')->with('error', '¡Error al guardar!');
+            return redirect()->route('organizations.index')->with('status', 'error');
         }
     }
 
@@ -102,7 +98,7 @@ class OrganizationController extends Controller
 
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->route('organizations.index')->with('error', '¡Error al eliminar!');
+            return redirect()->route('organizations.index')->with('error', 'error');
         }
     }
 }

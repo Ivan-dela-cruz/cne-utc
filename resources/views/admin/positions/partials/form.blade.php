@@ -5,16 +5,20 @@
             <h4>Nuevo Cargo</h4>
         </div>
         <div class="custom-form">
+            <label> Ámbito politico <i class="fa fa-globe"></i> </label>
+            {!! Form::select('indent', $list , null , ['class' => 'chosen-select']) !!}
             <label>Nombre <i class="fa fa-user-o"></i></label>
-            {!! Form::text('name',null, ['id'=>'name']) !!}
+            {!! Form::text('name',null, ['id'=>'name','required'=>'required']) !!}
             @error('name')
             <strong class="text-danger">{{ $message }}</strong>
             @enderror
             <label>Descripción<i class="fa fa-envelope-o"></i> </label>
-            {!! Form::text('description',null, ['id'=>'description']) !!}
+            {!! Form::text('description',null, ['id'=>'description','required'=>'required']) !!}
             @error('description')
             <strong class="text-danger">{{ $message }}</strong>
             @enderror
+
+            
 
             <button type="submit" class="btn  big-btn  color-bg flat-btn">Guardar<i
                     class="fa fa-angle-right"></i></button>

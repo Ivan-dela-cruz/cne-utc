@@ -17,7 +17,7 @@
                                 <div  class="row block-div">
                                         
                                     <div class="col-md-3">
-                                        <select data-placeholder="All Categories" class="chosen-select-canton">
+                                        <select  data-placeholder="All Categories" class="chosen-select-canton">
                                 
                                             @foreach($cantons as $canton)
                                                 <option value="{{$canton->id}}">{{$canton->name}}</option>
@@ -26,15 +26,29 @@
                                     </div>
             
                                     <div class="col-md-3">
-                                        <select   data-placeholder="All Categories" class="chosen-select-result">
+                                        <select   data-placeholder="All Categories" class="chosen-select-parish">
                                                 @include('web.selects.parishes')
                                         </select>
                                     </div>
                 
                                     <div class="col-md-3">
-                                        <select  data-placeholder="Dignidades" class="chosen-select-position">
+                                        <select  data-placeholder="All Categories" class="chosen-select-enclosure">
                                         
-                                            @include('web.selects.positions')
+                                            @include('web.selects.enclosures')
+                                        </select>
+                                    </div>
+            
+                                    <div class="col-md-1">
+                                        <select  data-placeholder="All Categories" class="chosen-select-gender">
+                                            <option value="meeting_fem">F</option>
+                                            <option value="meeting_mas">M</option>
+                                        </select>
+                                    </div>
+            
+                                    <div class="col-md-1">
+                                        <select  data-placeholder="All Categories" class="chosen-select-meeting">
+                                        
+                                        @include('web.selects.meeting')
                                         </select>
                                     </div>
                                 </div>
@@ -46,14 +60,43 @@
             </section>
             <section >
                 <div class="row ml-5 mr-5">
-                    <div class="col-md-6 table_resum">
-                        
-                    </div>
-                    <div class="col-md-6 table_total">
-                        
-                    </div>
-                    <div style="background-color: #323539;" class="col-md-12">
-                        <canvas id="myChart" style="height: 400px; width: 100%;"></canvas>
+                    <div class="col-md-12">
+                        <div class="table-container">
+                            <table class="table table-responsive">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Organización</th>
+                                <th>Cantón</th>
+                                <th>Parroquia</th>
+                                <th>Recinto</th>
+                                <th>Género</th>
+                                <th>Junta</th>
+                                <th>Votos</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($organizations as $organization)
+                                <tr>
+                                    <td>{{$organization->organization}}</td>
+                                    <td>{{$organization->canton}}</td>
+                                    <td>{{$organization->parish}}</td>
+                                    <td>{{$organization->enclosure}}</td>
+                                    <td>
+                                        @if($organization->gender == "meeting_fem")
+                                            Femenino
+                                        @else
+                                            Masculino
+                                        @endif
+                                     </td>
+                                    <td>{{$organization->meeting}}</td>
+                                    <td>{{$organization->votes}}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    {{$organizations->render()}}
+                    
+                        </div>
                     </div>
                 </div>
             </section>
@@ -62,7 +105,5 @@
 @endsection
 
 @section('scripts')
-   
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
-     <script type="text/javascript" src="{{asset('js/script_pages.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/script_pages.js')}}"></script>
 @endsection

@@ -2265,12 +2265,13 @@ section.gray-section .section-separator {
 	box-shadow: 0px 0px 0px 3px rgba(255,255,255,0.2);
 }
 .pagination {
+
 	margin-top:20px;
 	text-align:center;
 	float:left;
 	width:100%;
 }
-.pagination  a {
+.pagination li.page-item, a.page-link{
 	display:inline-block;
 	width:44px;
 	height:44px;
@@ -2284,7 +2285,21 @@ section.gray-section .section-separator {
 	background:#fff;
 	letter-spacing:1px;
 }
-.pagination a.current-page, .pagination a:hover {
+.pagination li.active, a.active{
+	display:inline-block;
+	width:44px;
+	height:44px;
+	line-height:44px;
+	border-radius:6px;
+ 	border:1px solid #eee;
+	box-sizing:border-box;
+	position:relative;
+	font-size:13px;
+	color:#ffffff;
+	background:#D0161A;
+	letter-spacing:1px;
+}
+.pagination a.current-page,  .pagination a:hover {
     color:#fff;
 }
 .pagination  a i {
@@ -3432,12 +3447,12 @@ article .list-single-main-item {
 .onoffswitch-inner:before {
     content: "ON";
     padding-left: 21px;
-    background-color: #4DB7FE; color: #FFFFFF;
+    background-color: #22ee8f; color: #FFFFFF;
 }
 .onoffswitch-inner:after {
-    content: "OFF";
+    content: "OF";
     padding-right: 21px;
-    background-color: #4DB7FE; color: #FFFFFF;
+    background-color: #fc586e; color: #FFFFFF;
     text-align: right;
 }
 .onoffswitch-switch {
@@ -4230,6 +4245,32 @@ article .list-single-main-item {
 }
 .dashboard-listing-table-opt li  a.del-btn:hover {
 	background:#f91942;
+}
+button.del-btn {
+	all: unset;
+	cursor: pointer;
+	color:#fff;
+	padding:9px 22px;
+	border-radius:30px;
+	background: #f74464;
+	float:left;
+}
+button.del-btn:hover {
+	background:#f91942;
+}
+a.edit-btn {
+	all: unset;
+	cursor: pointer;
+	color:#fff;
+	padding:9px 22px;
+	border-radius:30px;
+	background: #5ECFB1;
+	
+	float:left;
+}
+a.edit-btn:hover {
+	
+	background:#27ace0;
 }
 .profile-edit-header h4 span{
 	color: #5ECFB1;
@@ -6853,3 +6894,41 @@ header.main-header {
 	background-position:center;
 }
 }
+
+#customers {
+	font-family: Arial, Helvetica, sans-serif;
+	border-collapse: collapse;
+	margin-top: 10px;
+	width: 100%;
+	
+  }
+  
+  #customers td, #customers th {
+	text-align: left;
+	vertical-align: middle;
+	border: 1px solid #ddd;
+	padding: 8px;
+  }
+  
+  #customers tr:nth-child(even){background-color: #f2f2f2;}
+  
+  #customers tr:hover {background-color: #ddd;}
+  
+  #customers th {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+	background-color: #2b2e2b;
+	color: white;
+  }
+  .container-table{
+	overflow-x:auto; 
+	width: 100%;
+  }
+.panel-height{
+	height: 100vh;
+}
+  @media only screen and  (max-width: 1060px) {
+	.panel-height{
+		height: auto;
+	}

@@ -8,10 +8,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use App\Rules\MatchOldPassword;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $users = User::orderBy('name', 'ASC')->get();
@@ -51,26 +57,37 @@ class UserController extends Controller
             return redirect()->route('users.index')->with('status', '¡Usuario registrado con exíto!');
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->route('users.index')->with('error', '¡Error al registrar el usuario! ');
+            return redirect()->route('users.index')->with('status', 'error');
         }
     }
 
 
-    public function show($id)
+    public function show()
     {
-        $user = User::find($id);
-        if (isset($user)) {
-            return response()->json([
-                'status' => true,
-                'user' => $user
-            ], 200);
-        }
-        return response()->json([
-            'status' => false,
-            'message' => 'Usuario no entrado'
-        ], 404);
+        $user =User::find(auth()->user()->id);
+       
+        return view('admin.users.profile',compact('user'));
     }
 
+    public function updateProfile(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+            $data = $request->all();
+            $user =User::find(auth()->user()->id);
+            
+            if ($request->file('image')) {
+                $data['avatar'] = $this->loadFile($request, 'image', 'users', 'users');
+            }
+            $user->fill($data);
+            $user->save();
+            DB::commit();
+            return redirect()->route('profile')->with('status', '¡Perfil modificado con exíto!');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('profile')->with('status', 'error');
+        }
+    }
 
     public function edit($id)
     {
@@ -97,10 +114,7 @@ class UserController extends Controller
             return redirect()->route('users.index')->with('status', '¡Usuario modificado con exíto!');
         } catch (\Exception $e) {
             DB::rollBack();
-            return response()->json([
-                'status' => false,
-                'message' => $e->getMessage()
-            ], 500);
+            return redirect()->route('users.index')->with('status', 'error');
         }
     }
 
@@ -109,18 +123,62 @@ class UserController extends Controller
         try {
             DB::beginTransaction();
             $user = User::find($id);
+            $user->roles()->detach();
             $user->delete();
             DB::commit();
-            return response()->json([
-                'status' => true,
-                'message' => 'Usuario elemindado correctamente'
-            ], 200);
+            return redirect()->route('users.index')->with('status', '¡Usuario eliminado con exíto!');
         } catch (\Exception $e) {
             DB::rollBack();
-            return response()->json([
-                'status' => false,
-                'message' => $e->getMessage()
-            ], 500);
+            return redirect()->route('users.index')->with('status', 'error');
         }
+    }
+
+    public function changeStatus($id)
+    {
+        $user = User::find($id);
+        if($user->status==1){
+           
+            $user->status = 0;
+        }else{
+           
+            $user->status = 1;
+        }
+        $user->save();
+
+        return response()->json([
+            'status'=>true,
+            'user'=>$user
+        ],200);
+        
+    }
+
+    public function changePassword()
+    {
+        return view('admin.users.password');
+    }
+    public function changePasswordPost(Request $request)
+    {
+        $request->validate([
+            'current_password' => ['required', new MatchOldPassword],
+            'new_password' => ['required'],
+            'new_confirm_password' => ['same:new_password'],
+        ],[
+            'current_password.required' => "La contaseña es aterior es obligatoria.",
+            'new_password.required' => "La contaseña nueva es obligatoria.",
+            'new_confirm_password.same' => "La nueva contraseña de confirmación y la nueva contraseña deben coincidir.",
+        ]);
+        try {
+            DB::beginTransaction();
+            User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
+            DB::commit();
+            return redirect()->route('change-my-password')->with('status', 'Contraseña cambiado con exíto!');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('change-my-password')->with('status', 'error');
+        }
+
+        
+
+        
     }
 }

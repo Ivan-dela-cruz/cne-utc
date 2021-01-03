@@ -37,13 +37,10 @@ class RoleController extends Controller
             $role->syncPermissions($request->get('permissions'));
 
             DB::commit();
-            return redirect()->route('roles.index');
+            return redirect()->route('roles.index')->with('status', '¡Registro creado con exito!');
         } catch (\Exception $e) {
             DB::rollBack();
-            return response()->json([
-                'status' => false,
-                'message' => $e->getMessage()
-            ], 500);
+            return redirect()->route('roles.index')->with('status', 'error');
         }
     }
 
@@ -64,23 +61,58 @@ class RoleController extends Controller
 
     public function update(Request $request, $id)
     {
-        $role = Role::findById($id);
-        $role->name = $request->name;
-        $role->description = $request->description;
-        $role->guard_name = 'web';
-        $role->save();
-        // revocamos todos los permisos otorgados
-        $role->revokePermissionTo(Permission::all());
-        // sincronizar los nuevos permisos
-        $role->syncPermissions($request->get('permissions'));
-
-        return redirect()->route('roles.index');
-
+        try {
+            DB::beginTransaction();
+           
+                $role = Role::findById($id);
+                $role->name = $request->name;
+                $role->description = $request->description;
+                $role->guard_name = 'web';
+                $role->save();
+                // revocamos todos los permisos otorgados
+                $role->revokePermissionTo(Permission::all());
+                // sincronizar los nuevos permisos
+                $role->syncPermissions($request->get('permissions'));
+            DB::commit();
+            return redirect()->route('roles.index')->with('status', '¡Registro modificado con exito!');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('roles.index')->with('status', 'error');
+        }
     }
 
 
     public function destroy($id)
     {
-        //
+        try {
+            DB::beginTransaction();
+            $role = Role::findById($id);
+            $role->revokePermissionTo(Permission::all());
+            $role->delete();
+            DB::commit();
+            return redirect()->route('roles.index')->with('status', '¡Registro eliminado con exito!');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('roles.index')->with('status', 'error');
+        }
+    }
+
+    public function changeStatus($id)
+    {
+        $role = Role::find($id);
+        if($role->status==1){
+           
+            $role->status = 0;
+        }else{
+           
+            $role->status = 1;
+        }
+        $role->save();
+
+        return response()->json([
+            'status'=>true,
+            'role'=>$role
+        ],200);
+        
     }
 }

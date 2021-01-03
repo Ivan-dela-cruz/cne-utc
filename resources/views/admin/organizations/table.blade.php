@@ -51,17 +51,11 @@
                                 class="fa fa-pencil-square-o"></i></a></li>
                                 @endcan
                     {!! Form::open(['route' => ['organizations.destroy', $organization->id], 'method' => 'DELETE','class'=>'delete-item'.$organization->id]) !!}
-    
-                  
+                   
                     @can('destroy_organization')
-                      <button style="
-                      all: unset;
-                      cursor: pointer;
-                      color:#fff;
-                      padding:9px 22px;
-                      border-radius:30px;
-                      background: #f91942;
-                      float:left;" type="submit">Eliminar <i class="fa fa-trash-o"></i></button>
+                      <button data-id="{{ $organization->id}}"
+                        class="del-btn delete-item-table"
+                      type="submit">Eliminar <i class="fa fa-trash-o"></i></button>
                       @endcan
                     {!! Form::close() !!}
                 </ul>
