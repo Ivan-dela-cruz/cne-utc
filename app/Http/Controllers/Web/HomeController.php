@@ -160,7 +160,7 @@ class HomeController extends Controller
             $vote2->type_election= $data['type_election'];
             $vote2->save();
 
-         return redirect()->route('national');
+         return redirect('/');
     }
     public function redirectUrlSelect($path)
     {
