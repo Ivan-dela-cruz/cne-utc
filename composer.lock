@@ -4476,6 +4476,10 @@
                 "query",
                 "search"
             ],
+            "support": {
+                "issues": "https://github.com/Tucker-Eric/EloquentFilter/issues",
+                "source": "https://github.com/Tucker-Eric/EloquentFilter/tree/2.4.0"
+            },
             "time": "2020-09-07T23:24:50+00:00"
         },
         {
@@ -6979,5 +6983,6 @@
     "platform": {
         "php": "^7.2.5|^8.0"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "2.0.0"
 }
