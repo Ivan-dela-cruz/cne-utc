@@ -3,8 +3,7 @@
 @section('position')
 <div class="breadcrumbs">
     <a href="{{route('admin')}}">Home</a>
-    <a href="{{route('candidates.index')}}">Candidatos</a>
-    <span>Listado</span>
+    <span>Dashboard</span>
 </div>
 @endsection
 @section('content')

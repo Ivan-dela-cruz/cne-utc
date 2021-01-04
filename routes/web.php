@@ -54,7 +54,7 @@ Route::group(['middleware' => ['auth']], function () {
     
 });
 ///PERMISO PARA EL USUARIO DE REGISTRAR LOS RESULTADOS DE LOS VOTOS/////
-Route::group(['middleware' => ['auth','role:Digitador|Administrador|SuperAdmin']], function () {
+Route::group(['middleware' => ['auth','role:Digitador|SuperAdmin']], function () {
     Route::post('store-president','Web\HomeController@storeVotes')->name('store-president');
     Route::get('redirect-route/{path}','Web\HomeController@redirectUrlSelect')->name('redirect-route');
 

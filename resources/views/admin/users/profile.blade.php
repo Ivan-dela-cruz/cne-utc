@@ -8,9 +8,6 @@
 </div>
 @endsection
 @section('content')
-      
-           
-       
         {!! Form::model($user,['url' => route('update-profile',$user->id),'method' => 'PUT','files' => true]) !!}
         <div class="col-md-7">
             @if (session('status'))
