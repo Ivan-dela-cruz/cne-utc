@@ -16,19 +16,22 @@
                                        
                             </div>   
                             <ul class="dashboard-listing-table-opt  fl-wrap">
-                                @can('update_position')
-                                 <li><a href="{{route('positions.edit',$position->id)}}">Editar <i
-                                class="fa fa-pencil-square-o"></i></a></li>
-                                @endcan
-                                {!! Form::open(['route' => ['positions.destroy', $position->id], 'method' => 'DELETE','class'=>'delete-item'.$position->id]) !!}
-                                @can('destroy_position')
-                                    <button 
-                                    type="submit"
-                                    data-id="{{ $position->id}}"
-                                    class="del-btn delete-item-table" >
-                                    Eliminar <i class="fa fa-trash-o"></i></button>
-                                @endcan
-                                {!! Form::close() !!}
+                                @if ($position->id>3)
+                                    @can('update_position')
+                                    <li><a href="{{route('positions.edit',$position->id)}}">Editar <i
+                                    class="fa fa-pencil-square-o"></i></a></li>
+                                    @endcan
+                                    {!! Form::open(['route' => ['positions.destroy', $position->id], 'method' => 'DELETE','class'=>'delete-item'.$position->id]) !!}
+                                    @can('destroy_position')
+                                        <button 
+                                        type="submit"
+                                        data-id="{{ $position->id}}"
+                                        class="del-btn delete-item-table" >
+                                        Eliminar <i class="fa fa-trash-o"></i></button>
+                                    @endcan
+                                    {!! Form::close() !!}
+                                @endif
+                               
                             </ul>
                         </div>
                     </div>

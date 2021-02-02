@@ -47,6 +47,39 @@ $(document).ready(function(){
              $('.chosen-select-meeting').niceSelect('update');
      });
  }
+ function getSelectMeetingVote(){
+    let canton = $('.chosen-select-canton').val();
+    let parish   = $('.chosen-select-parish').val();
+    let enclosure = $('.chosen-select-enclosure').val();
+    let gender  =  $('.chosen-select-gender').val();
+    let type  =  $('#type_election').val();
+    let meeting =   $('.chosen-select-meeting').val();
+
+    let url ='meeting';
+    axios.post(url,{
+       
+            enclosure_id: enclosure,
+            canton_id: canton,
+            parish_id: parish,
+            meeting: meeting,
+            gender: gender,
+            type_election: type
+        
+    }).then(function(response){
+            console.log("==>===========>>>>>>>>>>>>"+response.data.is_existed);
+            console.log("==>===========***********"+response.data.votes);
+            if(response.data.is_existed){
+                $('#cj_1').prop("hidden", true);
+                $('#cj_2').prop("hidden", true);
+                $('#cj_3').prop("hidden", true);
+            }else{
+                $('#cj_1').removeAttr("hidden");
+                $('#cj_2').removeAttr("hidden");
+                $('#cj_3').removeAttr("hidden");
+                
+            }
+    });
+}
 
  function loadValuesInputHidden(){
      let canton = $('.chosen-select-canton').val();
@@ -105,6 +138,7 @@ $(document).on('change','.chosen-select-meeting',function(){
     if(meeting!=0){
         loadValuesInputHidden();
         x.style.display = "block";
+        getSelectMeetingVote();
     }else{
         alert('No hay juntas para elejir');
     }

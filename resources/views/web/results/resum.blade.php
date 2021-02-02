@@ -38,5 +38,11 @@
             <td>{{$vote_nmas}}</td>
             <td>{{$vote_nfem}}</td>
         </tr>
+        <tr>
+            <td>TOTAL</td>
+            <td>{{$vote_n + $vote_b + $vote_t}}</td>
+            <td>{{$vote_tmas + $vote_nmas + $vote_nmas}}</td>
+            <td>{{$vote_tfem + $vote_bfem + $vote_nfem}}</td>
+        </tr>
     </tbody>
 </table>

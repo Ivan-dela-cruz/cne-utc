@@ -35,8 +35,8 @@ class ResultController extends Controller
 
         $data = [
             'voters'=>$enclosures->sum('voters'),
-            'voters_mas'=>$enclosures->sum('voters')/2,
-            'voters_fem'=>$enclosures->sum('voters')/2,
+            'voters_mas'=> round(($enclosures->sum('voters')/2)) ,
+            'voters_fem'=> round(($enclosures->sum('voters')/2)) -1,
             'total'=> $enclosures->sum('meeting_total'),
             'mas'=> $enclosures->sum('meeting_mas'),
             'fem'=>$enclosures->sum('meeting_fem')
@@ -197,5 +197,34 @@ class ResultController extends Controller
             }
         }
         return  $lista;
+    }
+
+    public function getMeetingVote(Request $request)
+    {
+        $is_existed = true;
+        $meeting = $request->meeting;
+        $enclosure_id = $request->enclosure_id;
+        $parish_id = $request->parish_id;
+        $canton_id = $request->canton_id;
+        $type_election = $request->type_election;
+        $gender = $request->gender;
+        $data = $request->all();
+        
+        $vote = Vote::where('meeting',$meeting)
+        ->where('canton',$canton_id)
+        ->where('parish',$parish_id)
+        ->where('enclosure',$enclosure_id)
+        ->where('gender',$gender)
+        ->where('type_election',$type_election)
+        ->get();
+       
+        if(count($vote)==0){
+            $is_existed = false;
+        }
+
+        return response()->json([
+            'is_existed'=>$is_existed,
+            'votes'=>count($vote)
+        ]);
     }
 }

@@ -198,8 +198,8 @@
                                 </div>
                                 <div class="custom-form">
                                 <div class="row">
-                                    <div class="col-md-3">
-                                        <input hidden  name="type_election" value="{{env('POSITION_NATIONAL','AN')}}" type="text">
+                                    <div id="cj_1" class="col-md-3">
+                                        <input hidden  id="type_election"  name="type_election" value="{{env('POSITION_NATIONAL','AN')}}" type="text">
                                         <input hidden  name="canton" class="input-canton" id="input-canton" type="text">
                                         <input hidden  name="parish" class="input-parish" id="input-parish" type="text">
                                         <input hidden  name="enclosure" class="input-enclosure" id="input-enclosure" type="text">
@@ -207,16 +207,16 @@
                                         <input hidden  name="meeting" class="input-meeting" id="input-meeting" type="text">
                                         <input  placeholder="Votos en blanco" name="vote_null"    onKeyPress="return soloNumeros(event)"  class="input-blank" id="input-blank" type="text" required>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div id="cj_2" class="col-md-3">
                                         <input  placeholder="Votos nulos" name="vote_blank"  onKeyPress="return soloNumeros(event)"    class="input-null" id="input-null" type="text" required>
                                     </div>
                                     <div class="col-md-3">
                                          <button type="button" style="width: 100%; margin-top: 0; margin-right: 10px; background-color: #3a3939;" class="btn  big-btn  color-bg flat-btn" id="btn_block">Habilitar<i class="fa fa-unlock"></i></button>
                                     
                                     </div>
-                                    <div class="col-md-3">
+                                    <div  id="cj_3" class="col-md-3">
 
-                                   <button type="submit" style="width: 100%; margin-top:0; background-color: #D0161A;" class="btn  big-btn  color-bg flat-btn"  id="btn_send">Registar<i class="fa fa-angle-right"></i></button>
+                                        <button type="submit" style="width: 100%; margin-top:0; background-color: #D0161A;" class="btn  big-btn  color-bg flat-btn"  id="btn_send">Registar<i class="fa fa-angle-right"></i></button>
                                     </div>
                                 </div>
                                 
