@@ -78,6 +78,7 @@ Route::group(['middleware' => ['auth','role:Digitador|SuperAdmin']], function ()
 Route::get('select-parishes/{id}', 'Web\HomeController@getSelectParish');
 Route::get('select-enclosures/{id}', 'Web\HomeController@getSelectEnclosure');
 Route::get('select-gender/{id}/{gender}', 'Web\HomeController@getMeeting');
+Route::post('meeting', 'Web\ResultController@getMeetingVote');
 //RESULTS
 Route::get('resum/{id}/results', 'Web\ResultController@getResum');
 Route::get('total/{id}/results', 'Web\ResultController@getTotal');

@@ -20,6 +20,7 @@ class HomeController extends Controller
     {
         //
         $positions = Position::orderBy('name', 'ASC')->where('status', 1)->get();
+        
         return view('web.index', compact('positions'));
     }
 

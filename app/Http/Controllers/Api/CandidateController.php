@@ -26,6 +26,7 @@ class CandidateController extends Controller
     {
         $organizations = Organization::orderBy('name', 'ASC')->pluck('name', 'id');
         $positions = Position::orderBy('name', 'ASC')->pluck('name', 'id');
+        unset($positions[1]);
         return view('admin.candidates.create', compact('organizations', 'positions'));
     }
 
@@ -33,9 +34,11 @@ class CandidateController extends Controller
     {
         try {
             DB::beginTransaction();
+            $position = Position::find($request->position_id);
             $data = $request->all();
             $candidate = new Candidate();
             $data['url_image'] = $this->loadFile($request, 'image', 'candidates', 'candidates');
+            $data['indent'] =  $position->indent;
             $candidate->fill($data);
             $candidate->save();
             DB::commit();
@@ -70,6 +73,8 @@ class CandidateController extends Controller
         $candidate = Candidate::find($id);
         $organizations = Organization::orderBy('name', 'ASC')->pluck('name', 'id');
         $positions = Position::orderBy('name', 'ASC')->pluck('name', 'id');
+        unset($positions[1]);
+
         if (isset($candidate)) {
             return view('admin.candidates.edit', compact('organizations', 'positions', 'candidate'));
         }
@@ -82,11 +87,14 @@ class CandidateController extends Controller
         //
         try {
             DB::beginTransaction();
+            
             $data = $request->all();
+            $position = Position::find($request->position_id);
             $candidate = Candidate::find($id);
             if ($request->file('image')) {
                 $data['url_image'] = $this->loadFile($request, 'image', 'candidates', 'candidates');
             }
+            $data['indent'] =  $position->indent;
             $candidate->fill($data);
             $candidate->save();
             DB::commit();

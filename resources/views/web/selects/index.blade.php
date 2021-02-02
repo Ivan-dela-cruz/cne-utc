@@ -52,8 +52,6 @@
                                     </div>
                                 </div>
                             </div>
-                               
-                        
                     </div>
                 </div>
                 <div class="bubble-bg"> </div>
@@ -76,63 +74,64 @@
                             </div>
                             
                             <div class="list-main-wrap fl-wrap card-listing row ">
-                                @for($i = 0; $i< count($candidates); $i++)
-                                <div class="col-md-4">
-                                    <div class="listing-item">
-                                        <article class="geodir-category-listing fl-wrap">
-                                            <div class="geodir-category-img">
-                                                <img style="height: 200px;"
-                                                     src="{{$candidates[$i]['presi']->url_image}}" alt="">
+                              
+                                    @for($i = 0; $i< count($candidates); $i++)
+                                        <div class="col-md-4">
+                                            <div class="listing-item">
+                                                <article class="geodir-category-listing fl-wrap">
+                                                    <div class="geodir-category-img">
+                                                        <img style="height: 200px;"
+                                                            src="{{$candidates[$i]['presi']->url_image}}" alt="">
+                                                    </div>
+                                                    <div class="geodir-category-content fl-wrap">
+                                                    
+                                                        <div class="listing-avatar"><a href="author-single.html"><img
+                                                                
+                                                                    src="{{$candidates[$i]['presi']->organization->url_image}}"
+                                                                    alt=""></a>
+                                                            <span
+                                                                class="avatar-tooltip"><strong>{{$candidates[$i]['presi']->organization->name}}</strong></span>
+                                                        </div>
+                                                        <h4>
+                                                            <a href="listing-single.html">{{$candidates[$i]['presi']->name}} {{$candidates[$i]['presi']->last_name}}
+                                                                (PRESIDENTE) </a>
+                                                        </h4>
+                                                    </div>
+                                                </article>
                                             </div>
-                                            <div class="geodir-category-content fl-wrap">
-                                               
-                                                <div class="listing-avatar"><a href="author-single.html"><img
-                                                          
-                                                            src="{{$candidates[$i]['presi']->organization->url_image}}"
-                                                            alt=""></a>
-                                                    <span
-                                                        class="avatar-tooltip"><strong>{{$candidates[$i]['presi']->organization->name}}</strong></span>
-                                                </div>
-                                                <h4>
-                                                    <a href="listing-single.html">{{$candidates[$i]['presi']->name}} {{$candidates[$i]['presi']->last_name}}
-                                                        (PRESIDENTE) </a>
-                                                </h4>
-                                            </div>
-                                        </article>
-                                    </div>
-                                    <div class="listing-item">
-                                        <article class="geodir-category-listing fl-wrap">
-                                            <div class="geodir-category-img">
-                                                <img style="height: 200px;" src="{{$candidates[$i]['vice']->url_image}}"
-                                                     alt="">
-                                            </div>
-                                            <div class="geodir-category-content fl-wrap">
-                                                
-                                                <div class="listing-avatar"><a href="author-single.html"><img
+                                            <div class="listing-item">
+                                                <article class="geodir-category-listing fl-wrap">
+                                                    <div class="geodir-category-img">
+                                                        <img style="height: 200px;" src="{{$candidates[$i]['vice']->url_image}}"
+                                                            alt="">
+                                                    </div>
+                                                    <div class="geodir-category-content fl-wrap">
                                                         
-                                                            src="{{$candidates[$i]['vice']->organization->url_image}}"
-                                                            alt=""></a>
-                                                    <span
-                                                        class="avatar-tooltip"><strong>{{$candidates[$i]['vice']->organization->name}}</strong></span>
-                                                </div>
-                                                <h4>
-                                                    <a href="listing-single.html">{{$candidates[$i]['vice']->name}} {{$candidates[$i]['vice']->last_name}}
-                                                        (VICEPRESIDENTE)</a>
-                                                </h4>
+                                                        <div class="listing-avatar"><a href="author-single.html"><img
+                                                                
+                                                                    src="{{$candidates[$i]['vice']->organization->url_image}}"
+                                                                    alt=""></a>
+                                                            <span
+                                                                class="avatar-tooltip"><strong>{{$candidates[$i]['vice']->organization->name}}</strong></span>
+                                                        </div>
+                                                        <h4>
+                                                            <a href="listing-single.html">{{$candidates[$i]['vice']->name}} {{$candidates[$i]['vice']->last_name}}
+                                                                (VICEPRESIDENTE)</a>
+                                                        </h4>
+                                                    </div>
+                                                </article>
                                             </div>
-                                        </article>
-                                    </div>
-                                    <div style="background-color: #fff; padding: 10px;" class="row">
-                                        <div class="col-md-12">
+                                            <div style="background-color: #fff; padding: 10px;" class="row">
+                                                <div class="col-md-12">
 
-                                                <div class="custom-form">
-                                                    {{ Form::text('list[]', null, ['class' => '','placeholder'=>'Ingrese votos','required'=>true, 'onKeyPress'=>'return soloNumeros(event)']) }}
-                                                    {{ Form::hidden('organizations[]',$candidates[$i]['vice']->organization->id , ['class' => '','placeholder'=>'id organizacion']) }}
+                                                        <div class="custom-form">
+                                                            {{ Form::text('list[]', null, ['class' => '','placeholder'=>'Ingrese votos','required'=>true, 'onKeyPress'=>'return soloNumeros(event)']) }}
+                                                            {{ Form::hidden('organizations[]',$candidates[$i]['vice']->organization->id , ['class' => '','placeholder'=>'id organizacion']) }}
+                                                        </div>
                                                 </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                                @endfor
+                                    @endfor
                                
                             </div>
                         </div>
@@ -149,8 +148,8 @@
                                 </div>
                                 <div class="custom-form">
                                 <div class="row">
-                                    <div class="col-md-3">
-                                        <input hidden name="type_election" value="{{env('POSITION_PRESIDENT','PR')}}" type="text">
+                                    <div id="cj_1" class="col-md-3">
+                                        <input hidden id="type_election" name="type_election" value="{{env('POSITION_PRESIDENT','PR')}}" type="text">
                                         <input hidden name="canton" class="input-canton" id="input-canton" type="text">
                                         <input hidden name="parish" class="input-parish" id="input-parish" type="text">
                                         <input hidden name="enclosure" class="input-enclosure" id="input-enclosure" type="text">
@@ -158,16 +157,16 @@
                                         <input hidden name="meeting" class="input-meeting" id="input-meeting" type="text">
                                         <input  placeholder="Votos en blanco" name="vote_null" onKeyPress="return soloNumeros(event)"  class="input-blank" id="input-blank" type="text" required >
                                     </div>
-                                    <div class="col-md-3">
+                                    <div id="cj_2" class="col-md-3">
                                         <input  placeholder="Votos nulos" name="vote_blank"  onKeyPress="return soloNumeros(event)" class="input-null" id="input-null" type="text"required >
                                     </div>
                                     <div class="col-md-3">
                                          <button type="button" style="width: 100%; margin-top: 0; margin-right: 10px; background-color: #3a3939;" class="btn  big-btn  color-bg flat-btn" id="btn_block">Habilitar<i class="fa fa-unlock"></i></button>
                                     
                                     </div>
-                                    <div class="col-md-3">
+                                    <div id="cj_3" class="col-md-3">
 
-                                   <button type="submit" style="width: 100%; margin-top:0; background-color: #D0161A;" class="btn  big-btn  color-bg flat-btn" id="btn_send">Registar<i class="fa fa-angle-right"></i></button>
+                                        <button type="submit" style="width: 100%; margin-top:0; background-color: #D0161A;" class="btn  big-btn  color-bg flat-btn" id="btn_send">Registar<i class="fa fa-angle-right"></i></button>
                                     </div>
                                 </div>
                                 </div>
