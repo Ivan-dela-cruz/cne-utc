@@ -51,6 +51,12 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('dashboard/locations', 'Api\LocationController');
         Route::get('dashboard/locations/status/{id}', 'Api\LocationController@changeStatus');
     });
+    Route::group(['middleware' => ['permission:create_enclosure|update_enclosure|destroy_enclosure|read_enclosure']], function () {
+        Route::resource('dashboard/votes', 'Api\VoteController');
+        Route::get('dashboard/votes/status/{id}', 'Api\LocationController@changeStatus');
+        Route::post('dashboard/list-votes', 'Api\VoteController@getTable');
+        Route::post('dashboard/update-votes/{id}', 'Api\VoteController@changeVotes');
+    });
     
 });
 ///PERMISO PARA EL USUARIO DE REGISTRAR LOS RESULTADOS DE LOS VOTOS/////
@@ -73,6 +79,7 @@ Route::group(['middleware' => ['auth','role:Digitador|SuperAdmin']], function ()
     Route::get('select-parishes/{id}', 'Web\HomeController@getSelectParish');
     Route::get('select-enclosures/{id}', 'Web\HomeController@getSelectEnclosure');
     Route::get('select-gender/{id}/{gender}', 'Web\HomeController@getMeeting');
+    
     
 });
 Route::get('select-parishes/{id}', 'Web\HomeController@getSelectParish');

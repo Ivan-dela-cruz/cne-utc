@@ -3,6 +3,139 @@ let status = 1;
 let answer_valid = 1;
 let question_id = 0;
 
+$(document).ready(function(){
+    $('.chosen-select-parish').niceSelect();
+    $('.chosen-select-enclosure').niceSelect();
+    $('.chosen-select-canton').niceSelect();
+    $('.chosen-select-gender').niceSelect();
+    $('.chosen-select-meeting').niceSelect();
+    $('.chosen-select-position').niceSelect();
+    $('.chosen-select-result').niceSelect();
+    $('.chosen-select-pos').niceSelect();
+   // $('.chosen-select-organization').niceSelect();
+    $('.chosen-select-position-web').niceSelect();
+    
+ });
+
+
+ $(document).on('click', '.btn-vote', function () {
+    let id = $(this).data('id');
+    let votes  = $('.vote'+id).val();
+    let url = "update-votes/"+id;
+    Swal.fire({
+        title: '¿Estas Seguro?',
+        text: "Los resultados se modificarán con esta acción!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Actualizar',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            axios.post(url,{
+                votes:votes
+            }).then(function (response) {
+                Swal.fire('Actualizado!', '', 'success')
+            }).catch(error => {
+                Swal.fire('No se pudo actualizar el registro', '', 'info')
+            });
+        }
+    });
+
+ });
+ $(document).on('click', '.btn-search-vote', function () {
+    getVotes();
+});
+
+function getVotes(){
+    let p_id = $('.chosen-select-parish').val();
+    let e_id = $('.chosen-select-enclosure').val();
+    let c_id = $('.chosen-select-canton').val();
+    let g_id = $('.chosen-select-gender').val();
+    let m_id = $('.chosen-select-meeting').val();
+
+    //let o_id = $('.chosen-select-organization').val();
+    let pos_id = $('.chosen-select-pos').val();
+
+    let url ='list-votes';
+    axios.post(url,{
+        canton:c_id,
+        parish:p_id,
+        enclosure:e_id,
+        gender:g_id,
+        meeting:m_id,
+        position:pos_id
+    }).then(function(response){
+            $('.votes-table').empty();
+            $('.votes-table').html(response.data);
+    });
+}
+
+
+ function getSelectParishes(id){
+    
+    let url ='../select-parishes/'+id;
+    axios.get(url).then(function(response){
+            $('.chosen-select-parish').empty();
+            $('.chosen-select-parish').html(response.data.view);
+            $('.chosen-select-parish').niceSelect('update');
+
+            $('.chosen-select-result').empty();
+            $('.chosen-select-result').html(response.data.view);
+            $('.chosen-select-result').niceSelect('update');
+           // getSelectEnclosure(response.data.location_id);
+    });
+}
+function getSelectEnclosure(id){
+    let url ='../select-enclosures/'+id;
+    axios.get(url).then(function(response){
+            $('.chosen-select-enclosure').empty();
+            $('.chosen-select-enclosure').html(response.data);
+            $('.chosen-select-enclosure').niceSelect('update');
+    });
+}
+
+$(document).on('change','.chosen-select-pos',function(){
+    getVotes();
+});
+
+$(document).on('change','.chosen-select-gender',function(){
+    let gender = $(this).val();
+    let enclosure_id = $('.chosen-select-enclosure').val();
+    if(enclosure_id != 0){
+        getSelectGender(enclosure_id,gender);
+    }else{
+        alert('Selecciona un recinto para continuar');
+    }
+    getVotes();
+});
+
+function getSelectGender(id,gender){
+    let url ='../select-gender/'+id+'/'+gender;
+    axios.get(url).then(function(response){
+            $('.chosen-select-meeting').empty();
+            $('.chosen-select-meeting').html(response.data);
+            $('.chosen-select-meeting').niceSelect('update');
+    });
+    getVotes();
+}
+ $(document).on('change','.chosen-select-canton',function(){
+    let id = $(this).val(); 
+    getSelectParishes(id);
+    getVotes();
+});
+
+$(document).on('change','.chosen-select-parish',function(){
+    let id = $(this).val(); 
+    getSelectEnclosure(id);
+    getVotes();
+});
+
+function soloNumeros(e){
+    var key = window.Event ? e.which : e.keyCode
+    return (key >= 48 && key <= 57)
+}
 
 //Método para eliminar la imagen de una unidad
 $(document).on('click', '.delete_image_unit', function () {

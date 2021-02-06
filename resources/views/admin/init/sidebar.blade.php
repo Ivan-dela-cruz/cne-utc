@@ -9,6 +9,12 @@
                         <a class="{{ (request()->is('admin')) ? 'user-profile-act' : '' }}"
                            href="{{route('admin')}}"><i
                                 class="fa fa-desktop"></i>Dashboard</a></li>
+                    @can('read_enclosure')
+                        <li>
+                            <a class="{{ (request()->is('dashboard/votes')) ? 'user-profile-act' : '' }}"
+                                href="{{route('votes.index')}}"><i
+                                    class="fa fa-file-archive-o"></i>Votos</a></li>
+                    @endcan
                     @can('read_position')
                         <li>
                             <a class="{{ (request()->is('dashboard/positions')) ? 'user-profile-act' : '' }}"
