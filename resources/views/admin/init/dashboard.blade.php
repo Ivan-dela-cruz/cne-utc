@@ -53,6 +53,13 @@
                         <h5>Usuarios</h5>
                     </div>
                 </div>
+                <div class="statistic-item-wrap">
+                    <div class="statistic-item gradient-bg fl-wrap">
+                        <i class="fa fa-user-circle-o"></i>
+                        <div class="statistic-item-numder">{{$votes}}</div>
+                        <h5>Usuarios</h5>
+                    </div>
+                </div>
             </div>
         </div>
 

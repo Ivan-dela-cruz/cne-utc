@@ -51,7 +51,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('dashboard/locations', 'Api\LocationController');
         Route::get('dashboard/locations/status/{id}', 'Api\LocationController@changeStatus');
     });
-    
+    Route::resource('dashboard/votes', 'Api\VoteController');
 });
 ///PERMISO PARA EL USUARIO DE REGISTRAR LOS RESULTADOS DE LOS VOTOS/////
 Route::group(['middleware' => ['auth','role:Digitador|SuperAdmin']], function () {

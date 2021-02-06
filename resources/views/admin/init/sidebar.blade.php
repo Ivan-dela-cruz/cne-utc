@@ -44,6 +44,12 @@
                                     class="fa fa-th-list"></i>
                                 Ubicaciones </a></li> @endcan
 
+
+                                <li>
+                                    <a class="{{ (request()->is('dashboard/votes')) ? 'user-profile-act' : '' }}"
+                                       href="{{route('votes.index')}}"><i
+                                            class="fa fa-user-o"></i> Votos</a></li>
+
                 </ul>
             </div>
             <!-- user-profile-menu end-->
